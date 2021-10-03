@@ -1,0 +1,23 @@
+<resources>
+    <string name="app_name">Eino</string>
+
+    <!-- Navigation -->
+    <string name="navigation_register_label">Register</string>
+    <string name="navigation_login_label">Login</string>
+    <string name="navigation_books_label">Books</string>
+    <string name="navigation_movies_label">Movies</string>
+    <string name="navigation_settings_label">Settings</string>
+
+    <!-- Bottom navigation bar -->
+    <string name="menu_bottom_nav_books">Books</string>
+    <string name="menu_bottom_nav_movies">Movies</string>
+    <string name="menu_bottom_nav_settings">Settings</string>
+
+    <!-- Auth -->
+    <string name="btn_register_text">Register</string>
+    <string name="btn_login_text">Login</string>
+    <string name="til_username_help_text">Password length should be between 3–255 characters</string>
+    <string name="til_password_help_text">Password length should be between 8–255 characters</string>
+    <string name="til_username_hint">Username</string>
+    <string name="til_password_hint">Password</string>
+</resources>

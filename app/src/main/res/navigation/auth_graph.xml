@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/auth_graph"
+    app:startDestination="@+id/loginFragment">
+
+    <fragment
+        android:id="@+id/registerFragment"
+        android:name="com.jankku.eino.ui.auth.RegisterFragment"
+        android:label="@string/navigation_register_label"
+        tools:layout="@layout/fragment_register" />
+
+    <fragment
+        android:id="@+id/loginFragment"
+        android:name="com.jankku.eino.ui.auth.LoginFragment"
+        android:label="@string/navigation_login_label"
+        tools:layout="@layout/fragment_login" />
+
+</navigation>
