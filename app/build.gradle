@@ -13,7 +13,6 @@ baseUrlProperties.load(new FileInputStream(baseUrlFile))
 
 android {
     compileSdk 31
-
     defaultConfig {
         applicationId "com.jankku.eino"
         minSdk 23
@@ -23,11 +22,9 @@ android {
         buildConfigField "String", "baseUrl", baseUrlProperties['baseUrl']
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
-
     buildFeatures {
         viewBinding true
     }
-
     buildTypes {
         release {
             minifyEnabled true
