@@ -8,6 +8,8 @@ import androidx.fragment.app.Fragment
 import com.jankku.eino.databinding.FragmentBookListBinding
 import dagger.hilt.android.AndroidEntryPoint
 
+private const val TAG = "BookListFragment"
+
 @AndroidEntryPoint
 class BookListFragment : Fragment() {
     private var _binding: FragmentBookListBinding? = null

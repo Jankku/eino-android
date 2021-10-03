@@ -13,6 +13,7 @@ import kotlinx.coroutines.flow.callbackFlow
 import kotlinx.coroutines.flow.map
 import javax.inject.Inject
 
+// https://markonovakovic.medium.com/android-better-internet-connection-monitoring-with-kotlin-flow-feac139e2a3
 class NetworkStatusTracker @Inject constructor(@ApplicationContext context: Context) {
     private val connectivityManager =
         context.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager

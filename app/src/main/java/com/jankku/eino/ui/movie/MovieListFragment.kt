@@ -8,6 +8,8 @@ import androidx.fragment.app.Fragment
 import com.jankku.eino.databinding.FragmentMovieListBinding
 import dagger.hilt.android.AndroidEntryPoint
 
+private const val TAG = "MovieListFragment"
+
 @AndroidEntryPoint
 class MovieListFragment : Fragment() {
     private var _binding: FragmentMovieListBinding? = null

@@ -9,6 +9,8 @@ import androidx.fragment.app.viewModels
 import com.jankku.eino.databinding.FragmentRegisterBinding
 import dagger.hilt.android.AndroidEntryPoint
 
+private const val TAG = "RegisterFragment"
+
 @AndroidEntryPoint
 class RegisterFragment : Fragment() {
     private var _binding: FragmentRegisterBinding? = null

@@ -41,11 +41,7 @@ class MainActivity : AppCompatActivity() {
         window.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_NOTHING)
     }
 
-    /**
-     * Used in [BaseFragment] to set the visibility of bottom nav
-     */
     fun setBottomNavigationVisibility(visibility: Int) {
-        // get the reference of the bottomNavigation and set the visibility.
         binding.bottomNavigation.visibility = visibility
     }
 
