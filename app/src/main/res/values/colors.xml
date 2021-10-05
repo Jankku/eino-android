@@ -1,12 +1,30 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="purple_200">#FFBB86FC</color>
-    <color name="purple_500">#FF6200EE</color>
-    <color name="purple_700">#FF3700B3</color>
-    <color name="teal_200">#FF03DAC5</color>
-    <color name="teal_700">#FF018786</color>
+
+    <color name="purple_50">#F3E5F5</color>
+    <color name="purple_100">#E1BEE7</color>
+    <color name="purple_200">#CE93D8</color>
+    <color name="purple_300">#BA68C8</color>
+    <color name="purple_400">#AB47BC</color>
+    <color name="purple_500">#9C27B0</color>
+    <color name="purple_600">#872A9F</color>
+    <color name="purple_700">#642480</color>
+    <color name="purple_800">#291833</color>
+    <color name="purple_900">#1D1527</color>
 
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
     <color name="grey">#EEEEEE</color>
+
+    <color name="bottom_nav_item_active">@color/purple_300</color>
+    <color name="bottom_nav_item_inactive">#8A8A8A</color>
+
+    <color name="divider_color">#392843</color>
+
+    <color name="text_color_primary">@color/grey</color>
+    <color name="text_color_secondary">@color/purple_200</color>
+
+    <!--background protection for nav-bar, varied on Q+-->
+    <color name="immersive_sys_ui">#33000000</color>
+    <color name="nav_bar">@color/immersive_sys_ui</color>
 </resources>
