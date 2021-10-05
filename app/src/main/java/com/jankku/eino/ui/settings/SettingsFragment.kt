@@ -1,4 +1,4 @@
-package com.jankku.eino.ui
+package com.jankku.eino.ui.settings
 
 import android.os.Bundle
 import androidx.preference.PreferenceFragmentCompat
