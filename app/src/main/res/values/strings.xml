@@ -16,7 +16,7 @@
     <!-- Auth -->
     <string name="btn_register_text">Register</string>
     <string name="btn_login_text">Login</string>
-    <string name="til_username_help_text">Password length should be between 3–255 characters</string>
+    <string name="til_username_help_text">Username length should be between 3–255 characters</string>
     <string name="til_password_help_text">Password length should be between 8–255 characters</string>
     <string name="til_username_hint">Username</string>
     <string name="til_password_hint">Password</string>
