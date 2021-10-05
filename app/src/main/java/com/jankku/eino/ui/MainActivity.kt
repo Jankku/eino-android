@@ -32,9 +32,14 @@ class MainActivity : AppCompatActivity() {
 
         binding.bottomNavigation.setupWithNavController(navController)
 
-        // Setup the ActionBar with navController and 3 top level destinations
         appBarConfiguration = AppBarConfiguration(
-            setOf(R.id.bookListFragment, R.id.movieListFragment, R.id.settingsFragment)
+            setOf(
+                R.id.registerFragment,
+                R.id.loginFragment,
+                R.id.bookListFragment,
+                R.id.movieListFragment,
+                R.id.settingsFragment
+            )
         )
         setupActionBarWithNavController(navController, appBarConfiguration)
 
