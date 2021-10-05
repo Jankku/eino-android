@@ -3,28 +3,19 @@ package com.jankku.eino.ui.movie
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
-import androidx.fragment.app.Fragment
+import androidx.viewbinding.ViewBinding
 import com.jankku.eino.databinding.FragmentMovieListBinding
+import com.jankku.eino.ui.BindingFragment
 import dagger.hilt.android.AndroidEntryPoint
 
 private const val TAG = "MovieListFragment"
 
 @AndroidEntryPoint
-class MovieListFragment : Fragment() {
-    private var _binding: FragmentMovieListBinding? = null
-    private val binding get() = _binding!!
+class MovieListFragment : BindingFragment<FragmentMovieListBinding>() {
+    override val bindingInflater: (LayoutInflater) -> ViewBinding
+        get() = FragmentMovieListBinding::inflate
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View {
-        _binding = FragmentMovieListBinding.inflate(inflater, container, false)
-        return binding.root
-    }
-
-    override fun onDestroyView() {
-        super.onDestroyView()
-        _binding = null
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
     }
 }

@@ -3,10 +3,10 @@ package com.jankku.eino.ui.auth
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
-import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.viewbinding.ViewBinding
 import com.jankku.eino.databinding.FragmentLoginBinding
+import com.jankku.eino.ui.BindingFragment
 import com.jankku.eino.util.NetworkStatus
 import com.jankku.eino.util.Result
 import com.jankku.eino.util.hideBottomNav
@@ -17,26 +17,17 @@ import kotlinx.coroutines.ExperimentalCoroutinesApi
 private const val TAG = "LoginFragment"
 
 @AndroidEntryPoint
-class LoginFragment : Fragment() {
-    private var _binding: FragmentLoginBinding? = null
-    private val binding get() = _binding!!
+class LoginFragment : BindingFragment<FragmentLoginBinding>() {
+    override val bindingInflater: (LayoutInflater) -> ViewBinding
+        get() = FragmentLoginBinding::inflate
     private val viewModel: AuthViewModel by viewModels()
 
     @ExperimentalCoroutinesApi
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View {
-        _binding = FragmentLoginBinding.inflate(inflater, container, false)
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
         hideBottomNav(requireActivity())
         setLoginBtnListener()
         setupObservers()
-        return binding.root
-    }
-
-    override fun onDestroyView() {
-        super.onDestroyView()
-        _binding = null
     }
 
     private fun setLoginBtnListener() {
