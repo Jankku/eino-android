@@ -2,9 +2,14 @@ package com.jankku.eino.ui.auth
 
 import android.util.Log
 import androidx.lifecycle.*
+import com.jankku.eino.data.DataStoreManager
+import com.jankku.eino.data.DataStoreManager.Companion.ACCESS_TOKEN
+import com.jankku.eino.data.DataStoreManager.Companion.REFRESH_TOKEN
 import com.jankku.eino.network.EinoApiInterface
 import com.jankku.eino.network.request.LoginRequest
+import com.jankku.eino.network.request.RegisterRequest
 import com.jankku.eino.network.response.LoginResponse
+import com.jankku.eino.network.response.RegisterResponse
 import com.jankku.eino.util.NetworkStatus
 import com.jankku.eino.util.NetworkStatusTracker
 import com.jankku.eino.util.Result
@@ -20,11 +25,15 @@ private const val TAG = "AuthViewModel"
 @HiltViewModel
 class AuthViewModel @Inject constructor(
     private val api: EinoApiInterface,
-    networkStatusTracker: NetworkStatusTracker
+    networkStatusTracker: NetworkStatusTracker,
+    private val dataStoreManager: DataStoreManager
 ) : ViewModel() {
 
-    private val _response: MutableLiveData<Result<LoginResponse>> = MutableLiveData()
-    val response: LiveData<Result<LoginResponse>> get() = _response
+    private val _registerResponse: MutableLiveData<Result<RegisterResponse>> = MutableLiveData()
+    val registerResponse: LiveData<Result<RegisterResponse>> get() = _registerResponse
+
+    private val _loginResponse: MutableLiveData<Result<LoginResponse>> = MutableLiveData()
+    val loginResponse: LiveData<Result<LoginResponse>> get() = _loginResponse
 
     @ExperimentalCoroutinesApi
     val networkStatus = networkStatusTracker.networkStatus.map(
@@ -32,19 +41,33 @@ class AuthViewModel @Inject constructor(
         onAvailable = { NetworkStatus.Available },
     ).asLiveData(Dispatchers.IO)
 
-    fun register() {}
+    fun register(username: String, password: String, password2: String) {
+        viewModelScope.launch(Dispatchers.IO) {
+            try {
+                _registerResponse.postValue(Result.Loading())
+                val body = RegisterRequest(username, password, password2)
+                val response = api.register(body)
+                _registerResponse.postValue(Result.Success(response))
+            } catch (e: Exception) {
+                Log.d(TAG, e.toString())
+                _registerResponse.postValue(Result.Error(e.message))
+            }
+        }
+    }
 
     fun login(username: String, password: String) {
         viewModelScope.launch(Dispatchers.IO) {
             try {
-                _response.postValue(Result.Loading())
+                _loginResponse.postValue(Result.Loading())
                 val body = LoginRequest(username, password)
                 val response = api.login(body)
-                _response.postValue(Result.Success(response))
-                Log.d(TAG, "login: $response")
+                _loginResponse.postValue(Result.Success(response))
+
+                dataStoreManager.putString(ACCESS_TOKEN, response.accessToken)
+                dataStoreManager.putString(REFRESH_TOKEN, response.refreshToken)
             } catch (e: Exception) {
                 Log.d(TAG, e.toString())
-                _response.postValue(Result.Error(e.message))
+                _loginResponse.postValue(Result.Error(e.message))
             }
         }
     }

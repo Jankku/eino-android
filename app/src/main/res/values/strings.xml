@@ -2,6 +2,7 @@
     <string name="app_name">Eino</string>
 
     <!-- Navigation -->
+    <string name="navigation_landing_label">Welcome</string>
     <string name="navigation_register_label">Register</string>
     <string name="navigation_login_label">Login</string>
     <string name="navigation_books_label">Books</string>
@@ -20,4 +21,13 @@
     <string name="til_password_help_text">Password length should be between 8–255 characters</string>
     <string name="til_username_hint">Username</string>
     <string name="til_password_hint">Password</string>
+    <string name="til_password2_hint">Repeat password</string>
+    <string name="content_desc_logo">Eino logo</string>
+
+    <!-- Validation -->
+    <string name="validation_username_empty">Username can\'t be empty</string>
+    <string name="validation_password_empty">Password can\'t be empty</string>
+    <string name="validation_passwords_dont_match">Passwords don\'t match</string>
+    <string name="validation_username_length_invalid">Username length should be between 3–255 characters</string>
+    <string name="validation_password_length_invalid">Password length should be between 8–255 characters</string>
 </resources>

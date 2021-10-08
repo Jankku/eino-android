@@ -8,14 +8,15 @@
 
     <ImageView
         android:id="@+id/ivLogo"
-        android:layout_width="80dp"
-        android:layout_height="80dp"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:contentDescription="@string/content_desc_logo"
         android:src="@drawable/eino_icon_white"
         app:layout_constraintBottom_toTopOf="@id/guidelineTop"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="1" />
+        app:layout_constraintVertical_bias="0.8" />
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/tilUsername"
@@ -24,10 +25,6 @@
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="@dimen/spacing_default"
         android:hint="@string/til_username_hint"
-        app:counterEnabled="true"
-        app:counterMaxLength="255"
-        app:helperText="@string/til_username_help_text"
-        app:helperTextEnabled="true"
         app:layout_constraintBottom_toTopOf="@id/tilPassword"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -50,11 +47,7 @@
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="@dimen/spacing_default"
         android:hint="@string/til_password_hint"
-        app:counterEnabled="true"
-        app:counterMaxLength="255"
         app:endIconMode="password_toggle"
-        app:helperText="@string/til_password_help_text"
-        app:helperTextEnabled="true"
         app:layout_constraintBottom_toTopOf="@id/btnLogin"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -86,14 +79,14 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_begin="200dp" />
+        app:layout_constraintGuide_begin="250dp" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guidelineBottom"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_begin="600dp" />
+        app:layout_constraintGuide_begin="550dp" />
 
     <com.google.android.material.progressindicator.LinearProgressIndicator
         android:id="@+id/progressBar"
