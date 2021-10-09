@@ -12,6 +12,6 @@ fun hideBottomNav(activity: FragmentActivity) {
 
 fun showBottomNav(activity: FragmentActivity) {
     if (activity is MainActivity) {
-        activity.setBottomNavigationVisibility(View.GONE)
+        activity.setBottomNavigationVisibility(View.VISIBLE)
     }
 }
