@@ -6,7 +6,7 @@ import android.view.View
 import androidx.navigation.fragment.navArgs
 import androidx.viewbinding.ViewBinding
 import com.jankku.eino.databinding.FragmentBookDetailBinding
-import com.jankku.eino.ui.BindingFragment
+import com.jankku.eino.ui.common.BindingFragment
 import dagger.hilt.android.AndroidEntryPoint
 
 private const val TAG = "BookDetailFragment"

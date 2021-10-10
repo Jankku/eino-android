@@ -11,7 +11,7 @@ import com.basgeekball.awesomevalidation.ValidationStyle
 import com.basgeekball.awesomevalidation.utility.RegexTemplate
 import com.jankku.eino.R
 import com.jankku.eino.databinding.FragmentRegisterBinding
-import com.jankku.eino.ui.BindingFragment
+import com.jankku.eino.ui.common.BindingFragment
 import com.jankku.eino.util.NetworkStatus
 import com.jankku.eino.util.Result
 import com.jankku.eino.util.hideBottomNav

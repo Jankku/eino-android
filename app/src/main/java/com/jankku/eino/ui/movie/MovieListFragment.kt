@@ -8,7 +8,7 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import androidx.viewbinding.ViewBinding
 import com.jankku.eino.databinding.FragmentMovieListBinding
-import com.jankku.eino.ui.BindingFragment
+import com.jankku.eino.ui.common.BindingFragment
 import com.jankku.eino.util.Result
 import com.jankku.eino.util.showBottomNav
 import com.jankku.eino.util.showSnackBar

@@ -1,4 +1,4 @@
-package com.jankku.eino.ui
+package com.jankku.eino.ui.common
 
 import android.os.Bundle
 import android.view.LayoutInflater

@@ -7,7 +7,7 @@ import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.viewbinding.ViewBinding
 import com.jankku.eino.databinding.FragmentLandingBinding
-import com.jankku.eino.ui.BindingFragment
+import com.jankku.eino.ui.common.BindingFragment
 import com.jankku.eino.util.hideBottomNav
 import dagger.hilt.android.AndroidEntryPoint
 
