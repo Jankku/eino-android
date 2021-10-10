@@ -1,7 +1,6 @@
 package com.jankku.eino.di
 
 import android.content.Context
-import android.util.Log
 import com.jankku.eino.BuildConfig
 import com.jankku.eino.data.DataStoreManager
 import com.jankku.eino.network.EinoApiInterface
@@ -13,6 +12,7 @@ import dagger.hilt.InstallIn
 import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
 import okhttp3.OkHttpClient
+import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.moshi.MoshiConverterFactory
 import javax.inject.Singleton
@@ -44,16 +44,8 @@ object AppModule {
     @Singleton
     fun provideOkHttpClient(): OkHttpClient = OkHttpClient
         .Builder()
-        .addNetworkInterceptor { chain ->
-            val request = chain.request()
-            val response = chain.proceed(request)
-
-            if (BuildConfig.DEBUG) {
-                Log.d("LOG_REQUEST_URL", request.url().toString())
-            }
-
-            return@addNetworkInterceptor response
-        }.build()
+        .addInterceptor(HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.HEADERS))
+        .build()
 
     @Provides
     @Singleton

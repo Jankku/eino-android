@@ -59,9 +59,10 @@ dependencies {
     implementation "androidx.navigation:navigation-fragment-ktx:$nav_version"
     implementation "androidx.navigation:navigation-ui-ktx:$nav_version"
 
-    // Retrofit
+    // Network
     implementation "com.squareup.retrofit2:retrofit:$retrofit_version"
     implementation "com.squareup.retrofit2:converter-moshi:$retrofit_version"
+    implementation "com.squareup.okhttp3:logging-interceptor:4.9.2"
 
     // Moshi
     implementation "com.squareup.moshi:moshi-kotlin:$moshi_version"
@@ -85,7 +86,7 @@ dependencies {
     implementation 'com.basgeekball:awesome-validation:4.3'
 
     // LeakCanary
-    // debugImplementation "com.squareup.leakcanary:leakcanary-android:2.7"
+    debugImplementation "com.squareup.leakcanary:leakcanary-android:2.7"
 
     // Tests
     testImplementation 'junit:junit:4.13.2'
