@@ -1,7 +1,6 @@
 package com.jankku.eino.ui.auth
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import androidx.fragment.app.viewModels
@@ -41,7 +40,6 @@ class LandingFragment : BindingFragment<FragmentLandingBinding>() {
 
     private fun checkLoginStatus() {
         viewModel.isLoggedIn.observe(viewLifecycleOwner) { isLoggedIn ->
-            Log.d(TAG, "checkLoginStatus: $isLoggedIn")
             if (isLoggedIn) {
                 val action = LandingFragmentDirections.actionLandingFragmentToAppGraph()
                 findNavController().navigate(action)

@@ -33,11 +33,24 @@
         android:id="@+id/movieListFragment"
         android:name="com.jankku.eino.ui.movie.MovieListFragment"
         android:label="@string/navigation_movies_label"
-        tools:layout="@layout/fragment_movie_list" />
+        tools:layout="@layout/fragment_movie_list">
+        <action
+            android:id="@+id/action_movieListFragment_to_movieDetailFragment"
+            app:destination="@id/movieDetailFragment" />
+    </fragment>
 
     <fragment
         android:id="@+id/settingsFragment"
         android:name="com.jankku.eino.ui.settings.SettingsFragment"
         android:label="@string/navigation_settings_label" />
+    <fragment
+        android:id="@+id/movieDetailFragment"
+        android:name="com.jankku.eino.ui.movie.MovieDetailFragment"
+        android:label="@string/navigation_movie_detail_label"
+        tools:layout="@layout/fragment_movie_detail">
+        <argument
+            android:name="movie"
+            app:argType="com.jankku.eino.network.response.Movie" />
+    </fragment>
 
 </navigation>
