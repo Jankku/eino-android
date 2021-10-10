@@ -35,11 +35,26 @@ class AuthViewModel @Inject constructor(
     private val _loginResponse: MutableLiveData<Result<LoginResponse>> = MutableLiveData()
     val loginResponse: LiveData<Result<LoginResponse>> get() = _loginResponse
 
+    private val _isLoggedIn: MutableLiveData<Boolean> = MutableLiveData()
+    val isLoggedIn: LiveData<Boolean> get() = _isLoggedIn
+
     @ExperimentalCoroutinesApi
     val networkStatus = networkStatusTracker.networkStatus.map(
         onUnavailable = { NetworkStatus.Unavailable },
         onAvailable = { NetworkStatus.Available },
     ).asLiveData(Dispatchers.IO)
+
+    init {
+        isAlreadyLoggedIn()
+    }
+
+    private fun isAlreadyLoggedIn() {
+        viewModelScope.launch {
+            val accessToken = dataStoreManager.getString(ACCESS_TOKEN)
+            val refreshToken = dataStoreManager.getString(REFRESH_TOKEN)
+            _isLoggedIn.postValue(accessToken.isNotBlank() && refreshToken.isNotBlank())
+        }
+    }
 
     fun register(username: String, password: String, password2: String) {
         viewModelScope.launch(Dispatchers.IO) {

@@ -47,13 +47,13 @@
             app:popEnterAnim="@anim/nav_default_pop_enter_anim"
             app:popExitAnim="@anim/nav_default_pop_exit_anim" />
         <action
+            android:id="@+id/action_landingFragment_to_app_graph"
+            app:destination="@id/app_graph" />
+        <action
             android:id="@+id/action_landingFragment_to_loginFragment"
-            app:destination="@id/loginFragment"
-            app:enterAnim="@anim/nav_default_enter_anim"
-            app:exitAnim="@anim/nav_default_exit_anim"
-            app:popEnterAnim="@anim/nav_default_pop_enter_anim"
-            app:popExitAnim="@anim/nav_default_pop_exit_anim" />
+            app:destination="@id/loginFragment" />
     </fragment>
+
     <include app:graph="@navigation/app_graph" />
 
 </navigation>
