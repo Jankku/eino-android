@@ -32,4 +32,15 @@
     <string name="validation_passwords_dont_match">Passwords don\'t match</string>
     <string name="validation_username_length_invalid">Username length should be between 3–255 characters</string>
     <string name="validation_password_length_invalid">Password length should be between 8–255 characters</string>
+
+    <!-- Settings -->
+    <string name="about_header">About</string>
+    <string name="app_key" translatable="false">app</string>
+    <string name="author_key" translatable="false">author</string>
+    <string name="author_title">Developer</string>
+    <string name="author_summary" translatable="false">Jankku</string>
+
+    <string name="github_key" translatable="false">github</string>
+    <string name="github_title" translatable="false">GitHub</string>
+    <string name="github_summary" translatable="false">https://github.com/jankku/eino-android</string>
 </resources>
