@@ -6,7 +6,9 @@
     <string name="navigation_register_label">Register</string>
     <string name="navigation_login_label">Login</string>
     <string name="navigation_books_label">Books</string>
+    <string name="navigation_book_detail_label">Book</string>
     <string name="navigation_movies_label">Movies</string>
+    <string name="navigation_movie_detail_label">Movie</string>
     <string name="navigation_settings_label">Settings</string>
 
     <!-- Bottom navigation bar -->

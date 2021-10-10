@@ -9,7 +9,25 @@
         android:id="@+id/bookListFragment"
         android:name="com.jankku.eino.ui.book.BookListFragment"
         android:label="@string/navigation_books_label"
-        tools:layout="@layout/fragment_book_list" />
+        tools:layout="@layout/fragment_book_list">
+        <action
+            android:id="@+id/action_bookListFragment_to_bookDetailFragment"
+            app:destination="@id/bookDetailFragment"
+            app:enterAnim="@anim/nav_default_enter_anim"
+            app:exitAnim="@anim/nav_default_exit_anim"
+            app:popEnterAnim="@anim/nav_default_pop_enter_anim"
+            app:popExitAnim="@anim/nav_default_pop_exit_anim" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/bookDetailFragment"
+        android:name="com.jankku.eino.ui.book.BookDetailFragment"
+        android:label="@string/navigation_book_detail_label"
+        tools:layout="@layout/fragment_book_detail">
+        <argument
+            android:name="book"
+            app:argType="com.jankku.eino.network.response.Book" />
+    </fragment>
 
     <fragment
         android:id="@+id/movieListFragment"

@@ -21,9 +21,9 @@ private val Context.dataStore by preferencesDataStore(DATASTORE_NAME)
 class DataStoreManager @Inject constructor(@ApplicationContext private val appContext: Context) {
     private val dataStore = appContext.dataStore
 
-    suspend fun getString(key: Preferences.Key<String>): String? {
+    suspend fun getString(key: Preferences.Key<String>): String {
         val preferences: Preferences = dataStore.data.first()
-        return preferences[key]
+        return preferences[key] ?: throw Exception("No value found")
     }
 
     suspend fun putString(key: Preferences.Key<String>, value: String) {

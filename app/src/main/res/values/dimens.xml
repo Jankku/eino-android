@@ -10,6 +10,6 @@
     <dimen name="spacing_3x">48dp</dimen>
     <dimen name="spacing_4x">64dp</dimen>
 
-    <dimen name="card_corner_radius">0dp</dimen>
-    <dimen name="card_elevation">0dp</dimen>
+    <dimen name="card_corner_radius">8dp</dimen>
+    <dimen name="card_elevation">4dp</dimen>
 </resources>
