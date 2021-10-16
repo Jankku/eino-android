@@ -50,9 +50,13 @@ class AuthViewModel @Inject constructor(
 
     private fun isAlreadyLoggedIn() {
         viewModelScope.launch {
-            val accessToken = dataStoreManager.getString(ACCESS_TOKEN)
-            val refreshToken = dataStoreManager.getString(REFRESH_TOKEN)
-            _isLoggedIn.postValue(accessToken.isNotBlank() && refreshToken.isNotBlank())
+            try {
+                val accessToken = dataStoreManager.getString(ACCESS_TOKEN)
+                val refreshToken = dataStoreManager.getString(REFRESH_TOKEN)
+                _isLoggedIn.postValue(accessToken.isNotBlank() && refreshToken.isNotBlank())
+            } catch (e: Exception) {
+                _isLoggedIn.postValue(false)
+            }
         }
     }
 
