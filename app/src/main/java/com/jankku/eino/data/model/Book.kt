@@ -1,4 +1,4 @@
-package com.jankku.eino.network.response
+package com.jankku.eino.data.model
 
 import android.os.Parcelable
 import kotlinx.parcelize.Parcelize
