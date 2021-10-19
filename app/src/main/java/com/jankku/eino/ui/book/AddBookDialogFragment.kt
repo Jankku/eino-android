@@ -84,7 +84,7 @@ class AddBookDialogFragment : BottomSheetDialogFragment() {
         val status = binding.mactvBookStatus.text.toString().lowercase()
         val score = binding.sliderBookScore.value.toInt()
         val startDate = getDateFromString(binding.mactvBookStartDate.text.toString())
-        val endDate = getDateFromString(binding.mactvBookStartDate.text.toString())
+        val endDate = getDateFromString(binding.mactvBookEndDate.text.toString())
 
         return AddBookRequest(
             isbn,
