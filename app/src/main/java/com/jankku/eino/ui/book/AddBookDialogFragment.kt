@@ -112,7 +112,7 @@ class AddBookDialogFragment : BottomSheetDialogFragment() {
     }
 
     private fun setupDatePickers() {
-        val formatter = SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault())
+        val formatter = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault())
         val today = formatter.format(Date())
         val dateFieldItems = resources.getStringArray(R.array.date_field_items)
         val adapter = ArrayAdapter(requireContext(), R.layout.item_date_picker, dateFieldItems)
