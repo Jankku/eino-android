@@ -3,16 +3,19 @@ package com.jankku.eino.ui.book
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
-import androidx.fragment.app.viewModels
+import androidx.fragment.app.activityViewModels
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import androidx.viewbinding.ViewBinding
 import com.jankku.eino.databinding.FragmentBookListBinding
 import com.jankku.eino.ui.common.BindingFragment
+import com.jankku.eino.util.Event
 import com.jankku.eino.util.Result
 import com.jankku.eino.util.showBottomNav
 import com.jankku.eino.util.showSnackBar
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.flow.collect
 
 private const val TAG = "BookListFragment"
 
@@ -20,7 +23,7 @@ private const val TAG = "BookListFragment"
 class BookListFragment : BindingFragment<FragmentBookListBinding>() {
     override val bindingInflater: (LayoutInflater) -> ViewBinding
         get() = FragmentBookListBinding::inflate
-    private val viewModel: BookListViewModel by viewModels()
+    private val viewModel: BookListViewModel by activityViewModels()
     private var _adapter: BookListAdapter? = null
     private val adapter get() = _adapter!!
 
@@ -29,6 +32,7 @@ class BookListFragment : BindingFragment<FragmentBookListBinding>() {
         showBottomNav(requireActivity())
         setupObservers()
         setupRecyclerView()
+        addBookFabClickListener()
     }
 
     override fun onDestroyView() {
@@ -51,6 +55,13 @@ class BookListFragment : BindingFragment<FragmentBookListBinding>() {
         }
     }
 
+    private fun addBookFabClickListener() {
+        binding.fabAddBook.setOnClickListener {
+            val action = BookListFragmentDirections.actionBookListFragmentToAddBookDialogFragment()
+            findNavController().navigate(action)
+        }
+    }
+
     private fun setupObservers() {
         viewModel.bookListResponse.observe(viewLifecycleOwner) { response ->
             when (response) {
@@ -64,6 +75,17 @@ class BookListFragment : BindingFragment<FragmentBookListBinding>() {
                 is Result.Error -> {
                     binding.progressBar.visibility = View.GONE
                     showSnackBar(binding.root, response.message.toString())
+                }
+            }
+        }
+
+        viewLifecycleOwner.lifecycleScope.launchWhenStarted {
+            viewModel.eventChannel.collect { event ->
+                when (event) {
+                    is Event.AddBookSuccessEvent -> {
+                        showSnackBar(binding.root, event.message)
+                    }
+                    is Event.AddBookErrorEvent -> showSnackBar(binding.root, event.message)
                 }
             }
         }

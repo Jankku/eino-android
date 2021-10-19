@@ -17,6 +17,9 @@
             app:exitAnim="@anim/nav_default_exit_anim"
             app:popEnterAnim="@anim/nav_default_pop_enter_anim"
             app:popExitAnim="@anim/nav_default_pop_exit_anim" />
+        <action
+            android:id="@+id/action_bookListFragment_to_addBookDialogFragment"
+            app:destination="@id/addBookDialogFragment" />
     </fragment>
 
     <fragment
@@ -26,7 +29,7 @@
         tools:layout="@layout/fragment_book_detail">
         <argument
             android:name="book"
-            app:argType="com.jankku.eino.network.response.Book" />
+            app:argType="com.jankku.eino.data.model.Book" />
     </fragment>
 
     <fragment
@@ -50,7 +53,13 @@
         tools:layout="@layout/fragment_movie_detail">
         <argument
             android:name="movie"
-            app:argType="com.jankku.eino.network.response.Movie" />
+            app:argType="com.jankku.eino.data.model.Movie" />
     </fragment>
+
+    <dialog
+        android:id="@+id/addBookDialogFragment"
+        android:name="com.jankku.eino.ui.book.AddBookDialogFragment"
+        android:label="@string/navigation_add_book_dialog_label"
+        tools:layout="@layout/fragment_add_book_dialog" />
 
 </navigation>

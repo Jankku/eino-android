@@ -6,6 +6,7 @@
     <string name="navigation_register_label">Register</string>
     <string name="navigation_login_label">Login</string>
     <string name="navigation_books_label">Books</string>
+    <string name="navigation_add_book_dialog_label">Add book</string>
     <string name="navigation_book_detail_label">Book</string>
     <string name="navigation_movies_label">Movies</string>
     <string name="navigation_movie_detail_label">Movie</string>
@@ -19,11 +20,11 @@
     <!-- Auth -->
     <string name="btn_register_text">Register</string>
     <string name="btn_login_text">Login</string>
-    <string name="til_username_help_text">Username length should be between 3–255 characters</string>
-    <string name="til_password_help_text">Password length should be between 8–255 characters</string>
-    <string name="til_username_hint">Username</string>
-    <string name="til_password_hint">Password</string>
-    <string name="til_password2_hint">Repeat password</string>
+    <string name="username_help_text">Username length should be between 3–255 characters</string>
+    <string name="password_help_text">Password length should be between 8–255 characters</string>
+    <string name="username_hint">Username</string>
+    <string name="password_hint">Password</string>
+    <string name="password2_hint">Repeat password</string>
     <string name="content_desc_logo">Eino logo</string>
 
     <!-- Validation -->
@@ -32,6 +33,21 @@
     <string name="validation_passwords_dont_match">Passwords don\'t match</string>
     <string name="validation_username_length_invalid">Username length should be between 3–255 characters</string>
     <string name="validation_password_length_invalid">Password length should be between 8–255 characters</string>
+
+    <!-- Add book dialog -->
+    <string name="add_book_dialog_create">Add book</string>
+    <string name="add_book_dialog_cancel">Cancel</string>
+    <string name="book_title_hint">Title</string>
+    <string name="book_author_hint">Author</string>
+    <string name="book_publisher_hint">Publisher</string>
+    <string name="book_pages_hint">Pages</string>
+    <string name="book_isbn_hint">ISBN</string>
+    <string name="book_year_hint">Year</string>
+    <string name="book_status_hint">Status</string>
+    <string name="book_score_hint">Score</string>
+    <string name="book_score_slider_desc">Score slider</string>
+    <string name="book_start_date_picker_title">Start date</string>
+    <string name="book_end_date_picker_title">End date</string>
 
     <!-- Settings -->
     <string name="about_header">About</string>

@@ -1,11 +1,9 @@
 package com.jankku.eino.network
 
+import com.jankku.eino.network.request.AddBookRequest
 import com.jankku.eino.network.request.LoginRequest
 import com.jankku.eino.network.request.RegisterRequest
-import com.jankku.eino.network.response.BookListResponse
-import com.jankku.eino.network.response.LoginResponse
-import com.jankku.eino.network.response.MovieListResponse
-import com.jankku.eino.network.response.RegisterResponse
+import com.jankku.eino.network.response.*
 import com.jankku.eino.util.Constant.REQUEST_HEADERS
 import retrofit2.http.*
 
@@ -20,6 +18,12 @@ interface EinoApiInterface {
 
     @GET("list/books/all")
     suspend fun getAllBooks(@Header("Authorization") accessToken: String): BookListResponse
+
+    @POST("list/books/add")
+    suspend fun addBook(
+        @Body book: AddBookRequest,
+        @Header("Authorization") accessToken: String
+    ): AddBookResponse
 
     @GET("list/movies/all")
     suspend fun getAllMovies(@Header("Authorization") accessToken: String): MovieListResponse

@@ -5,8 +5,8 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
+import com.jankku.eino.data.model.Book
 import com.jankku.eino.databinding.ItemBookListBinding
-import com.jankku.eino.network.response.Book
 
 class BookListAdapter(private val clickListener: (Book) -> Unit) :
     ListAdapter<Book, BookListAdapter.ViewHolder>(DiffCallback) {
