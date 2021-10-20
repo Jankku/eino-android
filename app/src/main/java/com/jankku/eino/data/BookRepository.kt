@@ -5,6 +5,7 @@ import com.jankku.eino.network.EinoApiInterface
 import com.jankku.eino.network.request.AddBookRequest
 import com.jankku.eino.network.response.AddBookResponse
 import com.jankku.eino.network.response.BookListResponse
+import com.jankku.eino.util.Result
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flowOf
 import javax.inject.Inject
@@ -15,8 +16,19 @@ class BookRepository @Inject constructor(
 ) {
     private suspend fun getAccessToken() = "Bearer ${dataStoreManager.getString(ACCESS_TOKEN)}"
 
-    suspend fun getAllBooks(): Flow<BookListResponse> = flowOf(api.getAllBooks(getAccessToken()))
+    suspend fun getAllBooks(): Flow<Result<BookListResponse>> = flowOf(
+        try {
+            Result.Success(api.getAllBooks(getAccessToken()))
+        } catch (e: Exception) {
+            Result.Error(e.message)
+        }
+    )
 
-    suspend fun addBook(book: AddBookRequest): Flow<AddBookResponse> =
-        flowOf(api.addBook(book, getAccessToken()))
+    suspend fun addBook(book: AddBookRequest): Flow<Result<AddBookResponse>> = flowOf(
+        try {
+            Result.Success(api.addBook(book, getAccessToken()))
+        } catch (e: Exception) {
+            Result.Error(e.message)
+        }
+    )
 }

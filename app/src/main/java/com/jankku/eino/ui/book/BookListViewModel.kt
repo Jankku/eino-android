@@ -38,7 +38,7 @@ class BookListViewModel @Inject constructor(
         repository
             .getAllBooks()
             .catch { e -> _bookListResponse.postValue(Result.Error(e.message)) }
-            .collect { response -> _bookListResponse.postValue(Result.Success(response)) }
+            .collect { response -> _bookListResponse.postValue(response) }
     }
 
     fun addBook(book: AddBookRequest) = viewModelScope.launch {
@@ -46,7 +46,7 @@ class BookListViewModel @Inject constructor(
             .addBook(book)
             .catch { e -> sendAddBookErrorEvent(e.message.toString()) }
             .collect { response ->
-                sendAddBookSuccessEvent(response.results[0].message)
+                sendAddBookSuccessEvent(response.data!!.results[0].message)
                 getAllBooks()
             }
     }
