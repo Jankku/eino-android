@@ -18,8 +18,8 @@ class BookDetailAdapter : ListAdapter<DetailItem, BookDetailAdapter.ViewHolder>(
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val item = getItem(position)
         with(holder.binding) {
-            tvTitle.text = item.text
-            tvText.text = item.message
+            tvTitle.text = if (item.text.isNotEmpty()) item.text else "-"
+            tvText.text = if (item.message.isNotEmpty()) item.message else "-"
         }
     }
 

@@ -22,8 +22,8 @@ class BookListAdapter(private val clickListener: (Book) -> Unit) :
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val item = getItem(position)
         with(holder.binding) {
-            tvBookTitle.text = item.title
-            tvBookAuthor.text = item.author
+            tvBookTitle.text = if (item.title.isNotEmpty()) item.title else "-"
+            tvBookAuthor.text = if (item.author.isNotEmpty()) item.author else "-"
             tvBookScore.text = item.score.toString()
         }
     }
