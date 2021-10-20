@@ -20,6 +20,9 @@
         <item name="android:colorBackground">@color/purple_900</item>
         <item name="colorOnBackground">?colorPrimary</item>
 
+        <item name="textAppearanceHeadline6">@style/TextAppearance.Eino.Headline6</item>
+        <item name="textAppearanceBody1">@style/TextAppearance.Eino.Body1</item>
+
         <item name="android:textColor">@color/text_color_primary</item>
         <item name="android:textColorPrimary">@color/text_color_primary</item>
         <item name="android:textColorSecondary">@color/text_color_secondary</item>

@@ -49,6 +49,9 @@
     <string name="book_start_date_picker_title">Start date</string>
     <string name="book_end_date_picker_title">End date</string>
 
+    <!-- Item detail -->
+    <string name="action_delete_label">Delete</string>
+
     <!-- Settings -->
     <string name="about_header">About</string>
     <string name="app_key" translatable="false">app</string>
