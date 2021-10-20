@@ -5,6 +5,7 @@ import com.jankku.eino.network.EinoApiInterface
 import com.jankku.eino.network.request.AddBookRequest
 import com.jankku.eino.network.response.AddBookResponse
 import com.jankku.eino.network.response.BookListResponse
+import com.jankku.eino.network.response.DeleteBookResponse
 import com.jankku.eino.util.Result
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flowOf
@@ -27,6 +28,14 @@ class BookRepository @Inject constructor(
     suspend fun addBook(book: AddBookRequest): Flow<Result<AddBookResponse>> = flowOf(
         try {
             Result.Success(api.addBook(book, getAccessToken()))
+        } catch (e: Exception) {
+            Result.Error(e.message)
+        }
+    )
+
+    suspend fun deleteBook(id: String): Flow<Result<DeleteBookResponse>> = flowOf(
+        try {
+            Result.Success(api.deleteBook(id, getAccessToken()))
         } catch (e: Exception) {
             Result.Error(e.message)
         }

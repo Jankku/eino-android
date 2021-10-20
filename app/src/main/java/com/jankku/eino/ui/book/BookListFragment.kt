@@ -23,7 +23,7 @@ private const val TAG = "BookListFragment"
 class BookListFragment : BindingFragment<FragmentBookListBinding>() {
     override val bindingInflater: (LayoutInflater) -> ViewBinding
         get() = FragmentBookListBinding::inflate
-    private val viewModel: BookListViewModel by activityViewModels()
+    private val viewModel: BookViewModel by activityViewModels()
     private var _adapter: BookListAdapter? = null
     private val adapter get() = _adapter!!
 
@@ -63,7 +63,7 @@ class BookListFragment : BindingFragment<FragmentBookListBinding>() {
     }
 
     private fun setupObservers() {
-        viewModel.bookListResponse.observe(viewLifecycleOwner) { response ->
+        viewModel.books.observe(viewLifecycleOwner) { response ->
             when (response) {
                 is Result.Loading -> {
                     binding.progressBar.visibility = View.VISIBLE
@@ -82,10 +82,10 @@ class BookListFragment : BindingFragment<FragmentBookListBinding>() {
         viewLifecycleOwner.lifecycleScope.launchWhenStarted {
             viewModel.eventChannel.collect { event ->
                 when (event) {
-                    is Event.AddBookSuccessEvent -> {
-                        showSnackBar(binding.root, event.message)
-                    }
+                    is Event.AddBookSuccessEvent -> showSnackBar(binding.root, event.message)
                     is Event.AddBookErrorEvent -> showSnackBar(binding.root, event.message)
+                    is Event.DeleteBookSuccessEvent -> showSnackBar(binding.root, event.message)
+                    is Event.DeleteBookErrorEvent -> showSnackBar(binding.root, event.message)
                 }
             }
         }

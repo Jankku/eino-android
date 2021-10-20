@@ -2,7 +2,8 @@ package com.jankku.eino.ui.book
 
 import android.os.Bundle
 import android.view.*
-import androidx.fragment.app.viewModels
+import androidx.fragment.app.activityViewModels
+import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.RecyclerView
 import androidx.viewbinding.ViewBinding
@@ -18,7 +19,7 @@ private const val TAG = "BookDetailFragment"
 class BookDetailFragment : BindingFragment<FragmentBookDetailBinding>() {
     override val bindingInflater: (LayoutInflater) -> ViewBinding
         get() = FragmentBookDetailBinding::inflate
-    private val viewModel: BookDetailViewModel by viewModels()
+    private val viewModel: BookViewModel by activityViewModels()
     private var _adapter: BookDetailAdapter? = null
     private val adapter get() = _adapter!!
     private val args: BookDetailFragmentArgs by navArgs()
@@ -60,7 +61,11 @@ class BookDetailFragment : BindingFragment<FragmentBookDetailBinding>() {
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         return when (item.itemId) {
-            R.id.action_delete -> true
+            R.id.action_delete -> {
+                viewModel.deleteBook()
+                findNavController().navigateUp()
+                true
+            }
             else -> super.onOptionsItemSelected(item)
         }
     }

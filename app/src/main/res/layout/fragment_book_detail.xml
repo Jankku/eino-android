@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:padding="@dimen/spacing_half"
+    android:padding="@dimen/spacing_three_fours"
     tools:context=".ui.book.BookDetailFragment">
 
     <androidx.recyclerview.widget.RecyclerView

@@ -25,7 +25,7 @@ private const val TAG = "AddBookDialogFragment"
 class AddBookDialogFragment : BottomSheetDialogFragment() {
     private var _binding: FragmentAddBookDialogBinding? = null
     private val binding get() = _binding!!
-    private val viewModel: BookListViewModel by activityViewModels()
+    private val viewModel: BookViewModel by activityViewModels()
 
     // https://stackoverflow.com/a/68232644
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
