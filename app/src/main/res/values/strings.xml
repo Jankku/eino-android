@@ -59,6 +59,9 @@
     <!-- Item detail -->
     <string name="action_delete_label">Delete</string>
 
+    <!-- No item layout -->
+    <string name="no_items_text">No Items found</string>
+
     <!-- Settings -->
     <string name="about_header">About</string>
     <string name="app_key" translatable="false">app</string>

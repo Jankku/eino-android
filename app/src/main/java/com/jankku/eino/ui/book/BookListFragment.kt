@@ -77,7 +77,15 @@ class BookListFragment : BindingFragment<FragmentBookListBinding>() {
                 }
                 is Result.Success -> {
                     binding.progressBar.visibility = View.GONE
-                    adapter.submitList(response.data?.results)
+
+                    if (response.data!!.results.isNotEmpty()) {
+                        binding.layoutNoItems.root.visibility = View.GONE
+                        binding.rvBookList.visibility = View.VISIBLE
+                        adapter.submitList(response.data.results)
+                    } else {
+                        binding.layoutNoItems.root.visibility = View.VISIBLE
+                        binding.rvBookList.visibility = View.GONE
+                    }
                 }
                 is Result.Error -> {
                     binding.progressBar.visibility = View.GONE
@@ -104,8 +112,8 @@ class BookListFragment : BindingFragment<FragmentBookListBinding>() {
 
         MaterialAlertDialogBuilder(requireContext())
             .setTitle(resources.getString(R.string.status_dialog_title))
-            .setSingleChoiceItems(statusArray, checkedItem) { _, which ->
-                val status = Status.values()[which]
+            .setSingleChoiceItems(statusArray, checkedItem) { _, index ->
+                val status = Status.values()[index]
                 viewModel.setStatus(status)
             }
             .setPositiveButton(resources.getString(R.string.status_dialog_btn_apply)) { _, _ ->
