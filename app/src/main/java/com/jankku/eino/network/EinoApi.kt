@@ -23,9 +23,11 @@ interface EinoApiInterface {
     /**
      *  Book routes
      */
-
-    @GET("list/books/all")
-    suspend fun getAllBooks(@Header("Authorization") accessToken: String): BookListResponse
+    @GET("list/books/{status}")
+    suspend fun getBooksByStatus(
+        @Path("status") status: String,
+        @Header("Authorization") accessToken: String
+    ): BookListResponse
 
     @Headers(REQUEST_HEADERS)
     @POST("list/books/add")
@@ -44,7 +46,6 @@ interface EinoApiInterface {
     /**
      *  Movie routes
      */
-
     @GET("list/movies/all")
     suspend fun getAllMovies(@Header("Authorization") accessToken: String): MovieListResponse
 }

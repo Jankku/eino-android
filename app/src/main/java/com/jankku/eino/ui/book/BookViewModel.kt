@@ -5,6 +5,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.jankku.eino.data.BookRepository
+import com.jankku.eino.data.enums.Status
 import com.jankku.eino.data.model.Book
 import com.jankku.eino.data.model.DetailItem
 import com.jankku.eino.network.request.AddBookRequest
@@ -34,17 +35,20 @@ class BookViewModel @Inject constructor(
     private val _books: MutableLiveData<Result<BookListResponse>> = MutableLiveData()
     val books: LiveData<Result<BookListResponse>> = _books
 
+    private val _selectedStatus: MutableLiveData<Status> = MutableLiveData(Status.ALL)
+    val selectedStatus: LiveData<Status> get() = _selectedStatus
+
     private val _eventChannel = Channel<Event>(Channel.BUFFERED)
     val eventChannel = _eventChannel.receiveAsFlow()
 
     init {
-        getAllBooks()
+        getBooksByStatus(selectedStatus.value!!)
     }
 
-    private fun getAllBooks() = viewModelScope.launch {
+    fun getBooksByStatus(status: Status) = viewModelScope.launch {
         _books.postValue(Result.Loading())
         repository
-            .getAllBooks()
+            .getBooksByStatus(status.value)
             .catch { e -> _books.postValue(Result.Error(e.message)) }
             .collect { response -> _books.postValue(response) }
     }
@@ -57,7 +61,7 @@ class BookViewModel @Inject constructor(
             }
             .collect { response ->
                 sendEvent { Event.AddBookSuccessEvent(response.data!!.results[0].message) }
-                getAllBooks()
+                getBooksByStatus(selectedStatus.value!!)
             }
     }
 
@@ -70,9 +74,13 @@ class BookViewModel @Inject constructor(
                 }
                 .collect { response ->
                     sendEvent { Event.DeleteBookSuccessEvent(response.data!!.results[0].message) }
-                    getAllBooks()
+                    getBooksByStatus(selectedStatus.value!!)
                 }
         }
+    }
+
+    fun setStatus(status: Status) {
+        _selectedStatus.postValue(status)
     }
 
     fun bookToDetailItemList(book: Book) {

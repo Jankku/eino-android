@@ -1,13 +1,15 @@
 package com.jankku.eino.ui.book
 
 import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.View
+import android.view.*
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import androidx.viewbinding.ViewBinding
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
+import com.jankku.eino.R
+import com.jankku.eino.data.enums.Status
 import com.jankku.eino.databinding.FragmentBookListBinding
 import com.jankku.eino.ui.common.BindingFragment
 import com.jankku.eino.util.Event
@@ -26,6 +28,11 @@ class BookListFragment : BindingFragment<FragmentBookListBinding>() {
     private val viewModel: BookViewModel by activityViewModels()
     private var _adapter: BookListAdapter? = null
     private val adapter get() = _adapter!!
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setHasOptionsMenu(true)
+    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -88,6 +95,37 @@ class BookListFragment : BindingFragment<FragmentBookListBinding>() {
                     is Event.DeleteBookErrorEvent -> showSnackBar(binding.root, event.message)
                 }
             }
+        }
+    }
+
+    private fun statusDialog() {
+        val checkedItem = viewModel.selectedStatus.value!!.ordinal
+        val statusArray = Status.toArray()
+
+        MaterialAlertDialogBuilder(requireContext())
+            .setTitle(resources.getString(R.string.status_dialog_title))
+            .setSingleChoiceItems(statusArray, checkedItem) { _, which ->
+                val status = Status.values()[which]
+                viewModel.setStatus(status)
+            }
+            .setPositiveButton(resources.getString(R.string.status_dialog_btn_apply)) { _, _ ->
+                val status = viewModel.selectedStatus.value!!
+                viewModel.getBooksByStatus(status)
+            }
+            .show()
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        inflater.inflate(R.menu.menu_item_list, menu)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        return when (item.itemId) {
+            R.id.action_status -> {
+                statusDialog()
+                true
+            }
+            else -> super.onOptionsItemSelected(item)
         }
     }
 }

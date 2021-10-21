@@ -101,7 +101,7 @@ class AddBookDialogFragment : BottomSheetDialogFragment() {
     }
 
     private fun setupStatusPicker() {
-        val items = resources.getStringArray(R.array.book_status_field_items)
+        val items = resources.getStringArray(R.array.add_dialog_book_status_values)
         val adapter = ArrayAdapter(requireContext(), R.layout.item_date_picker, items)
 
         binding.mactvBookStatus.apply {
