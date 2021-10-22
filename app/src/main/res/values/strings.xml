@@ -34,9 +34,9 @@
     <string name="validation_username_length_invalid">Username length should be between 3–255 characters</string>
     <string name="validation_password_length_invalid">Password length should be between 8–255 characters</string>
 
-    <!-- Add book dialog -->
+    <!-- book dialogs -->
     <string name="add_book_dialog_create">Add book</string>
-    <string name="add_book_dialog_cancel">Cancel</string>
+    <string name="update_book_dialog_update">Update book</string>
     <string name="book_title_hint">Title</string>
     <string name="book_author_hint">Author</string>
     <string name="book_publisher_hint">Publisher</string>

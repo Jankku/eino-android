@@ -13,7 +13,7 @@ import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.google.android.material.datepicker.MaterialDatePicker
 import com.jankku.eino.R
-import com.jankku.eino.databinding.FragmentAddBookDialogBinding
+import com.jankku.eino.databinding.FragmentUpdateBookDialogBinding
 import com.jankku.eino.network.request.BookRequest
 import com.jankku.eino.util.getDateFromString
 import dagger.hilt.android.AndroidEntryPoint
@@ -23,8 +23,8 @@ import java.util.*
 private const val TAG = "AddBookDialogFragment"
 
 @AndroidEntryPoint
-class AddBookDialogFragment : BottomSheetDialogFragment() {
-    private var _binding: FragmentAddBookDialogBinding? = null
+class UpdateBookDialogFragment : BottomSheetDialogFragment() {
+    private var _binding: FragmentUpdateBookDialogBinding? = null
     private val binding get() = _binding!!
     private val viewModel: BookViewModel by activityViewModels()
 
@@ -51,13 +51,13 @@ class AddBookDialogFragment : BottomSheetDialogFragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        _binding = FragmentAddBookDialogBinding.inflate(inflater)
+        _binding = FragmentUpdateBookDialogBinding.inflate(inflater)
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        addBookClickListener()
+        editBookClickListener()
         setupDatePickers()
         setupStatusPicker()
     }
@@ -67,15 +67,15 @@ class AddBookDialogFragment : BottomSheetDialogFragment() {
         _binding = null
     }
 
-    private fun addBookClickListener() {
-        binding.btnAddBook.setOnClickListener {
-            val book = getAddBookRequest()
-            viewModel.addBook(book)
+    private fun editBookClickListener() {
+        binding.btnUpdateBook.setOnClickListener {
+            val book = getUpdateBookRequest()
+            viewModel.editBook(book)
             this.dismiss()
         }
     }
 
-    private fun getAddBookRequest(): BookRequest {
+    private fun getUpdateBookRequest(): BookRequest {
         val isbn = binding.tietBookIsbn.text.toString()
         val title = binding.tietBookTitle.text.toString()
         val author = binding.tietBookAuthor.text.toString()

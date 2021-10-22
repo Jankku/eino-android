@@ -1,6 +1,6 @@
 package com.jankku.eino.network.request
 
-data class AddBookRequest(
+data class BookRequest(
     val isbn: String,
     val title: String,
     val author: String,

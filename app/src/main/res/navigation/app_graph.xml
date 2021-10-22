@@ -30,6 +30,9 @@
         <argument
             android:name="book"
             app:argType="com.jankku.eino.data.model.Book" />
+        <action
+            android:id="@+id/action_bookDetailFragment_to_updateBookDialogFragment"
+            app:destination="@id/updateBookDialogFragment" />
     </fragment>
 
     <fragment
@@ -61,5 +64,10 @@
         android:name="com.jankku.eino.ui.book.AddBookDialogFragment"
         android:label="@string/navigation_add_book_dialog_label"
         tools:layout="@layout/fragment_add_book_dialog" />
+    <dialog
+        android:id="@+id/updateBookDialogFragment"
+        android:name="com.jankku.eino.ui.book.UpdateBookDialogFragment"
+        android:label="UpdateBookDialogFragment"
+        tools:layout="@layout/fragment_update_book_dialog" />
 
 </navigation>

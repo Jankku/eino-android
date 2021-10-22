@@ -1,6 +1,6 @@
 package com.jankku.eino.network
 
-import com.jankku.eino.network.request.AddBookRequest
+import com.jankku.eino.network.request.BookRequest
 import com.jankku.eino.network.request.LoginRequest
 import com.jankku.eino.network.request.RegisterRequest
 import com.jankku.eino.network.response.*
@@ -23,6 +23,7 @@ interface EinoApiInterface {
     /**
      *  Book routes
      */
+    @Headers(REQUEST_HEADERS)
     @GET("list/books/{status}")
     suspend fun getBooksByStatus(
         @Path("status") status: String,
@@ -32,9 +33,17 @@ interface EinoApiInterface {
     @Headers(REQUEST_HEADERS)
     @POST("list/books/add")
     suspend fun addBook(
-        @Body book: AddBookRequest,
+        @Body book: BookRequest,
         @Header("Authorization") accessToken: String
     ): AddBookResponse
+
+    @Headers(REQUEST_HEADERS)
+    @PUT("list/books/update/{id}")
+    suspend fun updateBook(
+        @Path("id") id: String,
+        @Body book: BookRequest,
+        @Header("Authorization") accessToken: String
+    ): UpdateBookResponse
 
     @Headers(REQUEST_HEADERS)
     @DELETE("list/books/delete/{id}")
@@ -46,6 +55,7 @@ interface EinoApiInterface {
     /**
      *  Movie routes
      */
+    @Headers(REQUEST_HEADERS)
     @GET("list/movies/all")
     suspend fun getAllMovies(@Header("Authorization") accessToken: String): MovieListResponse
 }

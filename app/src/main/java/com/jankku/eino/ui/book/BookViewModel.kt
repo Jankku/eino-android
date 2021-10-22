@@ -8,7 +8,7 @@ import com.jankku.eino.data.BookRepository
 import com.jankku.eino.data.enums.Status
 import com.jankku.eino.data.model.Book
 import com.jankku.eino.data.model.DetailItem
-import com.jankku.eino.network.request.AddBookRequest
+import com.jankku.eino.network.request.BookRequest
 import com.jankku.eino.network.response.BookListResponse
 import com.jankku.eino.util.Event
 import com.jankku.eino.util.Result
@@ -46,19 +46,27 @@ class BookViewModel @Inject constructor(
     }
 
     fun getBooksByStatus(status: Status) = viewModelScope.launch {
-        _books.postValue(Result.Loading())
+        _books.value = Result.Loading()
         repository
             .getBooksByStatus(status.value)
-            .catch { e -> _books.postValue(Result.Error(e.message)) }
-            .collect { response -> _books.postValue(response) }
+            .catch { e -> _books.value = Result.Error(e.message) }
+            .collect { response -> _books.value = response }
     }
 
-    fun addBook(book: AddBookRequest) = viewModelScope.launch {
+    fun addBook(book: BookRequest) = viewModelScope.launch {
         repository
             .addBook(book)
-            .catch { e ->
-                sendEvent { Event.AddBookErrorEvent(e.message.toString()) }
+            .catch { e -> sendEvent { Event.AddBookErrorEvent(e.message.toString()) } }
+            .collect { response ->
+                sendEvent { Event.AddBookSuccessEvent(response.data!!.results[0].message) }
+                getBooksByStatus(selectedStatus.value!!)
             }
+    }
+
+    fun editBook(book: BookRequest) = viewModelScope.launch {
+        repository
+            .editBook(bookId!!, book)
+            .catch { e -> sendEvent { Event.AddBookErrorEvent(e.message.toString()) } }
             .collect { response ->
                 sendEvent { Event.AddBookSuccessEvent(response.data!!.results[0].message) }
                 getBooksByStatus(selectedStatus.value!!)
@@ -66,21 +74,17 @@ class BookViewModel @Inject constructor(
     }
 
     fun deleteBook() = viewModelScope.launch {
-        bookId?.let {
-            repository
-                .deleteBook(it)
-                .catch { e ->
-                    sendEvent { Event.DeleteBookErrorEvent(e.message.toString()) }
-                }
-                .collect { response ->
-                    sendEvent { Event.DeleteBookSuccessEvent(response.data!!.results[0].message) }
-                    getBooksByStatus(selectedStatus.value!!)
-                }
-        }
+        repository
+            .deleteBook(bookId!!)
+            .catch { e -> sendEvent { Event.DeleteBookErrorEvent(e.message.toString()) } }
+            .collect { response ->
+                sendEvent { Event.DeleteBookSuccessEvent(response.data!!.results[0].message) }
+                getBooksByStatus(selectedStatus.value!!)
+            }
     }
 
     fun setStatus(status: Status) {
-        _selectedStatus.postValue(status)
+        _selectedStatus.value = status
     }
 
     fun bookToDetailItemList(book: Book) {

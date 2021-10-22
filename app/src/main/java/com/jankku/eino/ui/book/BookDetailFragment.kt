@@ -34,6 +34,7 @@ class BookDetailFragment : BindingFragment<FragmentBookDetailBinding>() {
         hideBottomNav(requireActivity())
         viewModel.bookToDetailItemList(args.book)
         setupRecyclerView()
+        setupEditFabClickListener()
     }
 
     override fun onDestroyView() {
@@ -53,6 +54,14 @@ class BookDetailFragment : BindingFragment<FragmentBookDetailBinding>() {
         }
 
         adapter.submitList(viewModel.detailItemList)
+    }
+
+    private fun setupEditFabClickListener() {
+        binding.fabEditBook.setOnClickListener {
+            val action =
+                BookDetailFragmentDirections.actionBookDetailFragmentToUpdateBookDialogFragment()
+            findNavController().navigate(action)
+        }
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {

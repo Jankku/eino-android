@@ -39,7 +39,7 @@ class BookListFragment : BindingFragment<FragmentBookListBinding>() {
         showBottomNav(requireActivity())
         setupObservers()
         setupRecyclerView()
-        addBookFabClickListener()
+        setupAddBookFabClickListener()
     }
 
     override fun onDestroyView() {
@@ -62,7 +62,7 @@ class BookListFragment : BindingFragment<FragmentBookListBinding>() {
         }
     }
 
-    private fun addBookFabClickListener() {
+    private fun setupAddBookFabClickListener() {
         binding.fabAddBook.setOnClickListener {
             val action = BookListFragmentDirections.actionBookListFragmentToAddBookDialogFragment()
             findNavController().navigate(action)
