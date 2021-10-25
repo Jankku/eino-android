@@ -36,6 +36,11 @@ class LoginFragment : BindingFragment<FragmentLoginBinding>() {
         setupObservers()
     }
 
+    override fun onDestroyView() {
+        super.onDestroyView()
+        validation.clear()
+    }
+
     private fun setLoginBtnListener() {
         binding.btnLogin.setOnClickListener {
             formFieldValidation()

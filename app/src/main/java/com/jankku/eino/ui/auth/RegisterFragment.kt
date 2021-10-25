@@ -36,6 +36,11 @@ class RegisterFragment : BindingFragment<FragmentRegisterBinding>() {
         setupObservers()
     }
 
+    override fun onDestroyView() {
+        super.onDestroyView()
+        validation.clear()
+    }
+
     private fun setRegisterBtnListener() {
         binding.btnRegister.setOnClickListener {
             formFieldValidation()
