@@ -31,6 +31,13 @@ interface EinoApiInterface {
     ): BookListResponse
 
     @Headers(REQUEST_HEADERS)
+    @GET("list/books/book/{id}")
+    suspend fun getBookById(
+        @Path("id") id: String,
+        @Header("Authorization") accessToken: String
+    ): BookListResponse
+
+    @Headers(REQUEST_HEADERS)
     @POST("list/books/add")
     suspend fun addBook(
         @Body book: BookRequest,

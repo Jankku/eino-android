@@ -8,14 +8,14 @@ import androidx.recyclerview.widget.RecyclerView
 import com.jankku.eino.data.model.Book
 import com.jankku.eino.databinding.ItemBookListBinding
 
-class BookListAdapter(private val clickListener: (Book) -> Unit) :
+class BookListAdapter(private val clickListener: (String) -> Unit) :
     ListAdapter<Book, BookListAdapter.ViewHolder>(DiffCallback) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val binding =
             ItemBookListBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         return ViewHolder(binding) { position ->
-            getItem(position)?.let { clickListener(it) }
+            getItem(position)?.let { clickListener(it.book_id) }
         }
     }
 

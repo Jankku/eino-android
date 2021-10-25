@@ -25,6 +25,14 @@ class BookRepository @Inject constructor(
         }
     )
 
+    suspend fun getBookById(bookId: String) = flowOf(
+        try {
+            Result.Success(api.getBookById(bookId, getAccessToken()))
+        } catch (e: Exception) {
+            Result.Error(e.message)
+        }
+    )
+
     suspend fun addBook(book: BookRequest): Flow<Result<AddBookResponse>> = flowOf(
         try {
             Result.Success(api.addBook(book, getAccessToken()))

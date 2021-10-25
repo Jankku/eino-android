@@ -2,12 +2,12 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
     <item
-        android:id="@+id/bookListFragment"
+        android:id="@+id/book_graph"
         android:icon="@drawable/selector_books"
         android:title="@string/navigation_books_label" />
 
     <item
-        android:id="@+id/movieListFragment"
+        android:id="@+id/movie_graph"
         android:icon="@drawable/selector_movies"
         android:title="@string/navigation_movies_label" />
 

@@ -3,9 +3,10 @@ package com.jankku.eino.ui.auth
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
-import androidx.fragment.app.viewModels
+import androidx.hilt.navigation.fragment.hiltNavGraphViewModels
 import androidx.navigation.fragment.findNavController
 import androidx.viewbinding.ViewBinding
+import com.jankku.eino.R
 import com.jankku.eino.databinding.FragmentLandingBinding
 import com.jankku.eino.ui.common.BindingFragment
 import com.jankku.eino.util.hideBottomNav
@@ -17,7 +18,7 @@ private const val TAG = "LandingFragment"
 class LandingFragment : BindingFragment<FragmentLandingBinding>() {
     override val bindingInflater: (LayoutInflater) -> ViewBinding
         get() = FragmentLandingBinding::inflate
-    private val viewModel: AuthViewModel by viewModels()
+    private val viewModel: AuthViewModel by hiltNavGraphViewModels(R.id.auth_graph)
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -28,21 +29,18 @@ class LandingFragment : BindingFragment<FragmentLandingBinding>() {
 
     private fun setupClickListeners() {
         binding.btnRegister.setOnClickListener {
-            val action = LandingFragmentDirections.actionLandingFragmentToRegisterFragment()
-            findNavController().navigate(action)
+            findNavController().navigate(R.id.action_landingFragment_to_registerFragment)
         }
 
         binding.btnLogin.setOnClickListener {
-            val action = LandingFragmentDirections.actionLandingFragmentToLoginFragment()
-            findNavController().navigate(action)
+            findNavController().navigate(R.id.action_landingFragment_to_loginFragment)
         }
     }
 
     private fun checkLoginStatus() {
         viewModel.isLoggedIn.observe(viewLifecycleOwner) { isLoggedIn ->
             if (isLoggedIn) {
-                val action = LandingFragmentDirections.actionLandingFragmentToAppGraph()
-                findNavController().navigate(action)
+                findNavController().navigate(R.id.action_global_book_graph)
             }
         }
     }

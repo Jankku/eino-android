@@ -27,13 +27,14 @@ private const val TAG = "BookViewModel"
 class BookViewModel @Inject constructor(
     private val repository: BookRepository
 ) : ViewModel() {
-    // Detail screen
-    private var bookId: String? = null
-    val detailItemList = mutableListOf<DetailItem>()
+    private var bookId = "null"
 
-    // Book list
-    private val _books: MutableLiveData<Result<BookListResponse>> = MutableLiveData()
-    val books: LiveData<Result<BookListResponse>> = _books
+    private val _detailItemList: MutableLiveData<Result<MutableList<DetailItem>>> =
+        MutableLiveData()
+    val detailItemList: LiveData<Result<MutableList<DetailItem>>> get() = _detailItemList
+
+    private val _bookList: MutableLiveData<Result<BookListResponse>> = MutableLiveData()
+    val bookList: LiveData<Result<BookListResponse>> = _bookList
 
     private val _selectedStatus: MutableLiveData<Status> = MutableLiveData(Status.ALL)
     val selectedStatus: LiveData<Status> get() = _selectedStatus
@@ -46,11 +47,19 @@ class BookViewModel @Inject constructor(
     }
 
     fun getBooksByStatus(status: Status) = viewModelScope.launch {
-        _books.value = Result.Loading()
+        _bookList.postValue(Result.Loading())
         repository
             .getBooksByStatus(status.value)
-            .catch { e -> _books.value = Result.Error(e.message) }
-            .collect { response -> _books.value = response }
+            .catch { e -> _bookList.value = Result.Error(e.message) }
+            .collect { response -> _bookList.postValue(response) }
+    }
+
+    fun getBookById() = viewModelScope.launch {
+        _detailItemList.value = Result.Loading()
+        repository
+            .getBookById(bookId)
+            .catch { e -> _detailItemList.value = Result.Error(e.message) }
+            .collect { response -> bookToDetailItemList(response.data!!.results[0]) }
     }
 
     fun addBook(book: BookRequest) = viewModelScope.launch {
@@ -65,7 +74,7 @@ class BookViewModel @Inject constructor(
 
     fun editBook(book: BookRequest) = viewModelScope.launch {
         repository
-            .editBook(bookId!!, book)
+            .editBook(bookId, book)
             .catch { e -> sendEvent { Event.AddBookErrorEvent(e.message.toString()) } }
             .collect { response ->
                 sendEvent { Event.AddBookSuccessEvent(response.data!!.results[0].message) }
@@ -75,7 +84,7 @@ class BookViewModel @Inject constructor(
 
     fun deleteBook() = viewModelScope.launch {
         repository
-            .deleteBook(bookId!!)
+            .deleteBook(bookId)
             .catch { e -> sendEvent { Event.DeleteBookErrorEvent(e.message.toString()) } }
             .collect { response ->
                 sendEvent { Event.DeleteBookSuccessEvent(response.data!!.results[0].message) }
@@ -87,11 +96,18 @@ class BookViewModel @Inject constructor(
         _selectedStatus.value = status
     }
 
-    fun bookToDetailItemList(book: Book) {
-        bookId = book.book_id
+    fun setBookId(id: String) {
+        bookId = id
+    }
+
+    fun sendEvent(event: () -> Event) = viewModelScope.launch {
+        _eventChannel.trySend(event())
+    }
+
+    private fun bookToDetailItemList(book: Book) {
         with(book) {
-            with(detailItemList) {
-                clear()
+            val list = mutableListOf<DetailItem>()
+            with(list) {
                 add(DetailItem("Title", title))
                 add(DetailItem("Author", author))
                 add(DetailItem("Publisher", publisher))
@@ -103,10 +119,7 @@ class BookViewModel @Inject constructor(
                 add(DetailItem("Start date", utcToLocal(start_date)))
                 add(DetailItem("End date", utcToLocal(end_date)))
             }
+            _detailItemList.value = Result.Success(list)
         }
-    }
-
-    private fun sendEvent(event: () -> Event) = viewModelScope.launch {
-        _eventChannel.send(event())
     }
 }

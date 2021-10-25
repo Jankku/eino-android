@@ -3,6 +3,8 @@ package com.jankku.eino.ui.book
 import android.os.Bundle
 import android.view.*
 import androidx.fragment.app.activityViewModels
+import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.flowWithLifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.RecyclerView
@@ -18,6 +20,7 @@ import com.jankku.eino.util.showBottomNav
 import com.jankku.eino.util.showSnackBar
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.launch
 
 private const val TAG = "BookListFragment"
 
@@ -48,8 +51,9 @@ class BookListFragment : BindingFragment<FragmentBookListBinding>() {
     }
 
     private fun setupRecyclerView() {
-        _adapter = BookListAdapter { book ->
-            val action = BookListFragmentDirections.actionBookListFragmentToBookDetailFragment(book)
+        _adapter = BookListAdapter { bookId ->
+            val action =
+                BookListFragmentDirections.actionBookListFragmentToBookDetailFragment(bookId)
             findNavController().navigate(action)
         }
 
@@ -64,21 +68,19 @@ class BookListFragment : BindingFragment<FragmentBookListBinding>() {
 
     private fun setupAddBookFabClickListener() {
         binding.fabAddBook.setOnClickListener {
-            val action = BookListFragmentDirections.actionBookListFragmentToAddBookDialogFragment()
-            findNavController().navigate(action)
+            findNavController().navigate(R.id.action_bookListFragment_to_addBookDialogFragment)
         }
     }
 
     private fun setupObservers() {
-        viewModel.books.observe(viewLifecycleOwner) { response ->
+        viewModel.bookList.observe(viewLifecycleOwner) { response ->
             when (response) {
                 is Result.Loading -> {
                     binding.progressBar.visibility = View.VISIBLE
                 }
                 is Result.Success -> {
                     binding.progressBar.visibility = View.GONE
-
-                    if (response.data!!.results.isNotEmpty()) {
+                    if (response.data?.results?.isNotEmpty() == true) {
                         binding.layoutNoItems.root.visibility = View.GONE
                         binding.rvBookList.visibility = View.VISIBLE
                         adapter.submitList(response.data.results)
@@ -94,15 +96,19 @@ class BookListFragment : BindingFragment<FragmentBookListBinding>() {
             }
         }
 
-        viewLifecycleOwner.lifecycleScope.launchWhenStarted {
-            viewModel.eventChannel.collect { event ->
-                when (event) {
-                    is Event.AddBookSuccessEvent -> showSnackBar(binding.root, event.message)
-                    is Event.AddBookErrorEvent -> showSnackBar(binding.root, event.message)
-                    is Event.DeleteBookSuccessEvent -> showSnackBar(binding.root, event.message)
-                    is Event.DeleteBookErrorEvent -> showSnackBar(binding.root, event.message)
+        lifecycleScope.launch {
+            viewModel.eventChannel
+                .flowWithLifecycle(lifecycle, Lifecycle.State.STARTED)
+                .collect { event ->
+                    when (event) {
+                        is Event.AddBookSuccessEvent -> showSnackBar(binding.root, event.message)
+                        is Event.AddBookErrorEvent -> showSnackBar(binding.root, event.message)
+                        is Event.DeleteBookSuccessEvent -> showSnackBar(binding.root, event.message)
+                        is Event.DeleteBookErrorEvent -> showSnackBar(binding.root, event.message)
+                        else -> {
+                        }
+                    }
                 }
-            }
         }
     }
 

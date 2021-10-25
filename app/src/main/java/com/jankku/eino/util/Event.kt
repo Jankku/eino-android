@@ -5,4 +5,5 @@ sealed class Event {
     data class AddBookErrorEvent(val message: String) : Event()
     data class DeleteBookSuccessEvent(val message: String) : Event()
     data class DeleteBookErrorEvent(val message: String) : Event()
+    data class GetBookErrorEvent(val message: String) : Event()
 }
