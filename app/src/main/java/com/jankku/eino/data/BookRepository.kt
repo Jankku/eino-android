@@ -1,6 +1,5 @@
 package com.jankku.eino.data
 
-import com.jankku.eino.data.DataStoreManager.Companion.ACCESS_TOKEN
 import com.jankku.eino.network.EinoApiInterface
 import com.jankku.eino.network.request.BookRequest
 import com.jankku.eino.network.response.AddBookResponse
@@ -15,11 +14,9 @@ class BookRepository @Inject constructor(
     private val api: EinoApiInterface,
     private val dataStoreManager: DataStoreManager
 ) {
-    private suspend fun getAccessToken() = "Bearer ${dataStoreManager.getString(ACCESS_TOKEN)}"
-
     suspend fun getBooksByStatus(status: String) = flowOf(
         try {
-            Result.Success(api.getBooksByStatus(status, getAccessToken()))
+            Result.Success(api.getBooksByStatus(status, dataStoreManager.getAccessToken()))
         } catch (e: Exception) {
             Result.Error(e.message)
         }
@@ -27,7 +24,7 @@ class BookRepository @Inject constructor(
 
     suspend fun getBookById(bookId: String) = flowOf(
         try {
-            Result.Success(api.getBookById(bookId, getAccessToken()))
+            Result.Success(api.getBookById(bookId, dataStoreManager.getAccessToken()))
         } catch (e: Exception) {
             Result.Error(e.message)
         }
@@ -35,7 +32,7 @@ class BookRepository @Inject constructor(
 
     suspend fun addBook(book: BookRequest): Flow<Result<AddBookResponse>> = flowOf(
         try {
-            Result.Success(api.addBook(book, getAccessToken()))
+            Result.Success(api.addBook(book, dataStoreManager.getAccessToken()))
         } catch (e: Exception) {
             Result.Error(e.message)
         }
@@ -43,7 +40,7 @@ class BookRepository @Inject constructor(
 
     suspend fun editBook(id: String, book: BookRequest): Flow<Result<UpdateBookResponse>> = flowOf(
         try {
-            Result.Success(api.updateBook(id, book, getAccessToken()))
+            Result.Success(api.updateBook(id, book, dataStoreManager.getAccessToken()))
         } catch (e: Exception) {
             Result.Error(e.message)
         }
@@ -51,7 +48,7 @@ class BookRepository @Inject constructor(
 
     suspend fun deleteBook(id: String): Flow<Result<DeleteBookResponse>> = flowOf(
         try {
-            Result.Success(api.deleteBook(id, getAccessToken()))
+            Result.Success(api.deleteBook(id, dataStoreManager.getAccessToken()))
         } catch (e: Exception) {
             Result.Error(e.message)
         }

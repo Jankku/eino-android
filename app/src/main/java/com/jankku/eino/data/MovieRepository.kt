@@ -11,7 +11,6 @@ class MovieRepository @Inject constructor(
     private val dataStoreManager: DataStoreManager
 ) {
     suspend fun getAllMovies(): Flow<MovieListResponse> {
-        val accessToken = "Bearer ${dataStoreManager.getString(DataStoreManager.ACCESS_TOKEN)}"
-        return flowOf(api.getAllMovies(accessToken))
+        return flowOf(api.getAllMovies(dataStoreManager.getAccessToken()))
     }
 }

@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/book_graph"
+    app:startDestination="@id/bookListFragment">
+    <fragment
+        android:id="@+id/bookListFragment"
+        android:name="com.jankku.eino.ui.book.BookListFragment"
+        android:label="@string/navigation_books_label"
+        tools:layout="@layout/fragment_book_list">
+        <action
+            android:id="@+id/action_bookListFragment_to_addBookDialogFragment"
+            app:destination="@id/addBookDialogFragment" />
+        <action
+            android:id="@+id/action_bookListFragment_to_bookDetailFragment"
+            app:destination="@id/bookDetailFragment"
+            app:enterAnim="@anim/nav_default_enter_anim"
+            app:exitAnim="@anim/nav_default_exit_anim"
+            app:popEnterAnim="@anim/nav_default_pop_enter_anim"
+            app:popExitAnim="@anim/nav_default_pop_exit_anim" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/bookDetailFragment"
+        android:name="com.jankku.eino.ui.book.BookDetailFragment"
+        android:label="@string/navigation_book_detail_label"
+        tools:layout="@layout/fragment_book_detail">
+        <argument
+            android:name="book_id"
+            android:defaultValue="null"
+            app:argType="string" />
+        <action
+            android:id="@+id/action_bookDetailFragment_to_updateBookDialogFragment"
+            app:destination="@id/updateBookDialogFragment" />
+    </fragment>
+
+    <dialog
+        android:id="@+id/updateBookDialogFragment"
+        android:name="com.jankku.eino.ui.book.UpdateBookDialogFragment"
+        android:label="UpdateBookDialogFragment"
+        tools:layout="@layout/fragment_update_book_dialog" />
+    <dialog
+        android:id="@+id/addBookDialogFragment"
+        android:name="com.jankku.eino.ui.book.AddBookDialogFragment"
+        android:label="@string/navigation_add_book_dialog_label"
+        tools:layout="@layout/fragment_add_book_dialog" />
+</navigation>

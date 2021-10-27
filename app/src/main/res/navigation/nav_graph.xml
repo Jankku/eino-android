@@ -1,123 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
-    app:startDestination="@id/auth_graph">
+    app:startDestination="@id/book_graph">
 
-    <navigation
-        android:id="@+id/auth_graph"
-        app:startDestination="@id/landingFragment">
-        <fragment
-            android:id="@+id/registerFragment"
-            android:name="com.jankku.eino.ui.auth.RegisterFragment"
-            android:label="@string/navigation_register_label"
-            tools:layout="@layout/fragment_register">
-            <action
-                android:id="@+id/action_registerFragment_to_loginFragment"
-                app:destination="@id/loginFragment"
-                app:enterAnim="@anim/nav_default_enter_anim"
-                app:exitAnim="@anim/nav_default_exit_anim"
-                app:popEnterAnim="@anim/nav_default_pop_enter_anim"
-                app:popExitAnim="@anim/nav_default_pop_exit_anim" />
-        </fragment>
-        <fragment
-            android:id="@+id/loginFragment"
-            android:name="com.jankku.eino.ui.auth.LoginFragment"
-            android:label="@string/navigation_login_label"
-            tools:layout="@layout/fragment_login" />
-        <fragment
-            android:id="@+id/landingFragment"
-            android:name="com.jankku.eino.ui.auth.LandingFragment"
-            android:label="@string/navigation_landing_label"
-            tools:layout="@layout/fragment_landing">
-            <action
-                android:id="@+id/action_landingFragment_to_registerFragment"
-                app:destination="@id/registerFragment"
-                app:enterAnim="@anim/nav_default_enter_anim"
-                app:exitAnim="@anim/nav_default_exit_anim"
-                app:popEnterAnim="@anim/nav_default_pop_enter_anim"
-                app:popExitAnim="@anim/nav_default_pop_exit_anim" />
-            <action
-                android:id="@+id/action_landingFragment_to_loginFragment"
-                app:destination="@id/loginFragment" />
-        </fragment>
-        <action
-            android:id="@+id/action_global_book_graph"
-            app:destination="@id/book_graph" />
-    </navigation>
-
-    <navigation
-        android:id="@+id/book_graph"
-        app:startDestination="@id/bookListFragment">
-        <fragment
-            android:id="@+id/bookListFragment"
-            android:name="com.jankku.eino.ui.book.BookListFragment"
-            android:label="@string/navigation_books_label"
-            tools:layout="@layout/fragment_book_list">
-            <action
-                android:id="@+id/action_bookListFragment_to_addBookDialogFragment"
-                app:destination="@id/addBookDialogFragment" />
-            <action
-                android:id="@+id/action_bookListFragment_to_bookDetailFragment"
-                app:destination="@id/bookDetailFragment"
-                app:enterAnim="@anim/nav_default_enter_anim"
-                app:exitAnim="@anim/nav_default_exit_anim"
-                app:popEnterAnim="@anim/nav_default_pop_enter_anim"
-                app:popExitAnim="@anim/nav_default_pop_exit_anim" />
-        </fragment>
-
-        <fragment
-            android:id="@+id/bookDetailFragment"
-            android:name="com.jankku.eino.ui.book.BookDetailFragment"
-            android:label="@string/navigation_book_detail_label"
-            tools:layout="@layout/fragment_book_detail">
-            <argument
-                android:name="book_id"
-                android:defaultValue="null"
-                app:argType="string" />
-            <action
-                android:id="@+id/action_bookDetailFragment_to_updateBookDialogFragment"
-                app:destination="@id/updateBookDialogFragment" />
-        </fragment>
-
-        <dialog
-            android:id="@+id/updateBookDialogFragment"
-            android:name="com.jankku.eino.ui.book.UpdateBookDialogFragment"
-            android:label="UpdateBookDialogFragment"
-            tools:layout="@layout/fragment_update_book_dialog" />
-        <dialog
-            android:id="@+id/addBookDialogFragment"
-            android:name="com.jankku.eino.ui.book.AddBookDialogFragment"
-            android:label="@string/navigation_add_book_dialog_label"
-            tools:layout="@layout/fragment_add_book_dialog" />
-    </navigation>
-
-    <navigation
-        android:id="@+id/movie_graph"
-        app:startDestination="@id/movieListFragment">
-
-        <fragment
-            android:id="@+id/movieListFragment"
-            android:name="com.jankku.eino.ui.movie.MovieListFragment"
-            android:label="@string/navigation_movies_label"
-            tools:layout="@layout/fragment_movie_list">
-            <action
-                android:id="@+id/action_movieListFragment_to_movieDetailFragment"
-                app:destination="@id/movieDetailFragment" />
-        </fragment>
-
-        <fragment
-            android:id="@+id/movieDetailFragment"
-            android:name="com.jankku.eino.ui.movie.MovieDetailFragment"
-            android:label="@string/navigation_movie_detail_label"
-            tools:layout="@layout/fragment_movie_detail">
-            <argument
-                android:name="movie"
-                app:argType="com.jankku.eino.data.model.Movie" />
-        </fragment>
-
-    </navigation>
+    <include app:graph="@navigation/auth_graph" />
+    <include app:graph="@navigation/book_graph" />
+    <include app:graph="@navigation/movie_graph" />
 
     <fragment
         android:id="@+id/settingsFragment"

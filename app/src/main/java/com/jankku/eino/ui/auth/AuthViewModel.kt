@@ -1,11 +1,8 @@
 package com.jankku.eino.ui.auth
 
-import android.util.Log
 import androidx.lifecycle.*
+import com.jankku.eino.data.AuthRepository
 import com.jankku.eino.data.DataStoreManager
-import com.jankku.eino.data.DataStoreManager.Companion.ACCESS_TOKEN
-import com.jankku.eino.data.DataStoreManager.Companion.REFRESH_TOKEN
-import com.jankku.eino.network.EinoApiInterface
 import com.jankku.eino.network.request.LoginRequest
 import com.jankku.eino.network.request.RegisterRequest
 import com.jankku.eino.network.response.LoginResponse
@@ -17,6 +14,8 @@ import com.jankku.eino.util.map
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.ExperimentalCoroutinesApi
+import kotlinx.coroutines.flow.catch
+import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -24,11 +23,10 @@ private const val TAG = "AuthViewModel"
 
 @HiltViewModel
 class AuthViewModel @Inject constructor(
-    private val api: EinoApiInterface,
-    networkStatusTracker: NetworkStatusTracker,
-    private val dataStoreManager: DataStoreManager
+    private val repository: AuthRepository,
+    private val dataStoreManager: DataStoreManager,
+    networkStatusTracker: NetworkStatusTracker
 ) : ViewModel() {
-
     private val _registerResponse: MutableLiveData<Result<RegisterResponse>> = MutableLiveData()
     val registerResponse: LiveData<Result<RegisterResponse>> get() = _registerResponse
 
@@ -48,46 +46,35 @@ class AuthViewModel @Inject constructor(
         isAlreadyLoggedIn()
     }
 
-    private fun isAlreadyLoggedIn() {
+    private fun isAlreadyLoggedIn() = viewModelScope.launch {
+        try {
+            val accessToken = dataStoreManager.getAccessToken()
+            val refreshToken = dataStoreManager.getRefreshToken()
+            _isLoggedIn.value = accessToken.isNotBlank() && refreshToken.isNotBlank()
+        } catch (e: Exception) {
+            _isLoggedIn.value = false
+        }
+    }
+
+    fun register(username: String, password: String, password2: String) =
         viewModelScope.launch {
-            try {
-                val accessToken = dataStoreManager.getString(ACCESS_TOKEN)
-                val refreshToken = dataStoreManager.getString(REFRESH_TOKEN)
-                _isLoggedIn.postValue(accessToken.isNotBlank() && refreshToken.isNotBlank())
-            } catch (e: Exception) {
-                _isLoggedIn.postValue(false)
-            }
+            _registerResponse.value = Result.Loading()
+            val body = RegisterRequest(username, password, password2)
+            repository
+                .register(body)
+                .catch { e -> _registerResponse.value = Result.Error(e.message) }
+                .collect { response -> _registerResponse.value = response }
         }
-    }
 
-    fun register(username: String, password: String, password2: String) {
-        viewModelScope.launch(Dispatchers.IO) {
-            try {
-                _registerResponse.postValue(Result.Loading())
-                val body = RegisterRequest(username, password, password2)
-                val response = api.register(body)
-                _registerResponse.postValue(Result.Success(response))
-            } catch (e: Exception) {
-                Log.d(TAG, e.toString())
-                _registerResponse.postValue(Result.Error(e.message))
+    fun login(username: String, password: String) = viewModelScope.launch {
+        _loginResponse.value = Result.Loading()
+        val body = LoginRequest(username, password)
+        repository
+            .login(body)
+            .catch { e -> _loginResponse.value = Result.Error(e.message) }
+            .collect { response ->
+                response.data?.let { dataStoreManager.setTokens(it.accessToken, it.refreshToken) }
+                _loginResponse.value = response
             }
-        }
-    }
-
-    fun login(username: String, password: String) {
-        viewModelScope.launch(Dispatchers.IO) {
-            try {
-                _loginResponse.postValue(Result.Loading())
-                val body = LoginRequest(username, password)
-                val response = api.login(body)
-                _loginResponse.postValue(Result.Success(response))
-
-                dataStoreManager.putString(ACCESS_TOKEN, response.accessToken)
-                dataStoreManager.putString(REFRESH_TOKEN, response.refreshToken)
-            } catch (e: Exception) {
-                Log.d(TAG, e.toString())
-                _loginResponse.postValue(Result.Error(e.message))
-            }
-        }
     }
 }

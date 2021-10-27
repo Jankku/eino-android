@@ -18,17 +18,19 @@ import javax.inject.Inject
 
 private val Context.dataStore by preferencesDataStore(DATASTORE_NAME)
 
-class DataStoreManager @Inject constructor(@ApplicationContext private val appContext: Context) {
-    private val dataStore = appContext.dataStore
+class DataStoreManager @Inject constructor(@ApplicationContext private val context: Context) {
+    private val dataStore = context.dataStore
 
-    suspend fun getString(key: Preferences.Key<String>): String {
-        val preferences: Preferences = dataStore.data.first()
-        return preferences[key] ?: throw Exception("No value found")
-    }
+    suspend fun getAccessToken(): String =
+        dataStore.data.first()[ACCESS_TOKEN] ?: throw Exception("No access token found")
 
-    suspend fun putString(key: Preferences.Key<String>, value: String) {
-        dataStore.edit { settings ->
-            settings[key] = value
+    suspend fun getRefreshToken(): String =
+        dataStore.data.first()[REFRESH_TOKEN] ?: throw Exception("No refresh token found")
+
+    suspend fun setTokens(accessToken: String, refreshToken: String) {
+        dataStore.edit { preferences ->
+            preferences[ACCESS_TOKEN] = "Bearer $accessToken"
+            preferences[REFRESH_TOKEN] = refreshToken
         }
     }
 
