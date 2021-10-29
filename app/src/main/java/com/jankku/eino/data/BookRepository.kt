@@ -2,11 +2,7 @@ package com.jankku.eino.data
 
 import com.jankku.eino.network.EinoApiInterface
 import com.jankku.eino.network.request.BookRequest
-import com.jankku.eino.network.response.AddBookResponse
-import com.jankku.eino.network.response.DeleteBookResponse
-import com.jankku.eino.network.response.UpdateBookResponse
 import com.jankku.eino.util.Result
-import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flowOf
 import javax.inject.Inject
 
@@ -30,7 +26,7 @@ class BookRepository @Inject constructor(
         }
     )
 
-    suspend fun addBook(book: BookRequest): Flow<Result<AddBookResponse>> = flowOf(
+    suspend fun addBook(book: BookRequest) = flowOf(
         try {
             Result.Success(api.addBook(book, dataStoreManager.getAccessToken()))
         } catch (e: Exception) {
@@ -38,7 +34,7 @@ class BookRepository @Inject constructor(
         }
     )
 
-    suspend fun editBook(id: String, book: BookRequest): Flow<Result<UpdateBookResponse>> = flowOf(
+    suspend fun editBook(id: String, book: BookRequest) = flowOf(
         try {
             Result.Success(api.updateBook(id, book, dataStoreManager.getAccessToken()))
         } catch (e: Exception) {
@@ -46,7 +42,7 @@ class BookRepository @Inject constructor(
         }
     )
 
-    suspend fun deleteBook(id: String): Flow<Result<DeleteBookResponse>> = flowOf(
+    suspend fun deleteBook(id: String) = flowOf(
         try {
             Result.Success(api.deleteBook(id, dataStoreManager.getAccessToken()))
         } catch (e: Exception) {

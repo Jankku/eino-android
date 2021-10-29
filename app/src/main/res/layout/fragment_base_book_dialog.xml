@@ -12,7 +12,7 @@
         android:orientation="vertical"
         android:padding="@dimen/spacing_default"
         android:showDividers="middle"
-        tools:context=".ui.book.AddBookDialogFragment">
+        tools:context=".ui.book.UpdateBookDialogFragment">
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/tilBookTitle"
@@ -166,14 +166,14 @@
                 android:inputType="none" />
         </com.google.android.material.textfield.TextInputLayout>
 
-        <Button
-            android:id="@+id/btnAddBook"
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnAction"
             style="@style/Widget.MaterialComponents.Button.OutlinedButton"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/add_book_dialog_create"
-            app:icon="@drawable/ic_add"
-            app:iconGravity="textStart" />
+            app:iconGravity="textStart"
+            tools:icon="@drawable/ic_add"
+            tools:text="@string/dialog_update_action_text" />
 
     </LinearLayout>
 

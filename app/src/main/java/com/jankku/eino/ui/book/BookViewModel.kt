@@ -29,6 +29,9 @@ class BookViewModel @Inject constructor(
 ) : ViewModel() {
     private var bookId = "null"
 
+    private val _book: MutableLiveData<Book> = MutableLiveData()
+    val book: LiveData<Book> get() = _book
+
     private val _detailItemList: MutableLiveData<Result<MutableList<DetailItem>>> =
         MutableLiveData()
     val detailItemList: LiveData<Result<MutableList<DetailItem>>> get() = _detailItemList
@@ -51,7 +54,9 @@ class BookViewModel @Inject constructor(
         repository
             .getBooksByStatus(status.value)
             .catch { e -> _bookList.value = Result.Error(e.message) }
-            .collect { response -> _bookList.postValue(response) }
+            .collect { response ->
+                _bookList.postValue(response)
+            }
     }
 
     fun getBookById() = viewModelScope.launch {
@@ -59,7 +64,14 @@ class BookViewModel @Inject constructor(
         repository
             .getBookById(bookId)
             .catch { e -> _detailItemList.value = Result.Error(e.message) }
-            .collect { response -> bookToDetailItemList(response.data!!.results[0]) }
+            .collect { response ->
+                if (response.data?.results?.get(0) != null) {
+                    _book.value = response.data.results[0]
+                    bookToDetailItemList(response.data.results[0])
+                } else {
+                    _detailItemList.value = Result.Error(response.message)
+                }
+            }
     }
 
     fun addBook(book: BookRequest) = viewModelScope.launch {
@@ -67,7 +79,11 @@ class BookViewModel @Inject constructor(
             .addBook(book)
             .catch { e -> sendEvent { Event.AddBookErrorEvent(e.message.toString()) } }
             .collect { response ->
-                sendEvent { Event.AddBookSuccessEvent(response.data!!.results[0].message) }
+                if (response.data?.results?.get(0) != null) {
+                    sendEvent { Event.AddBookSuccessEvent(response.data.results[0].message) }
+                } else {
+                    sendEvent { Event.AddBookErrorEvent(response.message.toString()) }
+                }
                 getBooksByStatus(selectedStatus.value!!)
             }
     }
@@ -75,10 +91,14 @@ class BookViewModel @Inject constructor(
     fun editBook(book: BookRequest) = viewModelScope.launch {
         repository
             .editBook(bookId, book)
-            .catch { e -> sendEvent { Event.AddBookErrorEvent(e.message.toString()) } }
+            .catch { e -> sendEvent { Event.EditBookErrorEvent(e.message.toString()) } }
             .collect { response ->
-                sendEvent { Event.AddBookSuccessEvent(response.data!!.results[0].message) }
-                getBooksByStatus(selectedStatus.value!!)
+                if (response.data?.results?.get(0) != null) {
+                    sendEvent { Event.EditBookSuccessEvent(response.data.results[0].message) }
+                } else {
+                    sendEvent { Event.EditBookErrorEvent(response.message.toString()) }
+                }
+                getBookById()
             }
     }
 
@@ -87,7 +107,11 @@ class BookViewModel @Inject constructor(
             .deleteBook(bookId)
             .catch { e -> sendEvent { Event.DeleteBookErrorEvent(e.message.toString()) } }
             .collect { response ->
-                sendEvent { Event.DeleteBookSuccessEvent(response.data!!.results[0].message) }
+                if (response.data?.results?.get(0) != null) {
+                    sendEvent { Event.DeleteBookSuccessEvent(response.data.results[0].message) }
+                } else {
+                    sendEvent { Event.DeleteBookErrorEvent(response.message.toString()) }
+                }
                 getBooksByStatus(selectedStatus.value!!)
             }
     }
