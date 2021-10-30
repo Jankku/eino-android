@@ -19,14 +19,13 @@
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="@string/book_title_hint">
+            android:hint="@string/dialog_book_title_hint">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/tietBookTitle"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:inputType="text"
-                android:singleLine="true" />
+                android:inputType="text" />
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
@@ -34,14 +33,13 @@
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="@string/book_author_hint">
+            android:hint="@string/dialog_book_author_hint">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/tietBookAuthor"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:inputType="text"
-                android:singleLine="true" />
+                android:inputType="text" />
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
@@ -49,14 +47,13 @@
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="@string/book_publisher_hint">
+            android:hint="@string/dialog_book_publisher_hint">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/tietBookPublisher"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:inputType="text"
-                android:singleLine="true" />
+                android:inputType="text" />
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
@@ -64,7 +61,7 @@
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="@string/book_pages_hint">
+            android:hint="@string/dialog_book_pages_hint">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/tietBookPages"
@@ -78,7 +75,7 @@
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="@string/book_isbn_hint">
+            android:hint="@string/dialog_book_isbn_hint">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/tietBookIsbn"
@@ -92,7 +89,7 @@
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="@string/book_year_hint">
+            android:hint="@string/dialog_year_hint">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/tietBookYear"
@@ -106,7 +103,7 @@
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense.ExposedDropdownMenu"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="@string/book_status_hint">
+            android:hint="@string/dialog_status_hint">
 
             <com.google.android.material.textfield.MaterialAutoCompleteTextView
                 android:id="@+id/mactvBookStatus"
@@ -125,13 +122,13 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:labelFor="@id/sliderBookScore"
-                android:text="@string/book_score_hint" />
+                android:text="@string/dialog_score_hint" />
 
             <com.google.android.material.slider.Slider
                 android:id="@+id/sliderBookScore"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:contentDescription="@string/book_score_slider_desc"
+                android:contentDescription="@string/dialog_score_slider_desc"
                 android:stepSize="1"
                 android:valueFrom="0"
                 android:valueTo="10" />
@@ -143,7 +140,7 @@
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense.ExposedDropdownMenu"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="@string/book_start_date_picker_title">
+            android:hint="@string/dialog_start_date_picker_title">
 
             <com.google.android.material.textfield.MaterialAutoCompleteTextView
                 android:id="@+id/mactvBookStartDate"
@@ -157,7 +154,7 @@
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense.ExposedDropdownMenu"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="@string/book_end_date_picker_title">
+            android:hint="@string/dialog_end_date_picker_title">
 
             <com.google.android.material.textfield.MaterialAutoCompleteTextView
                 android:id="@+id/mactvBookEndDate"
@@ -173,7 +170,7 @@
             android:layout_height="wrap_content"
             app:iconGravity="textStart"
             tools:icon="@drawable/ic_add"
-            tools:text="@string/dialog_update_action_text" />
+            tools:text="@string/dialog_book_update_action_text" />
 
     </LinearLayout>
 

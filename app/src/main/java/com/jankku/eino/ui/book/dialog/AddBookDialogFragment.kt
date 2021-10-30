@@ -10,7 +10,7 @@ private const val TAG = "AddBookDialogFragment"
 class AddBookDialogFragment : BaseBookDialogFragment() {
     override fun setupActionButton() {
         binding.btnAction.apply {
-            text = getString(R.string.dialog_add_action_text)
+            text = getString(R.string.dialog_book_add_action_text)
             icon = ResourcesCompat.getDrawable(resources, R.drawable.ic_add, null)
             setOnClickListener {
                 viewModel.addBook(getBookRequest())

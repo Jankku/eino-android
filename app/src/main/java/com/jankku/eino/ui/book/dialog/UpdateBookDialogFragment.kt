@@ -18,7 +18,7 @@ class UpdateBookDialogFragment : BaseBookDialogFragment() {
 
     override fun setupActionButton() {
         binding.btnAction.apply {
-            text = getString(R.string.dialog_update_action_text)
+            text = getString(R.string.dialog_book_update_action_text)
             icon = ResourcesCompat.getDrawable(resources, R.drawable.ic_edit, null)
             setOnClickListener {
                 val book = getBookRequest()

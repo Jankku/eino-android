@@ -37,8 +37,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:importantForAutofill="yes"
-            android:inputType="text"
-            android:singleLine="true" />
+            android:inputType="text" />
 
     </com.google.android.material.textfield.TextInputLayout>
 
@@ -62,8 +61,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:importantForAutofill="yes"
-            android:inputType="textPassword"
-            android:singleLine="true" />
+            android:inputType="textPassword" />
 
     </com.google.android.material.textfield.TextInputLayout>
 
@@ -87,8 +85,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:importantForAutofill="yes"
-            android:inputType="textPassword"
-            android:singleLine="true" />
+            android:inputType="textPassword" />
 
     </com.google.android.material.textfield.TextInputLayout>
 

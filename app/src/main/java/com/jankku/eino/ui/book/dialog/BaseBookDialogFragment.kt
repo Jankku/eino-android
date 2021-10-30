@@ -2,7 +2,6 @@ package com.jankku.eino.ui.book.dialog
 
 import android.app.Dialog
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -19,6 +18,7 @@ import com.jankku.eino.network.request.BookRequest
 import com.jankku.eino.ui.book.BookViewModel
 import com.jankku.eino.util.convertUnixToDate
 import com.jankku.eino.util.getCurrentDate
+import com.jankku.eino.util.getCurrentYear
 import com.jankku.eino.util.getDateFromString
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -56,7 +56,7 @@ open class BaseBookDialogFragment : BottomSheetDialogFragment() {
         savedInstanceState: Bundle?
     ): View {
         _binding = FragmentBaseBookDialogBinding.inflate(inflater)
-        statusValueArray = resources.getStringArray(R.array.add_dialog_book_status_values)
+        statusValueArray = resources.getStringArray(R.array.dialog_book_status)
         dateFieldItems = resources.getStringArray(R.array.date_field_items)
         return binding.root
     }
@@ -89,15 +89,14 @@ open class BaseBookDialogFragment : BottomSheetDialogFragment() {
         // Date pickers
 
         val startDatePicker = MaterialDatePicker.Builder.datePicker()
-            .setTitleText(R.string.book_start_date_picker_title)
+            .setTitleText(R.string.dialog_start_date_picker_title)
             .build()
 
         val endDatePicker = MaterialDatePicker.Builder.datePicker()
-            .setTitleText(R.string.book_end_date_picker_title)
+            .setTitleText(R.string.dialog_end_date_picker_title)
             .build()
 
         startDatePicker.addOnPositiveButtonClickListener {
-            Log.d(TAG, "setupDatePickers: $it")
             binding.mactvBookStartDate.setText(convertUnixToDate(it), false)
         }
 
@@ -138,7 +137,7 @@ open class BaseBookDialogFragment : BottomSheetDialogFragment() {
         val author = binding.tietBookAuthor.text.toString()
         val publisher = binding.tietBookPublisher.text.toString()
         val pages = binding.tietBookPages.text.toString().toIntOrNull() ?: 0
-        val year = binding.tietBookYear.text.toString().toIntOrNull() ?: 2021
+        val year = binding.tietBookYear.text.toString().toIntOrNull() ?: getCurrentYear()
         val status = binding.mactvBookStatus.text.toString().lowercase()
         val score = binding.sliderBookScore.value.toInt()
         val startDate =

@@ -5,8 +5,8 @@ import com.jankku.eino.data.AuthRepository
 import com.jankku.eino.data.DataStoreManager
 import com.jankku.eino.network.request.LoginRequest
 import com.jankku.eino.network.request.RegisterRequest
-import com.jankku.eino.network.response.LoginResponse
-import com.jankku.eino.network.response.RegisterResponse
+import com.jankku.eino.network.response.auth.LoginResponse
+import com.jankku.eino.network.response.auth.RegisterResponse
 import com.jankku.eino.util.NetworkStatus
 import com.jankku.eino.util.NetworkStatusTracker
 import com.jankku.eino.util.Result

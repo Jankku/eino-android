@@ -13,6 +13,7 @@ import androidx.viewbinding.ViewBinding
 import com.jankku.eino.R
 import com.jankku.eino.databinding.FragmentBookDetailBinding
 import com.jankku.eino.ui.common.BindingFragment
+import com.jankku.eino.ui.common.DetailAdapter
 import com.jankku.eino.util.Event
 import com.jankku.eino.util.Result
 import com.jankku.eino.util.hideBottomNav
@@ -28,7 +29,7 @@ class BookDetailFragment : BindingFragment<FragmentBookDetailBinding>() {
     override val bindingInflater: (LayoutInflater) -> ViewBinding
         get() = FragmentBookDetailBinding::inflate
     private val viewModel: BookViewModel by activityViewModels()
-    private var _adapter: BookDetailAdapter? = null
+    private var _adapter: DetailAdapter? = null
     private val adapter get() = _adapter!!
     private val args: BookDetailFragmentArgs by navArgs()
 
@@ -53,7 +54,7 @@ class BookDetailFragment : BindingFragment<FragmentBookDetailBinding>() {
     }
 
     private fun setupRecyclerView() {
-        _adapter = BookDetailAdapter()
+        _adapter = DetailAdapter()
 
         adapter.stateRestorationPolicy =
             RecyclerView.Adapter.StateRestorationPolicy.PREVENT_WHEN_EMPTY
@@ -96,9 +97,7 @@ class BookDetailFragment : BindingFragment<FragmentBookDetailBinding>() {
 
     private fun setupEditFabClickListener() {
         binding.fabEditBook.setOnClickListener {
-            val action =
-                BookDetailFragmentDirections.actionBookDetailFragmentToUpdateBookDialogFragment()
-            findNavController().navigate(action)
+            findNavController().navigate(R.id.action_bookDetailFragment_to_updateBookDialogFragment)
         }
     }
 

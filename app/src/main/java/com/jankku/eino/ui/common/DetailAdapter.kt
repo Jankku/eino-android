@@ -1,4 +1,4 @@
-package com.jankku.eino.ui.book
+package com.jankku.eino.ui.common
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -8,7 +8,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.jankku.eino.data.model.DetailItem
 import com.jankku.eino.databinding.ItemDetailBinding
 
-class BookDetailAdapter : ListAdapter<DetailItem, BookDetailAdapter.ViewHolder>(DiffCallback) {
+class DetailAdapter : ListAdapter<DetailItem, DetailAdapter.ViewHolder>(DiffCallback) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val binding = ItemDetailBinding.inflate(LayoutInflater.from(parent.context), parent, false)

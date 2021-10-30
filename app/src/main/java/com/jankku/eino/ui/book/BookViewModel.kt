@@ -9,7 +9,7 @@ import com.jankku.eino.data.enums.BookStatus
 import com.jankku.eino.data.model.Book
 import com.jankku.eino.data.model.DetailItem
 import com.jankku.eino.network.request.BookRequest
-import com.jankku.eino.network.response.BookListResponse
+import com.jankku.eino.network.response.book.BookListResponse
 import com.jankku.eino.util.Event
 import com.jankku.eino.util.Result
 import com.jankku.eino.util.utcToLocal
@@ -46,13 +46,13 @@ class BookViewModel @Inject constructor(
     val eventChannel = _eventChannel.receiveAsFlow()
 
     init {
-        getBooksByStatus(selectedStatus.value!!)
+        getBooksByStatus()
     }
 
-    fun getBooksByStatus(status: BookStatus) = viewModelScope.launch {
+    fun getBooksByStatus() = viewModelScope.launch {
         _bookList.postValue(Result.Loading())
         repository
-            .getBooksByStatus(status.value)
+            .getBooksByStatus(selectedStatus.value!!.value)
             .catch { e -> _bookList.value = Result.Error(e.message) }
             .collect { response ->
                 _bookList.postValue(response)
@@ -84,7 +84,7 @@ class BookViewModel @Inject constructor(
                 } else {
                     sendEvent { Event.AddBookErrorEvent(response.message.toString()) }
                 }
-                getBooksByStatus(selectedStatus.value!!)
+                getBooksByStatus()
             }
     }
 
@@ -112,7 +112,7 @@ class BookViewModel @Inject constructor(
                 } else {
                     sendEvent { Event.DeleteBookErrorEvent(response.message.toString()) }
                 }
-                getBooksByStatus(selectedStatus.value!!)
+                getBooksByStatus()
             }
     }
 
@@ -138,7 +138,7 @@ class BookViewModel @Inject constructor(
                 add(DetailItem("ISBN", isbn))
                 add(DetailItem("Pages", pages.toString()))
                 add(DetailItem("Year", year.toString()))
-                add(DetailItem("BookStatus", status.replaceFirstChar { it.uppercase() }))
+                add(DetailItem("Status", status.replaceFirstChar { it.uppercase() }))
                 add(DetailItem("Score", score.toString()))
                 add(DetailItem("Start date", utcToLocal(start_date)))
                 add(DetailItem("End date", utcToLocal(end_date)))
