@@ -4,8 +4,16 @@
         <item>Choose a date</item>
     </string-array>
 
-    <string-array name="add_dialog_book_status_values">
+    <string-array name="dialog_book_status">
         <item>Reading</item>
+        <item>Completed</item>
+        <item>On-hold</item>
+        <item>Dropped</item>
+        <item>Planned</item>
+    </string-array>
+
+    <string-array name="dialog_movie_status">
+        <item>Watching</item>
         <item>Completed</item>
         <item>On-hold</item>
         <item>Dropped</item>

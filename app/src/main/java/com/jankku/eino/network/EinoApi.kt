@@ -2,8 +2,18 @@ package com.jankku.eino.network
 
 import com.jankku.eino.network.request.BookRequest
 import com.jankku.eino.network.request.LoginRequest
+import com.jankku.eino.network.request.MovieRequest
 import com.jankku.eino.network.request.RegisterRequest
-import com.jankku.eino.network.response.*
+import com.jankku.eino.network.response.auth.LoginResponse
+import com.jankku.eino.network.response.auth.RegisterResponse
+import com.jankku.eino.network.response.book.AddBookResponse
+import com.jankku.eino.network.response.book.BookListResponse
+import com.jankku.eino.network.response.book.DeleteBookResponse
+import com.jankku.eino.network.response.book.UpdateBookResponse
+import com.jankku.eino.network.response.movie.AddMovieResponse
+import com.jankku.eino.network.response.movie.DeleteMovieResponse
+import com.jankku.eino.network.response.movie.MovieListResponse
+import com.jankku.eino.network.response.movie.UpdateMovieResponse
 import com.jankku.eino.util.Constant.REQUEST_HEADERS
 import retrofit2.http.*
 
@@ -63,6 +73,38 @@ interface EinoApiInterface {
      *  Movie routes
      */
     @Headers(REQUEST_HEADERS)
-    @GET("list/movies/all")
-    suspend fun getAllMovies(@Header("Authorization") accessToken: String): MovieListResponse
+    @GET("list/movies/{status}")
+    suspend fun getMoviesByStatus(
+        @Path("status") status: String,
+        @Header("Authorization") accessToken: String
+    ): MovieListResponse
+
+    @Headers(REQUEST_HEADERS)
+    @GET("list/movies/movie/{id}")
+    suspend fun getMovieById(
+        @Path("id") id: String,
+        @Header("Authorization") accessToken: String
+    ): MovieListResponse
+
+    @Headers(REQUEST_HEADERS)
+    @POST("list/movies/add")
+    suspend fun addMovie(
+        @Body movie: MovieRequest,
+        @Header("Authorization") accessToken: String
+    ): AddMovieResponse
+
+    @Headers(REQUEST_HEADERS)
+    @PUT("list/movies/update/{id}")
+    suspend fun updateMovie(
+        @Path("id") id: String,
+        @Body movie: MovieRequest,
+        @Header("Authorization") accessToken: String
+    ): UpdateMovieResponse
+
+    @Headers(REQUEST_HEADERS)
+    @DELETE("list/movies/delete/{id}")
+    suspend fun deleteMovie(
+        @Path("id") id: String,
+        @Header("Authorization") accessToken: String
+    ): DeleteMovieResponse
 }

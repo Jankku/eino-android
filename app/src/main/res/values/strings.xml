@@ -34,22 +34,33 @@
     <string name="validation_username_length_invalid">Username length should be between 3–255 characters</string>
     <string name="validation_password_length_invalid">Password length should be between 8–255 characters</string>
 
-    <!-- book dialogs -->
-    <string name="dialog_add_action_text">Add book</string>
-    <string name="dialog_update_action_text">Update book</string>
-    <string name="book_title_hint">Title</string>
-    <string name="book_author_hint">Author</string>
-    <string name="book_publisher_hint">Publisher</string>
-    <string name="book_pages_hint">Pages</string>
-    <string name="book_isbn_hint">ISBN</string>
-    <string name="book_year_hint">Year</string>
-    <string name="book_status_hint">Status</string>
-    <string name="book_score_hint">Score</string>
-    <string name="book_score_slider_desc">Score slider</string>
-    <string name="book_start_date_picker_title">Start date</string>
-    <string name="book_end_date_picker_title">End date</string>
+    <!-- Common dialogs -->
+    <string name="dialog_status_hint">Status</string>
+    <string name="dialog_score_hint">Score</string>
+    <string name="dialog_score_slider_desc">Score slider</string>
+    <string name="dialog_start_date_picker_title">Start date</string>
+    <string name="dialog_end_date_picker_title">End date</string>
+    <string name="dialog_year_hint">Year</string>
 
-    <!-- BookStatus dialog -->
+    <!-- Book dialogs -->
+    <string name="dialog_book_add_action_text">Add book</string>
+    <string name="dialog_book_update_action_text">Update book</string>
+    <string name="dialog_book_title_hint">Title</string>
+    <string name="dialog_book_author_hint">Author</string>
+    <string name="dialog_book_publisher_hint">Publisher</string>
+    <string name="dialog_book_pages_hint">Pages</string>
+    <string name="dialog_book_isbn_hint">ISBN</string>
+
+    <!-- Movie dialogs -->
+    <string name="dialog_movie_add_action_text">Add movie</string>
+    <string name="dialog_movie_update_action_text">Update movie</string>
+    <string name="dialog_movie_title_hint">Title</string>
+    <string name="dialog_movie_studio_hint">Studio</string>
+    <string name="dialog_movie_director_hint">Director</string>
+    <string name="dialog_movie_writer_hint">Writer</string>
+    <string name="dialog_movie_duration_hint">Duration</string>
+
+    <!-- Status dialog -->
     <string name="status_dialog_title">Sort by status</string>
     <string name="status_dialog_btn_apply">Apply</string>
 
@@ -68,7 +79,6 @@
     <string name="author_key" translatable="false">author</string>
     <string name="author_title">Developer</string>
     <string name="author_summary" translatable="false">Jankku</string>
-
     <string name="github_key" translatable="false">github</string>
     <string name="github_title" translatable="false">GitHub</string>
     <string name="github_summary" translatable="false">https://github.com/jankku/eino-android</string>

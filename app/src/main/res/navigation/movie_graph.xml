@@ -12,7 +12,14 @@
         tools:layout="@layout/fragment_movie_list">
         <action
             android:id="@+id/action_movieListFragment_to_movieDetailFragment"
-            app:destination="@id/movieDetailFragment" />
+            app:destination="@id/movieDetailFragment"
+            app:enterAnim="@anim/nav_default_enter_anim"
+            app:exitAnim="@anim/nav_default_exit_anim"
+            app:popEnterAnim="@anim/nav_default_pop_enter_anim"
+            app:popExitAnim="@anim/nav_default_pop_exit_anim" />
+        <action
+            android:id="@+id/action_movieListFragment_to_addMovieDialogFragment"
+            app:destination="@id/addMovieDialogFragment" />
     </fragment>
 
     <fragment
@@ -21,8 +28,22 @@
         android:label="@string/navigation_movie_detail_label"
         tools:layout="@layout/fragment_movie_detail">
         <argument
-            android:name="movie"
-            app:argType="com.jankku.eino.data.model.Movie" />
+            android:name="movie_id"
+            android:defaultValue="null"
+            app:argType="string" />
+        <action
+            android:id="@+id/action_movieDetailFragment_to_updateMovieDialogFragment"
+            app:destination="@id/updateMovieDialogFragment" />
     </fragment>
+    <dialog
+        android:id="@+id/addMovieDialogFragment"
+        android:name="com.jankku.eino.ui.movie.dialog.AddMovieDialogFragment"
+        android:label="AddMovieDialogFragment"
+        tools:layout="@layout/fragment_base_movie_dialog" />
+    <dialog
+        android:id="@+id/updateMovieDialogFragment"
+        android:name="com.jankku.eino.ui.movie.dialog.UpdateMovieDialogFragment"
+        android:label="UpdateMovieDialogFragment"
+        tools:layout="@layout/fragment_base_movie_dialog" />
 
 </navigation>

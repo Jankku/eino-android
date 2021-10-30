@@ -54,3 +54,11 @@ fun getCurrentDate(): String {
     val formatter = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault())
     return formatter.format(Date())
 }
+
+/**
+ *  @return The current year as integer
+ */
+fun getCurrentYear(): Int {
+    val formatter = SimpleDateFormat("yyyy", Locale.getDefault())
+    return formatter.format(Date()).toInt()
+}
