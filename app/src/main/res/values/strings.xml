@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Eino</string>
+    <string name="app_name" translatable="false">Eino</string>
 
     <!-- Navigation -->
     <string name="navigation_landing_label">Welcome</string>
@@ -49,7 +49,7 @@
     <string name="book_start_date_picker_title">Start date</string>
     <string name="book_end_date_picker_title">End date</string>
 
-    <!-- Status dialog -->
+    <!-- BookStatus dialog -->
     <string name="status_dialog_title">Sort by status</string>
     <string name="status_dialog_btn_apply">Apply</string>
 
