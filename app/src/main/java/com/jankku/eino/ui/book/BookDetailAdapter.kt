@@ -23,7 +23,7 @@ class BookDetailAdapter : ListAdapter<DetailItem, BookDetailAdapter.ViewHolder>(
         }
     }
 
-    class ViewHolder(val binding: ItemDetailBinding) : RecyclerView.ViewHolder(binding.root) {}
+    class ViewHolder(val binding: ItemDetailBinding) : RecyclerView.ViewHolder(binding.root)
 
     companion object {
         object DiffCallback : DiffUtil.ItemCallback<DetailItem>() {

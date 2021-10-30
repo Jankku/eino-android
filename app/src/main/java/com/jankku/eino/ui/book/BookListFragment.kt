@@ -11,7 +11,7 @@ import androidx.recyclerview.widget.RecyclerView
 import androidx.viewbinding.ViewBinding
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.jankku.eino.R
-import com.jankku.eino.data.enums.Status
+import com.jankku.eino.data.enums.BookStatus
 import com.jankku.eino.databinding.FragmentBookListBinding
 import com.jankku.eino.ui.common.BindingFragment
 import com.jankku.eino.util.Event
@@ -114,12 +114,12 @@ class BookListFragment : BindingFragment<FragmentBookListBinding>() {
 
     private fun statusDialog() {
         val checkedItem = viewModel.selectedStatus.value!!.ordinal
-        val statusArray = Status.toArray()
+        val statusArray = BookStatus.toArray()
 
         MaterialAlertDialogBuilder(requireContext())
             .setTitle(resources.getString(R.string.status_dialog_title))
             .setSingleChoiceItems(statusArray, checkedItem) { _, index ->
-                val status = Status.values()[index]
+                val status = BookStatus.values()[index]
                 viewModel.setStatus(status)
             }
             .setPositiveButton(resources.getString(R.string.status_dialog_btn_apply)) { _, _ ->

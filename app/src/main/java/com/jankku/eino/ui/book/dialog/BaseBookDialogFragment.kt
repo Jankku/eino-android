@@ -2,6 +2,7 @@ package com.jankku.eino.ui.book.dialog
 
 import android.app.Dialog
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -16,10 +17,10 @@ import com.jankku.eino.R
 import com.jankku.eino.databinding.FragmentBaseBookDialogBinding
 import com.jankku.eino.network.request.BookRequest
 import com.jankku.eino.ui.book.BookViewModel
+import com.jankku.eino.util.convertUnixToDate
+import com.jankku.eino.util.getCurrentDate
 import com.jankku.eino.util.getDateFromString
 import dagger.hilt.android.AndroidEntryPoint
-import java.text.SimpleDateFormat
-import java.util.*
 
 private const val TAG = "BaseBookDialogFragment"
 
@@ -84,8 +85,6 @@ open class BaseBookDialogFragment : BottomSheetDialogFragment() {
 
     open fun setupDatePickers() {
         val adapter = ArrayAdapter(requireContext(), R.layout.item_date_picker, dateFieldItems)
-        val formatter = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault())
-        val today = formatter.format(Date())
 
         // Date pickers
 
@@ -98,13 +97,12 @@ open class BaseBookDialogFragment : BottomSheetDialogFragment() {
             .build()
 
         startDatePicker.addOnPositiveButtonClickListener {
-            val date = formatter.format(it)
-            binding.mactvBookStartDate.setText(date, false)
+            Log.d(TAG, "setupDatePickers: $it")
+            binding.mactvBookStartDate.setText(convertUnixToDate(it), false)
         }
 
         endDatePicker.addOnPositiveButtonClickListener {
-            val date = formatter.format(it)
-            binding.mactvBookEndDate.setText(date, false)
+            binding.mactvBookEndDate.setText(convertUnixToDate(it), false)
         }
 
         // Dropdown menus
@@ -121,14 +119,14 @@ open class BaseBookDialogFragment : BottomSheetDialogFragment() {
 
         binding.mactvBookStartDate.setOnItemClickListener { _, _, i, _ ->
             when (i) {
-                0 -> binding.mactvBookStartDate.setText(today, false)
+                0 -> binding.mactvBookStartDate.setText(getCurrentDate(), false)
                 1 -> startDatePicker.show(childFragmentManager, "StartDatePicker")
             }
         }
 
         binding.mactvBookEndDate.setOnItemClickListener { _, _, i, _ ->
             when (i) {
-                0 -> binding.mactvBookEndDate.setText(today, false)
+                0 -> binding.mactvBookEndDate.setText(getCurrentDate(), false)
                 1 -> endDatePicker.show(childFragmentManager, "EndDatePicker")
             }
         }

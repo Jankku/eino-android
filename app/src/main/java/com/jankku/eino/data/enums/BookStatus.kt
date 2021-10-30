@@ -1,6 +1,6 @@
 package com.jankku.eino.data.enums
 
-enum class Status(val value: String) {
+enum class BookStatus(val value: String) {
     ALL("all"),
     READING("reading"),
     COMPLETED("completed"),

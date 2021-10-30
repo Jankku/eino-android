@@ -5,7 +5,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.jankku.eino.data.BookRepository
-import com.jankku.eino.data.enums.Status
+import com.jankku.eino.data.enums.BookStatus
 import com.jankku.eino.data.model.Book
 import com.jankku.eino.data.model.DetailItem
 import com.jankku.eino.network.request.BookRequest
@@ -39,8 +39,8 @@ class BookViewModel @Inject constructor(
     private val _bookList: MutableLiveData<Result<BookListResponse>> = MutableLiveData()
     val bookList: LiveData<Result<BookListResponse>> = _bookList
 
-    private val _selectedStatus: MutableLiveData<Status> = MutableLiveData(Status.ALL)
-    val selectedStatus: LiveData<Status> get() = _selectedStatus
+    private val _selectedStatus: MutableLiveData<BookStatus> = MutableLiveData(BookStatus.ALL)
+    val selectedStatus: LiveData<BookStatus> get() = _selectedStatus
 
     private val _eventChannel = Channel<Event>(Channel.BUFFERED)
     val eventChannel = _eventChannel.receiveAsFlow()
@@ -49,7 +49,7 @@ class BookViewModel @Inject constructor(
         getBooksByStatus(selectedStatus.value!!)
     }
 
-    fun getBooksByStatus(status: Status) = viewModelScope.launch {
+    fun getBooksByStatus(status: BookStatus) = viewModelScope.launch {
         _bookList.postValue(Result.Loading())
         repository
             .getBooksByStatus(status.value)
@@ -116,7 +116,7 @@ class BookViewModel @Inject constructor(
             }
     }
 
-    fun setStatus(status: Status) {
+    fun setStatus(status: BookStatus) {
         _selectedStatus.value = status
     }
 
@@ -138,7 +138,7 @@ class BookViewModel @Inject constructor(
                 add(DetailItem("ISBN", isbn))
                 add(DetailItem("Pages", pages.toString()))
                 add(DetailItem("Year", year.toString()))
-                add(DetailItem("Status", status.replaceFirstChar { it.uppercase() }))
+                add(DetailItem("BookStatus", status.replaceFirstChar { it.uppercase() }))
                 add(DetailItem("Score", score.toString()))
                 add(DetailItem("Start date", utcToLocal(start_date)))
                 add(DetailItem("End date", utcToLocal(end_date)))

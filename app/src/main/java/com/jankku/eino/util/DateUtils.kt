@@ -37,3 +37,20 @@ fun getDateFromString(string: String, activity: Activity): String {
         string
     }
 }
+
+/**
+ *  @param timestamp Unix timestamp
+ *  @return date string in `yyyy-MM-dd` format
+ */
+fun convertUnixToDate(timestamp: Long): String {
+    val formatter = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault())
+    return formatter.format(timestamp)
+}
+
+/**
+ *  @return The current date in `yyyy-MM-dd` format
+ */
+fun getCurrentDate(): String {
+    val formatter = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault())
+    return formatter.format(Date())
+}

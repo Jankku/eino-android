@@ -48,6 +48,6 @@ object AppModule {
 
     @Provides
     @Singleton
-    fun provideDataStoreManager(@ApplicationContext appContext: Context): DataStoreManager =
-        DataStoreManager(appContext)
+    fun provideDataStoreManager(@ApplicationContext context: Context): DataStoreManager =
+        DataStoreManager(context)
 }
