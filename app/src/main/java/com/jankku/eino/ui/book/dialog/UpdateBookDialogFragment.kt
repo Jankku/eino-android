@@ -1,4 +1,4 @@
-package com.jankku.eino.ui.book
+package com.jankku.eino.ui.book.dialog
 
 import android.os.Bundle
 import android.view.View

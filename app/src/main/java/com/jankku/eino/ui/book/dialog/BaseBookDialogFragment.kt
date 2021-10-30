@@ -1,4 +1,4 @@
-package com.jankku.eino.ui.book
+package com.jankku.eino.ui.book.dialog
 
 import android.app.Dialog
 import android.os.Bundle
@@ -15,6 +15,7 @@ import com.google.android.material.datepicker.MaterialDatePicker
 import com.jankku.eino.R
 import com.jankku.eino.databinding.FragmentBaseBookDialogBinding
 import com.jankku.eino.network.request.BookRequest
+import com.jankku.eino.ui.book.BookViewModel
 import com.jankku.eino.util.getDateFromString
 import dagger.hilt.android.AndroidEntryPoint
 import java.text.SimpleDateFormat

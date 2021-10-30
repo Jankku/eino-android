@@ -1,4 +1,4 @@
-package com.jankku.eino.ui.book
+package com.jankku.eino.ui.book.dialog
 
 import androidx.core.content.res.ResourcesCompat
 import com.jankku.eino.R

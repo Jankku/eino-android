@@ -37,12 +37,12 @@
 
     <dialog
         android:id="@+id/updateBookDialogFragment"
-        android:name="com.jankku.eino.ui.book.UpdateBookDialogFragment"
+        android:name="com.jankku.eino.ui.book.dialog.UpdateBookDialogFragment"
         android:label="UpdateBookDialogFragment"
         tools:layout="@layout/fragment_base_book_dialog" />
     <dialog
         android:id="@+id/addBookDialogFragment"
-        android:name="com.jankku.eino.ui.book.AddBookDialogFragment"
+        android:name="com.jankku.eino.ui.book.dialog.AddBookDialogFragment"
         android:label="@string/navigation_add_book_dialog_label"
         tools:layout="@layout/fragment_base_book_dialog" />
 </navigation>
