@@ -43,6 +43,7 @@ class BookListFragment : BindingFragment<FragmentBookListBinding>() {
         setupObservers()
         setupRecyclerView()
         setupAddBookFabClickListener()
+        setupSwipeToRefresh()
     }
 
     override fun onDestroyView() {
@@ -69,6 +70,13 @@ class BookListFragment : BindingFragment<FragmentBookListBinding>() {
     private fun setupAddBookFabClickListener() {
         binding.fabAddBook.setOnClickListener {
             findNavController().navigate(R.id.action_bookListFragment_to_addBookDialogFragment)
+        }
+    }
+
+    private fun setupSwipeToRefresh() {
+        binding.swipeRefresh.setOnRefreshListener {
+            viewModel.getBooksByStatus()
+            binding.swipeRefresh.isRefreshing = false
         }
     }
 
@@ -123,8 +131,7 @@ class BookListFragment : BindingFragment<FragmentBookListBinding>() {
                 viewModel.setStatus(status)
             }
             .setPositiveButton(resources.getString(R.string.status_dialog_btn_apply)) { _, _ ->
-                val status = viewModel.selectedStatus.value!!
-                viewModel.getBooksByStatus(status)
+                viewModel.getBooksByStatus()
             }
             .show()
     }
