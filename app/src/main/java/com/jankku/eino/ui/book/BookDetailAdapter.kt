@@ -18,8 +18,8 @@ class BookDetailAdapter : ListAdapter<DetailItem, BookDetailAdapter.ViewHolder>(
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val item = getItem(position)
         with(holder.binding) {
-            tvTitle.text = if (item.text.isNotEmpty()) item.text else "-"
-            tvText.text = if (item.message.isNotEmpty()) item.message else "-"
+            tvTitle.text = if (item.title.isNotEmpty()) item.title else "-"
+            tvText.text = if (item.text.isNotEmpty()) item.text else "-"
         }
     }
 
@@ -28,7 +28,7 @@ class BookDetailAdapter : ListAdapter<DetailItem, BookDetailAdapter.ViewHolder>(
     companion object {
         object DiffCallback : DiffUtil.ItemCallback<DetailItem>() {
             override fun areItemsTheSame(oldItem: DetailItem, newItem: DetailItem) =
-                oldItem.text == newItem.text
+                oldItem.title == newItem.title
 
             override fun areContentsTheSame(oldItem: DetailItem, newItem: DetailItem) =
                 oldItem == newItem
