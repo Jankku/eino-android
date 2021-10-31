@@ -6,14 +6,14 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.jankku.eino.data.model.Book
-import com.jankku.eino.databinding.ItemBookListBinding
+import com.jankku.eino.databinding.ItemListBinding
 
 class BookListAdapter(private val clickListener: (String) -> Unit) :
     ListAdapter<Book, BookListAdapter.ViewHolder>(DiffCallback) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val binding =
-            ItemBookListBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+            ItemListBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         return ViewHolder(binding) { position ->
             getItem(position)?.let { clickListener(it.book_id) }
         }
@@ -22,13 +22,13 @@ class BookListAdapter(private val clickListener: (String) -> Unit) :
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val item = getItem(position)
         with(holder.binding) {
-            tvBookTitle.text = if (item.title.isNotEmpty()) item.title else "-"
-            tvBookAuthor.text = if (item.author.isNotEmpty()) item.author else "-"
-            tvBookScore.text = item.score.toString()
+            tvFirst.text = if (item.title.isNotEmpty()) item.title else "-"
+            tvSecond.text = if (item.author.isNotEmpty()) item.author else "-"
+            tvScore.text = item.score.toString()
         }
     }
 
-    class ViewHolder(val binding: ItemBookListBinding, clickAtPosition: (Int) -> Unit) :
+    class ViewHolder(val binding: ItemListBinding, clickAtPosition: (Int) -> Unit) :
         RecyclerView.ViewHolder(binding.root) {
         init {
             itemView.setOnClickListener { clickAtPosition(absoluteAdapterPosition) }

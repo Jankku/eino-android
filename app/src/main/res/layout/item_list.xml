@@ -5,66 +5,71 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_marginHorizontal="@dimen/spacing_default"
-    android:layout_marginTop="@dimen/spacing_half"
+    android:layout_marginTop="@dimen/spacing_three_fours"
     app:cardCornerRadius="@dimen/card_corner_radius"
     app:cardElevation="@dimen/card_elevation"
-    app:cardPreventCornerOverlap="false"
     app:layout_constraintBottom_toBottomOf="parent"
     app:layout_constraintEnd_toEndOf="parent"
     app:layout_constraintStart_toStartOf="parent"
     app:layout_constraintTop_toTopOf="parent">
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/llBookInfo"
+        android:id="@+id/clInfo"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:padding="@dimen/spacing_default"
+        android:paddingVertical="@dimen/spacing_default"
+        android:paddingStart="@dimen/spacing_default"
+        android:paddingEnd="@dimen/spacing_half"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
         <TextView
-            android:id="@+id/tvBookTitle"
+            android:id="@+id/tvFirst"
             style="@style/TextAppearance.Eino.Body1"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:ellipsize="end"
             android:maxLines="1"
             android:paddingBottom="@dimen/spacing_half"
-            app:layout_constraintBottom_toTopOf="@id/tvBookAuthor"
-            app:layout_constraintEnd_toStartOf="@id/tvBookScore"
+            app:layout_constraintBottom_toTopOf="@id/tvSecond"
+            app:layout_constraintEnd_toStartOf="@id/tvScore"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             tools:text="Book title" />
 
-        <TextView
-            android:id="@+id/tvBookScore"
-            style="@style/TextAppearance.Eino.Body1"
+        <com.google.android.material.chip.Chip
+            android:id="@+id/tvScore"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:paddingStart="@dimen/spacing_half"
-            app:layout_constraintBottom_toTopOf="@id/tvBookAuthor"
+            app:layout_constraintBottom_toTopOf="@id/guideline"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@id/tvBookTitle"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.0"
+            app:layout_constraintStart_toEndOf="@id/tvFirst"
+            app:layout_constraintTop_toTopOf="@id/tvSecond"
+            app:layout_constraintVertical_bias="1.0"
             tools:text="10" />
 
         <TextView
-            android:id="@+id/tvBookAuthor"
+            android:id="@+id/tvSecond"
             style="@style/TextAppearance.Eino.Body1"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:ellipsize="end"
             android:maxLines="1"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/tvBookTitle"
+            app:layout_constraintTop_toBottomOf="@id/tvFirst"
             tools:text="Book author" />
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_begin="35dp" />
 
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 </com.google.android.material.card.MaterialCardView>
