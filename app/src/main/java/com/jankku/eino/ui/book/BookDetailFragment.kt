@@ -11,7 +11,7 @@ import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.RecyclerView
 import androidx.viewbinding.ViewBinding
 import com.jankku.eino.R
-import com.jankku.eino.databinding.FragmentBookDetailBinding
+import com.jankku.eino.databinding.FragmentItemDetailBinding
 import com.jankku.eino.ui.common.BindingFragment
 import com.jankku.eino.ui.common.DetailAdapter
 import com.jankku.eino.util.Event
@@ -25,9 +25,9 @@ import kotlinx.coroutines.launch
 private const val TAG = "BookDetailFragment"
 
 @AndroidEntryPoint
-class BookDetailFragment : BindingFragment<FragmentBookDetailBinding>() {
+class BookDetailFragment : BindingFragment<FragmentItemDetailBinding>() {
     override val bindingInflater: (LayoutInflater) -> ViewBinding
-        get() = FragmentBookDetailBinding::inflate
+        get() = FragmentItemDetailBinding::inflate
     private val viewModel: BookViewModel by activityViewModels()
     private var _adapter: DetailAdapter? = null
     private val adapter get() = _adapter!!
@@ -59,7 +59,7 @@ class BookDetailFragment : BindingFragment<FragmentBookDetailBinding>() {
         adapter.stateRestorationPolicy =
             RecyclerView.Adapter.StateRestorationPolicy.PREVENT_WHEN_EMPTY
 
-        binding.rvBookDetail.let {
+        binding.rvDetail.let {
             it.setHasFixedSize(true)
             it.adapter = adapter
         }
@@ -96,7 +96,7 @@ class BookDetailFragment : BindingFragment<FragmentBookDetailBinding>() {
     }
 
     private fun setupEditFabClickListener() {
-        binding.fabEditBook.setOnClickListener {
+        binding.fabEditItem.setOnClickListener {
             findNavController().navigate(R.id.action_bookDetailFragment_to_updateBookDialogFragment)
         }
     }

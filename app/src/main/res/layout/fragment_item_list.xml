@@ -16,7 +16,7 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/rvBookList"
+            android:id="@+id/rvList"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical"
@@ -27,11 +27,11 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:spanCount="@integer/rv_grid_columns"
-            tools:listitem="@layout/item_book_list" />
+            tools:listitem="@layout/item_list" />
     </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/fabAddBook"
+        android:id="@+id/fabAddItem"
         style="@style/Widget.Eino.FloatingActionButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

@@ -12,7 +12,7 @@ import androidx.viewbinding.ViewBinding
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.jankku.eino.R
 import com.jankku.eino.data.enums.MovieStatus
-import com.jankku.eino.databinding.FragmentMovieListBinding
+import com.jankku.eino.databinding.FragmentItemListBinding
 import com.jankku.eino.ui.common.BindingFragment
 import com.jankku.eino.util.Event
 import com.jankku.eino.util.Result
@@ -25,9 +25,9 @@ import kotlinx.coroutines.launch
 private const val TAG = "MovieListFragment"
 
 @AndroidEntryPoint
-class MovieListFragment : BindingFragment<FragmentMovieListBinding>() {
+class MovieListFragment : BindingFragment<FragmentItemListBinding>() {
     override val bindingInflater: (LayoutInflater) -> ViewBinding
-        get() = FragmentMovieListBinding::inflate
+        get() = FragmentItemListBinding::inflate
     private val viewModel: MovieViewModel by activityViewModels()
     private var _adapter: MovieListAdapter? = null
     private val adapter get() = _adapter!!
@@ -61,14 +61,14 @@ class MovieListFragment : BindingFragment<FragmentMovieListBinding>() {
         adapter.stateRestorationPolicy =
             RecyclerView.Adapter.StateRestorationPolicy.PREVENT_WHEN_EMPTY
 
-        binding.rvMovieList.let {
+        binding.rvList.let {
             it.setHasFixedSize(true)
             it.adapter = adapter
         }
     }
 
     private fun setupAddMovieFabClickListener() {
-        binding.fabAddMovie.setOnClickListener {
+        binding.fabAddItem.setOnClickListener {
             findNavController().navigate(R.id.action_movieListFragment_to_addMovieDialogFragment)
         }
     }
@@ -90,11 +90,11 @@ class MovieListFragment : BindingFragment<FragmentMovieListBinding>() {
                     binding.progressBar.visibility = View.GONE
                     if (response.data?.results?.isNotEmpty() == true) {
                         binding.layoutNoItems.root.visibility = View.GONE
-                        binding.rvMovieList.visibility = View.VISIBLE
+                        binding.rvList.visibility = View.VISIBLE
                         adapter.submitList(response.data.results)
                     } else {
                         binding.layoutNoItems.root.visibility = View.VISIBLE
-                        binding.rvMovieList.visibility = View.GONE
+                        binding.rvList.visibility = View.GONE
                     }
                 }
                 is Result.Error -> {

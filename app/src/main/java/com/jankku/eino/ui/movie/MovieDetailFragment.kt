@@ -11,7 +11,7 @@ import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.RecyclerView
 import androidx.viewbinding.ViewBinding
 import com.jankku.eino.R
-import com.jankku.eino.databinding.FragmentMovieDetailBinding
+import com.jankku.eino.databinding.FragmentItemDetailBinding
 import com.jankku.eino.ui.common.BindingFragment
 import com.jankku.eino.ui.common.DetailAdapter
 import com.jankku.eino.util.Event
@@ -25,9 +25,9 @@ import kotlinx.coroutines.launch
 private const val TAG = "MovieDetailFragment"
 
 @AndroidEntryPoint
-class MovieDetailFragment : BindingFragment<FragmentMovieDetailBinding>() {
+class MovieDetailFragment : BindingFragment<FragmentItemDetailBinding>() {
     override val bindingInflater: (LayoutInflater) -> ViewBinding
-        get() = FragmentMovieDetailBinding::inflate
+        get() = FragmentItemDetailBinding::inflate
     private val viewModel: MovieViewModel by activityViewModels()
     private var _adapter: DetailAdapter? = null
     private val adapter get() = _adapter!!
@@ -59,7 +59,7 @@ class MovieDetailFragment : BindingFragment<FragmentMovieDetailBinding>() {
         adapter.stateRestorationPolicy =
             RecyclerView.Adapter.StateRestorationPolicy.PREVENT_WHEN_EMPTY
 
-        binding.rvMovieDetail.let {
+        binding.rvDetail.let {
             it.setHasFixedSize(true)
             it.adapter = adapter
         }
@@ -96,7 +96,7 @@ class MovieDetailFragment : BindingFragment<FragmentMovieDetailBinding>() {
     }
 
     private fun setupEditFabClickListener() {
-        binding.fabEditMovie.setOnClickListener {
+        binding.fabEditItem.setOnClickListener {
             findNavController().navigate(R.id.action_movieDetailFragment_to_updateMovieDialogFragment)
         }
     }

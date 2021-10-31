@@ -135,7 +135,7 @@ class BookViewModel @Inject constructor(
                 add(DetailItem("Title", title))
                 add(DetailItem("Author", author))
                 add(DetailItem("Publisher", publisher))
-                add(DetailItem("ISBN", isbn))
+                add(DetailItem("Isbn", isbn))
                 add(DetailItem("Pages", pages.toString()))
                 add(DetailItem("Year", year.toString()))
                 add(DetailItem("Status", status.replaceFirstChar { it.uppercase() }))
