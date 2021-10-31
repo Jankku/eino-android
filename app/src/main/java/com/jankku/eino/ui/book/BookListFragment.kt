@@ -14,6 +14,7 @@ import com.jankku.eino.R
 import com.jankku.eino.data.enums.BookStatus
 import com.jankku.eino.databinding.FragmentItemListBinding
 import com.jankku.eino.ui.common.BindingFragment
+import com.jankku.eino.ui.common.MarginItemDecoration
 import com.jankku.eino.util.Event
 import com.jankku.eino.util.Result
 import com.jankku.eino.util.showBottomNav
@@ -63,6 +64,13 @@ class BookListFragment : BindingFragment<FragmentItemListBinding>() {
 
         binding.rvList.let {
             it.setHasFixedSize(true)
+            it.addItemDecoration(
+                MarginItemDecoration(
+                    resources.configuration.orientation,
+                    resources.getInteger(R.integer.rv_list_columns),
+                    resources.getDimension(R.dimen.spacing_default)
+                )
+            )
             it.adapter = adapter
         }
     }

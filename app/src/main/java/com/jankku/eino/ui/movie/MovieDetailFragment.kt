@@ -14,6 +14,7 @@ import com.jankku.eino.R
 import com.jankku.eino.databinding.FragmentItemDetailBinding
 import com.jankku.eino.ui.common.BindingFragment
 import com.jankku.eino.ui.common.DetailAdapter
+import com.jankku.eino.ui.common.MarginItemDecoration
 import com.jankku.eino.util.Event
 import com.jankku.eino.util.Result
 import com.jankku.eino.util.hideBottomNav
@@ -61,6 +62,13 @@ class MovieDetailFragment : BindingFragment<FragmentItemDetailBinding>() {
 
         binding.rvDetail.let {
             it.setHasFixedSize(true)
+            it.addItemDecoration(
+                MarginItemDecoration(
+                    resources.configuration.orientation,
+                    resources.getInteger(R.integer.rv_detail_columns),
+                    resources.getDimension(R.dimen.spacing_default)
+                )
+            )
             it.adapter = adapter
         }
     }

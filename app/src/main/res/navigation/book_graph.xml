@@ -8,7 +8,7 @@
         android:id="@+id/bookListFragment"
         android:name="com.jankku.eino.ui.book.BookListFragment"
         android:label="@string/navigation_books_label"
-        tools:layout="@layout/fragment_book_list">
+        tools:layout="@layout/fragment_item_list">
         <action
             android:id="@+id/action_bookListFragment_to_addBookDialogFragment"
             app:destination="@id/addBookDialogFragment" />
@@ -25,7 +25,7 @@
         android:id="@+id/bookDetailFragment"
         android:name="com.jankku.eino.ui.book.BookDetailFragment"
         android:label="@string/navigation_book_detail_label"
-        tools:layout="@layout/fragment_book_detail">
+        tools:layout="@layout/fragment_item_detail">
         <argument
             android:name="book_id"
             android:defaultValue="null"

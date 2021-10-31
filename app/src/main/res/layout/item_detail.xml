@@ -4,10 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_margin="@dimen/spacing_quarter"
     app:cardCornerRadius="@dimen/card_corner_radius"
-    app:cardElevation="@dimen/card_elevation"
-    app:cardPreventCornerOverlap="false">
+    app:cardElevation="@dimen/card_elevation">
 
     <LinearLayout
         android:id="@+id/llBookDetail"
@@ -18,17 +16,21 @@
 
         <TextView
             android:id="@+id/tvTitle"
-            style="@style/TextAppearance.Eino.Headline6"
+            style="@style/TextAppearance.Eino.TitleMedium"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:paddingBottom="@dimen/spacing_half"
+            android:ellipsize="end"
+            android:maxLines="1"
+            android:paddingBottom="@dimen/spacing_quarter"
             tools:text="Title" />
 
         <TextView
             android:id="@+id/tvText"
-            style="@style/TextAppearance.Eino.Body1"
+            style="@style/TextAppearance.Eino.BodyMedium"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:ellipsize="end"
+            android:maxLines="5"
             tools:text="Text" />
     </LinearLayout>
 </com.google.android.material.card.MaterialCardView>

@@ -4,8 +4,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_marginHorizontal="@dimen/spacing_default"
-    android:layout_marginTop="@dimen/spacing_three_fours"
     app:cardCornerRadius="@dimen/card_corner_radius"
     app:cardElevation="@dimen/card_elevation"
     app:layout_constraintBottom_toBottomOf="parent"
@@ -28,7 +26,7 @@
 
         <TextView
             android:id="@+id/tvFirst"
-            style="@style/TextAppearance.Eino.Body1"
+            style="@style/TextAppearance.Eino.BodyMedium"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:ellipsize="end"
@@ -38,7 +36,7 @@
             app:layout_constraintEnd_toStartOf="@id/tvScore"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            tools:text="Book title" />
+            tools:text="First text" />
 
         <com.google.android.material.chip.Chip
             android:id="@+id/tvScore"
@@ -53,7 +51,7 @@
 
         <TextView
             android:id="@+id/tvSecond"
-            style="@style/TextAppearance.Eino.Body1"
+            style="@style/TextAppearance.Eino.BodyMedium"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:ellipsize="end"
@@ -61,7 +59,7 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/tvFirst"
-            tools:text="Book author" />
+            tools:text="Second text" />
 
         <androidx.constraintlayout.widget.Guideline
             android:id="@+id/guideline"
