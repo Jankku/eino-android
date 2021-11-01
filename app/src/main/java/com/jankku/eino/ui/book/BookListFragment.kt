@@ -53,7 +53,7 @@ class BookListFragment : BindingFragment<FragmentItemListBinding>() {
         _adapter = BookListAdapter { bookId ->
             val action =
                 BookListFragmentDirections.actionBookListFragmentToBookDetailFragment(bookId)
-            findNavController().navigate(action)
+            findNavController().navigateSafe(action)
         }
 
         adapter.stateRestorationPolicy =
@@ -75,7 +75,7 @@ class BookListFragment : BindingFragment<FragmentItemListBinding>() {
 
     private fun setupAddBookFabClickListener() {
         binding.fabAddItem.setOnClickListener {
-            findNavController().navigate(R.id.action_bookListFragment_to_addBookDialogFragment)
+            findNavController().navigateSafe(R.id.action_bookListFragment_to_addBookDialogFragment)
         }
     }
 

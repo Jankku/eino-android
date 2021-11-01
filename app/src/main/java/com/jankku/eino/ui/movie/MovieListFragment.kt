@@ -53,7 +53,7 @@ class MovieListFragment : BindingFragment<FragmentItemListBinding>() {
         _adapter = MovieListAdapter { movieId ->
             val action =
                 MovieListFragmentDirections.actionMovieListFragmentToMovieDetailFragment(movieId)
-            findNavController().navigate(action)
+            findNavController().navigateSafe(action)
         }
 
         adapter.stateRestorationPolicy =
@@ -75,7 +75,7 @@ class MovieListFragment : BindingFragment<FragmentItemListBinding>() {
 
     private fun setupAddMovieFabClickListener() {
         binding.fabAddItem.setOnClickListener {
-            findNavController().navigate(R.id.action_movieListFragment_to_addMovieDialogFragment)
+            findNavController().navigateSafe(R.id.action_movieListFragment_to_addMovieDialogFragment)
         }
     }
 

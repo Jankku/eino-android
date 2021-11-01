@@ -15,10 +15,7 @@ import com.jankku.eino.databinding.FragmentItemDetailBinding
 import com.jankku.eino.ui.common.BindingFragment
 import com.jankku.eino.ui.common.DetailAdapter
 import com.jankku.eino.ui.common.MarginItemDecoration
-import com.jankku.eino.util.Event
-import com.jankku.eino.util.Result
-import com.jankku.eino.util.hideBottomNav
-import com.jankku.eino.util.showSnackBar
+import com.jankku.eino.util.*
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
@@ -105,7 +102,7 @@ class BookDetailFragment : BindingFragment<FragmentItemDetailBinding>() {
 
     private fun setupEditFabClickListener() {
         binding.fabEditItem.setOnClickListener {
-            findNavController().navigate(R.id.action_bookDetailFragment_to_updateBookDialogFragment)
+            findNavController().navigateSafe(R.id.action_bookDetailFragment_to_updateBookDialogFragment)
         }
     }
 

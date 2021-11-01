@@ -12,10 +12,7 @@ import com.basgeekball.awesomevalidation.utility.RegexTemplate
 import com.jankku.eino.R
 import com.jankku.eino.databinding.FragmentLoginBinding
 import com.jankku.eino.ui.common.BindingFragment
-import com.jankku.eino.util.NetworkStatus
-import com.jankku.eino.util.Result
-import com.jankku.eino.util.hideBottomNav
-import com.jankku.eino.util.showSnackBar
+import com.jankku.eino.util.*
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 
@@ -62,7 +59,7 @@ class LoginFragment : BindingFragment<FragmentLoginBinding>() {
                 }
                 is Result.Success -> {
                     binding.progressBar.visibility = View.GONE
-                    findNavController().navigate(R.id.action_loginFragment_to_nav_graph)
+                    findNavController().navigateSafe(R.id.action_loginFragment_to_nav_graph)
                 }
                 is Result.Error -> {
                     binding.progressBar.visibility = View.GONE

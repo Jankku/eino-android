@@ -9,6 +9,7 @@ import com.jankku.eino.R
 import com.jankku.eino.databinding.FragmentLandingBinding
 import com.jankku.eino.ui.common.BindingFragment
 import com.jankku.eino.util.hideBottomNav
+import com.jankku.eino.util.navigateSafe
 import dagger.hilt.android.AndroidEntryPoint
 
 private const val TAG = "LandingFragment"
@@ -26,11 +27,11 @@ class LandingFragment : BindingFragment<FragmentLandingBinding>() {
 
     private fun setupClickListeners() {
         binding.btnRegister.setOnClickListener {
-            findNavController().navigate(R.id.action_landingFragment_to_registerFragment)
+            findNavController().navigateSafe(R.id.action_landingFragment_to_registerFragment)
         }
 
         binding.btnLogin.setOnClickListener {
-            findNavController().navigate(R.id.action_landingFragment_to_loginFragment)
+            findNavController().navigateSafe(R.id.action_landingFragment_to_loginFragment)
         }
     }
 }
