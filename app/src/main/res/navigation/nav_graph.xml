@@ -4,7 +4,6 @@
     android:id="@+id/nav_graph"
     app:startDestination="@id/book_graph">
 
-    <include app:graph="@navigation/auth_graph" />
     <include app:graph="@navigation/book_graph" />
     <include app:graph="@navigation/movie_graph" />
 

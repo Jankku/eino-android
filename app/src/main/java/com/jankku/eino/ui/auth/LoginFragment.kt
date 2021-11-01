@@ -62,7 +62,7 @@ class LoginFragment : BindingFragment<FragmentLoginBinding>() {
                 }
                 is Result.Success -> {
                     binding.progressBar.visibility = View.GONE
-                    findNavController().navigate(R.id.action_loginFragment_to_book_graph)
+                    findNavController().navigate(R.id.action_loginFragment_to_nav_graph)
                 }
                 is Result.Error -> {
                     binding.progressBar.visibility = View.GONE
