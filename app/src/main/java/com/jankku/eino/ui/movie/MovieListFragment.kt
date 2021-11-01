@@ -15,10 +15,7 @@ import com.jankku.eino.data.enums.MovieStatus
 import com.jankku.eino.databinding.FragmentItemListBinding
 import com.jankku.eino.ui.common.BindingFragment
 import com.jankku.eino.ui.common.MarginItemDecoration
-import com.jankku.eino.util.Event
-import com.jankku.eino.util.Result
-import com.jankku.eino.util.showBottomNav
-import com.jankku.eino.util.showSnackBar
+import com.jankku.eino.util.*
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
@@ -64,6 +61,7 @@ class MovieListFragment : BindingFragment<FragmentItemListBinding>() {
 
         binding.rvList.let {
             it.setHasFixedSize(true)
+            it.addOnScrollListener(HideFabOnScroll(binding.fabAddItem))
             it.addItemDecoration(
                 MarginItemDecoration(
                     resources.configuration.orientation,
