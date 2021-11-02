@@ -18,6 +18,7 @@
     <string name="menu_bottom_nav_settings">Settings</string>
 
     <!-- Auth -->
+    <string name="branding_text">eino</string>
     <string name="btn_register_text">Register</string>
     <string name="btn_login_text">Login</string>
     <string name="username_help_text">Username length should be between 3–255 characters</string>
@@ -25,7 +26,6 @@
     <string name="username_hint">Username</string>
     <string name="password_hint">Password</string>
     <string name="password2_hint">Repeat password</string>
-    <string name="content_desc_logo">Eino logo</string>
 
     <!-- Validation -->
     <string name="validation_username_empty">Username can\'t be empty</string>

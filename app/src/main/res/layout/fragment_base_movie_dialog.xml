@@ -16,7 +16,7 @@
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/tilMovieTitle"
-            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
+            style="@style/Widget.Material3.TextInputLayout.OutlinedBox.Dense"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="@string/dialog_movie_title_hint">
@@ -30,7 +30,7 @@
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/tilMovieStudio"
-            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
+            style="@style/Widget.Material3.TextInputLayout.OutlinedBox.Dense"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="@string/dialog_movie_studio_hint">
@@ -44,7 +44,7 @@
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/tilMovieDirector"
-            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
+            style="@style/Widget.Material3.TextInputLayout.OutlinedBox.Dense"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="@string/dialog_movie_director_hint">
@@ -58,7 +58,7 @@
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/tilMovieWriter"
-            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
+            style="@style/Widget.Material3.TextInputLayout.OutlinedBox.Dense"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="@string/dialog_movie_writer_hint">
@@ -72,7 +72,7 @@
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/tilMovieDuration"
-            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
+            style="@style/Widget.Material3.TextInputLayout.OutlinedBox.Dense"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="@string/dialog_movie_duration_hint">
@@ -86,7 +86,7 @@
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/tilMovieYear"
-            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
+            style="@style/Widget.Material3.TextInputLayout.OutlinedBox.Dense"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="@string/dialog_year_hint">
@@ -100,7 +100,7 @@
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/tilMovieStatus"
-            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense.ExposedDropdownMenu"
+            style="@style/Widget.Material3.TextInputLayout.OutlinedBox.Dense.ExposedDropdownMenu"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="@string/dialog_status_hint">
@@ -137,7 +137,7 @@
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/tilMovieStartDate"
-            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense.ExposedDropdownMenu"
+            style="@style/Widget.Material3.TextInputLayout.OutlinedBox.Dense.ExposedDropdownMenu"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="@string/dialog_start_date_picker_title">
@@ -151,7 +151,7 @@
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/tilMovieEndDate"
-            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense.ExposedDropdownMenu"
+            style="@style/Widget.Material3.TextInputLayout.OutlinedBox.Dense.ExposedDropdownMenu"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="@string/dialog_end_date_picker_title">
@@ -165,7 +165,7 @@
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/btnAction"
-            style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+            style="@style/Widget.Eino.DialogButton"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:iconGravity="textStart"

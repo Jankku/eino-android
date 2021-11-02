@@ -1,17 +1,95 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <style name="TextAppearance.Eino.Headline6" parent="TextAppearance.MaterialComponents.Headline6">
-        <item name="android:textSize">16sp</item>
+    <style name="TextAppearance.Eino.Branding" parent="TextAppearance.Material3.DisplayLarge">
+        <item name="android:textSize">120sp</item>
+        <item name="android:textColor">?android:textColor</item>
+        <item name="fontFamily">@font/pacifico</item>
+        <item name="android:fontFamily">@font/pacifico</item>
     </style>
 
-    <style name="TextAppearance.Eino.Headline5" parent="TextAppearance.MaterialComponents.Headline5">
-        <item name="android:textSize">20sp</item>
+    <style name="TextAppearance.Eino.DisplayLarge" parent="TextAppearance.Material3.DisplayLarge">
+        <item name="fontFamily">@font/source_sans_pro</item>
+        <item name="android:fontFamily">@font/source_sans_pro</item>
         <item name="android:textStyle">bold</item>
     </style>
 
-    <style name="TextAppearance.Eino.Body1" parent="TextAppearance.MaterialComponents.Body1">
-        <item name="android:textSize">14sp</item>
+    <style name="TextAppearance.Eino.DisplayMedium" parent="TextAppearance.Material3.DisplayMedium">
+        <item name="fontFamily">@font/source_sans_pro</item>
+        <item name="android:fontFamily">@font/source_sans_pro</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="TextAppearance.Eino.DisplaySmall" parent="TextAppearance.Material3.DisplaySmall">
+        <item name="fontFamily">@font/source_sans_pro</item>
+        <item name="android:fontFamily">@font/source_sans_pro</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="TextAppearance.Eino.HeadlineLarge" parent="TextAppearance.Material3.HeadlineLarge">
+        <item name="fontFamily">@font/source_sans_pro</item>
+        <item name="android:fontFamily">@font/source_sans_pro</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="TextAppearance.Eino.HeadlineMedium" parent="TextAppearance.Material3.HeadlineMedium">
+        <item name="fontFamily">@font/source_sans_pro</item>
+        <item name="android:fontFamily">@font/source_sans_pro</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="TextAppearance.Eino.HeadlineSmall" parent="TextAppearance.Material3.HeadlineSmall">
+        <item name="fontFamily">@font/source_sans_pro</item>
+        <item name="android:fontFamily">@font/source_sans_pro</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="TextAppearance.Eino.TitleLarge" parent="TextAppearance.Material3.TitleLarge">
+        <item name="fontFamily">@font/source_sans_pro</item>
+        <item name="android:fontFamily">@font/source_sans_pro</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="TextAppearance.Eino.TitleMedium" parent="TextAppearance.Material3.TitleMedium">
+        <item name="fontFamily">@font/source_sans_pro</item>
+        <item name="android:fontFamily">@font/source_sans_pro</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="TextAppearance.Eino.TitleSmall" parent="TextAppearance.Material3.TitleSmall">
+        <item name="fontFamily">@font/source_sans_pro</item>
+        <item name="android:fontFamily">@font/source_sans_pro</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="TextAppearance.Eino.BodyLarge" parent="TextAppearance.Material3.BodyLarge">
+        <item name="fontFamily">@font/source_sans_pro</item>
+        <item name="android:fontFamily">@font/source_sans_pro</item>
+    </style>
+
+    <style name="TextAppearance.Eino.BodyMedium" parent="TextAppearance.Material3.BodyMedium">
+        <item name="fontFamily">@font/source_sans_pro</item>
+        <item name="android:fontFamily">@font/source_sans_pro</item>
+    </style>
+
+    <style name="TextAppearance.Eino.BodySmall" parent="TextAppearance.Material3.BodySmall">
+        <item name="fontFamily">@font/source_sans_pro</item>
+        <item name="android:fontFamily">@font/source_sans_pro</item>
+    </style>
+
+    <style name="TextAppearance.Eino.LabelLarge" parent="TextAppearance.Material3.LabelLarge">
+        <item name="fontFamily">@font/source_sans_pro</item>
+        <item name="android:fontFamily">@font/source_sans_pro</item>
+    </style>
+
+    <style name="TextAppearance.Eino.LabelMedium" parent="TextAppearance.Material3.LabelMedium">
+        <item name="fontFamily">@font/source_sans_pro</item>
+        <item name="android:fontFamily">@font/source_sans_pro</item>
+    </style>
+
+    <style name="TextAppearance.Eino.LabelSmall" parent="TextAppearance.Material3.LabelSmall">
+        <item name="fontFamily">@font/source_sans_pro</item>
+        <item name="android:fontFamily">@font/source_sans_pro</item>
     </style>
 
 </resources>

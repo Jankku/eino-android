@@ -1,30 +1,28 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <color name="blue_50">#e4f2fe</color>
+    <color name="blue_100">#bce0fb</color>
+    <color name="blue_200">#90cbf9</color>
+    <color name="blue_300">#64b6f7</color>
+    <color name="blue_400">#42a6f5</color>
+    <color name="blue_500">#2196f3</color>
+    <color name="blue_600">#1d8ef1</color>
+    <color name="blue_700">#1883ef</color>
+    <color name="blue_800">#1479ed</color>
+    <color name="blue_900">#0b68ea</color>
+    <color name="blue_1000">#374B85</color>
 
-    <color name="purple_50">#F3E5F5</color>
-    <color name="purple_100">#E1BEE7</color>
-    <color name="purple_200">#CE93D8</color>
-    <color name="purple_300">#BA68C8</color>
-    <color name="purple_400">#AB47BC</color>
-    <color name="purple_500">#9C27B0</color>
-    <color name="purple_600">#872A9F</color>
-    <color name="purple_700">#642480</color>
-    <color name="purple_800">#291833</color>
-    <color name="purple_900">#1D1527</color>
+    <color name="grey_50">#e4e4e4</color>
+    <color name="grey_100">#bcbcbc</color>
+    <color name="grey_200">#909090</color>
+    <color name="grey_300">#646464</color>
+    <color name="grey_400">#424242</color>
+    <color name="grey_500">#212121</color>
+    <color name="grey_600">#1d1d1d</color>
+    <color name="grey_700">#181818</color>
+    <color name="grey_800">#141414</color>
+    <color name="grey_900">#0b0b0b</color>
 
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
-    <color name="grey">#EEEEEE</color>
-
-    <color name="bottom_nav_item_active">@color/purple_300</color>
-    <color name="bottom_nav_item_inactive">#8A8A8A</color>
-
-    <color name="divider_color">#392843</color>
-
-    <color name="text_color_primary">@color/grey</color>
-    <color name="text_color_secondary">@color/purple_200</color>
-
-    <!--background protection for nav-bar, varied on Q+-->
-    <color name="immersive_sys_ui">#33000000</color>
-    <color name="nav_bar">@color/immersive_sys_ui</color>
 </resources>

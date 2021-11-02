@@ -1,12 +1,57 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
 
-    <style name="Theme.Eino" parent="Theme.MaterialComponents.DayNight.DarkActionBar">
-        <item name="colorPrimary">@color/purple_500</item>
-        <item name="colorPrimaryVariant">@color/purple_700</item>
-        <item name="colorOnPrimary">@color/white</item>
-        <item name="colorSecondary">@color/purple_300</item>
-        <item name="colorSecondaryVariant">@color/purple_500</item>
+    <style name="Theme.Eino.SplashScreen" parent="Theme.SplashScreen">
+        <item name="windowSplashScreenAnimatedIcon">@mipmap/ic_launcher_round</item>
+        <item name="postSplashScreenTheme">@style/Theme.Eino</item>
+    </style>
+
+    <style name="Base.Theme.Eino" parent="Theme.Material3.DayNight">
+        <item name="chipStyle">@style/Widget.Eino.Chip</item>
+        <item name="toolbarStyle">@style/Widget.Eino.Toolbar</item>
+        <item name="bottomNavigationStyle">@style/Widget.Eino.BottomNavigationView</item>
+
+        <item name="textAppearanceDisplayLarge">@style/TextAppearance.Eino.DisplayLarge</item>
+        <item name="textAppearanceDisplayMedium">@style/TextAppearance.Eino.DisplayMedium</item>
+        <item name="textAppearanceDisplaySmall">@style/TextAppearance.Eino.DisplaySmall</item>
+
+        <item name="textAppearanceHeadlineLarge">@style/TextAppearance.Eino.HeadlineLarge</item>
+        <item name="textAppearanceHeadlineMedium">@style/TextAppearance.Eino.HeadlineMedium</item>
+        <item name="textAppearanceHeadlineSmall">@style/TextAppearance.Eino.HeadlineSmall</item>
+
+        <item name="textAppearanceTitleLarge">@style/TextAppearance.Eino.TitleLarge</item>
+        <item name="textAppearanceTitleMedium">@style/TextAppearance.Eino.TitleMedium</item>
+        <item name="textAppearanceTitleSmall">@style/TextAppearance.Eino.TitleSmall</item>
+
+        <item name="textAppearanceBodyLarge">@style/TextAppearance.Eino.BodyLarge</item>
+        <item name="textAppearanceBodyMedium">@style/TextAppearance.Eino.BodyMedium</item>
+        <item name="textAppearanceBodySmall">@style/TextAppearance.Eino.BodySmall</item>
+
+        <item name="textAppearanceLabelLarge">@style/TextAppearance.Eino.LabelLarge</item>
+        <item name="textAppearanceLabelMedium">@style/TextAppearance.Eino.LabelMedium</item>
+        <item name="textAppearanceLabelSmall">@style/TextAppearance.Eino.LabelSmall</item>
+    </style>
+
+    <style name="Theme.Eino" parent="Base.Theme.Eino">
+        <item name="android:statusBarColor">@android:color/transparent</item>
+        <item name="android:navigationBarColor">@android:color/transparent</item>
+        <item name="android:windowLightStatusBar" tools:targetApi="23">true</item>
+        <item name="android:windowLightNavigationBar" tools:targetApi="27">true</item>
+
+        <item name="colorPrimary">@color/blue_300</item>
+        <item name="colorOnPrimary">@color/black</item>
+
+        <item name="colorSecondary">@color/blue_300</item>
         <item name="colorOnSecondary">@color/black</item>
-        <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimaryVariant</item>
+        <item name="colorSecondaryContainer">@color/blue_200</item>
+
+        <item name="colorOutline">@color/blue_900</item>
+
+        <item name="colorSurface">@color/white</item>
+
+        <item name="android:textColor">@color/black</item>
+        <item name="android:textColorPrimary">@color/black</item>
+        <item name="android:textColorSecondary">@color/blue_1000</item>
+
+        <item name="colorControlNormal">?colorPrimary</item>
     </style>
 </resources>

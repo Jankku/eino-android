@@ -1,7 +1,52 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <style name="Widget.Eino.FloatingActionButton" parent="Widget.MaterialComponents.FloatingActionButton">
+    <style name="Widget.Eino.Chip" parent="Widget.Material3.Chip.Input">
+        <item name="android:focusable">false</item>
+        <item name="android:clickable">false</item>
+        <item name="android:checkable">false</item>
+        <item name="chipIconVisible">false</item>
+        <item name="checkedIconVisible">false</item>
+        <item name="closeIconVisible">false</item>
+        <item name="chipBackgroundColor">?colorPrimary</item>
+        <item name="chipStrokeWidth">0dp</item>
+        <item name="chipStrokeColor">@android:color/transparent</item>
+        <item name="android:textColor">@color/black</item>
+        <item name="chipMinHeight">@dimen/spacing_default</item>
+    </style>
+
+    <style name="Widget.Eino.BigButton" parent="Widget.Material3.Button">
+        <item name="android:paddingTop">@dimen/spacing_default</item>
+        <item name="android:paddingBottom">@dimen/spacing_default</item>
+        <item name="android:textAppearance">@style/TextAppearance.Eino.BodyLarge</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textAllCaps">true</item>
+    </style>
+
+    <style name="Widget.Eino.DialogButton" parent="Widget.Material3.Button.ElevatedButton">
+        <item name="android:paddingTop">@dimen/spacing_default</item>
+        <item name="android:paddingBottom">@dimen/spacing_default</item>
+        <item name="android:textAppearance">@style/TextAppearance.Eino.BodyLarge</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textAllCaps">true</item>
+        <item name="iconSize">@dimen/spacing_1_5x</item>
+    </style>
+
+    <style name="Widget.Eino.Toolbar" parent="Widget.Material3.Toolbar">
+        <item name="titleTextAppearance">@style/TextAppearance.Eino.HeadlineLarge</item>
+        <item name="android:titleTextAppearance">@style/TextAppearance.Eino.HeadlineLarge</item>
+        <item name="titleTextStyle">@style/TextAppearance.Eino.HeadlineLarge</item>
+    </style>
+
+    <style name="Widget.Eino.BottomNavigationView" parent="Widget.Material3.BottomNavigationView" />
+
+    <style name="Widget.Eino.FloatingActionButton" parent="Widget.Material3.FloatingActionButton.Primary">
+        <item name="materialThemeOverlay">@style/ThemeOverlay.Eino.FloatingActionButton</item>
         <item name="android:layout_margin">@dimen/spacing_default</item>
+    </style>
+
+    <style name="ThemeOverlay.Eino.FloatingActionButton" parent="">
+        <item name="colorContainer">?colorPrimary</item>
+        <item name="colorOnContainer">?colorOnPrimary</item>
     </style>
 </resources>

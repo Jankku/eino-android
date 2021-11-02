@@ -14,6 +14,7 @@
         <entry key="..\:/Users/Jankku/AndroidStudioProjects/Eino/app/src/main/res/drawable/ic_emoticon_frown.xml" value="0.3587962962962963" />
         <entry key="..\:/Users/Jankku/AndroidStudioProjects/Eino/app/src/main/res/drawable/ic_github.xml" value="0.4036458333333333" />
         <entry key="..\:/Users/Jankku/AndroidStudioProjects/Eino/app/src/main/res/drawable/ic_icon_black.xml" value="0.3974358974358974" />
+        <entry key="..\:/Users/Jankku/AndroidStudioProjects/Eino/app/src/main/res/drawable/ic_launcher_foreground.xml" value="0.3587962962962963" />
         <entry key="..\:/Users/Jankku/AndroidStudioProjects/Eino/app/src/main/res/drawable/ic_person.xml" value="0.3587962962962963" />
         <entry key="..\:/Users/Jankku/AndroidStudioProjects/Eino/app/src/main/res/drawable/ic_settings.xml" value="0.4036458333333333" />
         <entry key="..\:/Users/Jankku/AndroidStudioProjects/Eino/app/src/main/res/drawable/ic_settings_filled.xml" value="0.4036458333333333" />
@@ -21,6 +22,11 @@
         <entry key="..\:/Users/Jankku/AndroidStudioProjects/Eino/app/src/main/res/drawable/selector_books.xml" value="0.2755208333333333" />
         <entry key="..\:/Users/Jankku/AndroidStudioProjects/Eino/app/src/main/res/drawable/selector_movies.xml" value="0.2755208333333333" />
         <entry key="..\:/Users/Jankku/AndroidStudioProjects/Eino/app/src/main/res/drawable/selector_settings.xml" value="0.2755208333333333" />
+        <entry key="..\:/Users/Jankku/AndroidStudioProjects/Eino/app/src/main/res/font/fonts.xml" value="0.3712962962962963" />
+        <entry key="..\:/Users/Jankku/AndroidStudioProjects/Eino/app/src/main/res/font/inter.xml" value="0.28958333333333336" />
+        <entry key="..\:/Users/Jankku/AndroidStudioProjects/Eino/app/src/main/res/font/open_sans.xml" value="0.28958333333333336" />
+        <entry key="..\:/Users/Jankku/AndroidStudioProjects/Eino/app/src/main/res/font/pacifico.xml" value="0.28958333333333336" />
+        <entry key="..\:/Users/Jankku/AndroidStudioProjects/Eino/app/src/main/res/font/source_sans_pro.xml" value="0.28958333333333336" />
         <entry key="..\:/Users/Jankku/AndroidStudioProjects/Eino/app/src/main/res/layout/activity_main.xml" value="0.259375" />
         <entry key="..\:/Users/Jankku/AndroidStudioProjects/Eino/app/src/main/res/layout/dialog_add_book.xml" value="0.3875" />
         <entry key="..\:/Users/Jankku/AndroidStudioProjects/Eino/app/src/main/res/layout/fragment_add_book_dialog.xml" value="0.3734375" />
@@ -28,6 +34,8 @@
         <entry key="..\:/Users/Jankku/AndroidStudioProjects/Eino/app/src/main/res/layout/fragment_base_movie_dialog.xml" value="0.34444444444444444" />
         <entry key="..\:/Users/Jankku/AndroidStudioProjects/Eino/app/src/main/res/layout/fragment_book_detail.xml" value="0.35609756097560974" />
         <entry key="..\:/Users/Jankku/AndroidStudioProjects/Eino/app/src/main/res/layout/fragment_book_list.xml" value="0.264" />
+        <entry key="..\:/Users/Jankku/AndroidStudioProjects/Eino/app/src/main/res/layout/fragment_item_detail.xml" value="0.34444444444444444" />
+        <entry key="..\:/Users/Jankku/AndroidStudioProjects/Eino/app/src/main/res/layout/fragment_item_list.xml" value="0.34444444444444444" />
         <entry key="..\:/Users/Jankku/AndroidStudioProjects/Eino/app/src/main/res/layout/fragment_landing.xml" value="0.3875" />
         <entry key="..\:/Users/Jankku/AndroidStudioProjects/Eino/app/src/main/res/layout/fragment_login.xml" value="0.264" />
         <entry key="..\:/Users/Jankku/AndroidStudioProjects/Eino/app/src/main/res/layout/fragment_movie_detail.xml" value="0.3875" />
@@ -37,13 +45,16 @@
         <entry key="..\:/Users/Jankku/AndroidStudioProjects/Eino/app/src/main/res/layout/item_book_list.xml" value="0.4" />
         <entry key="..\:/Users/Jankku/AndroidStudioProjects/Eino/app/src/main/res/layout/item_date_picker.xml" value="0.3875" />
         <entry key="..\:/Users/Jankku/AndroidStudioProjects/Eino/app/src/main/res/layout/item_detail.xml" value="0.34444444444444444" />
+        <entry key="..\:/Users/Jankku/AndroidStudioProjects/Eino/app/src/main/res/layout/item_list.xml" value="0.4" />
         <entry key="..\:/Users/Jankku/AndroidStudioProjects/Eino/app/src/main/res/layout/item_movie_list.xml" value="0.39947916666666666" />
+        <entry key="..\:/Users/Jankku/AndroidStudioProjects/Eino/app/src/main/res/layout/layout_branding.xml" value="0.3875" />
         <entry key="..\:/Users/Jankku/AndroidStudioProjects/Eino/app/src/main/res/layout/layout_no_books.xml" value="0.34444444444444444" />
         <entry key="..\:/Users/Jankku/AndroidStudioProjects/Eino/app/src/main/res/layout/layout_no_items.xml" value="0.34444444444444444" />
         <entry key="..\:/Users/Jankku/AndroidStudioProjects/Eino/app/src/main/res/menu/menu_bottom_navigation.xml" value="0.259375" />
         <entry key="..\:/Users/Jankku/AndroidStudioProjects/Eino/app/src/main/res/menu/menu_item_detail.xml" value="0.34444444444444444" />
         <entry key="..\:/Users/Jankku/AndroidStudioProjects/Eino/app/src/main/res/menu/menu_item_list.xml" value="0.34444444444444444" />
         <entry key="..\:/Users/Jankku/AndroidStudioProjects/Eino/app/src/main/res/menu/menu_main.xml" value="0.259375" />
+        <entry key="..\:/Users/Jankku/AndroidStudioProjects/Eino/app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.3587962962962963" />
         <entry key="..\:/Users/Jankku/AndroidStudioProjects/Eino/app/src/main/res/xml/root_preferences.xml" value="0.2203125" />
       </map>
     </option>

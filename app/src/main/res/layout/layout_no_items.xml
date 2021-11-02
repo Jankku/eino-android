@@ -6,8 +6,8 @@
 
     <ImageView
         android:id="@+id/ivImage"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
+        android:layout_width="@dimen/spacing_4x"
+        android:layout_height="@dimen/spacing_4x"
         android:src="@drawable/ic_emoticon_frown"
         app:layout_constraintBottom_toTopOf="@id/tvMessage"
         app:layout_constraintEnd_toEndOf="parent"
@@ -17,9 +17,10 @@
 
     <TextView
         android:id="@+id/tvMessage"
-        style="@style/TextAppearance.Eino.BodyLarge"
-        android:layout_width="wrap_content"
+        style="@style/TextAppearance.Eino.TitleLarge"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:gravity="center"
         android:text="@string/no_items_text"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

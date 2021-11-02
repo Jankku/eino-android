@@ -16,7 +16,7 @@
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/tilBookTitle"
-            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
+            style="@style/Widget.Material3.TextInputLayout.OutlinedBox.Dense"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="@string/dialog_book_title_hint">
@@ -30,7 +30,7 @@
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/tilBookAuthor"
-            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
+            style="@style/Widget.Material3.TextInputLayout.OutlinedBox.Dense"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="@string/dialog_book_author_hint">
@@ -44,7 +44,7 @@
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/tilBookPublisher"
-            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
+            style="@style/Widget.Material3.TextInputLayout.OutlinedBox.Dense"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="@string/dialog_book_publisher_hint">
@@ -58,7 +58,7 @@
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/tilBookPages"
-            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
+            style="@style/Widget.Material3.TextInputLayout.OutlinedBox.Dense"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="@string/dialog_book_pages_hint">
@@ -72,7 +72,7 @@
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/tilBookIsbn"
-            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
+            style="@style/Widget.Material3.TextInputLayout.OutlinedBox.Dense"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="@string/dialog_book_isbn_hint">
@@ -86,7 +86,7 @@
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/tilBookYear"
-            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
+            style="@style/Widget.Material3.TextInputLayout.OutlinedBox.Dense"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="@string/dialog_year_hint">
@@ -100,7 +100,7 @@
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/tilBookStatus"
-            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense.ExposedDropdownMenu"
+            style="@style/Widget.Material3.TextInputLayout.OutlinedBox.Dense.ExposedDropdownMenu"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="@string/dialog_status_hint">
@@ -137,7 +137,7 @@
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/tilBookStartDate"
-            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense.ExposedDropdownMenu"
+            style="@style/Widget.Material3.TextInputLayout.OutlinedBox.Dense.ExposedDropdownMenu"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="@string/dialog_start_date_picker_title">
@@ -151,7 +151,7 @@
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/tilBookEndDate"
-            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense.ExposedDropdownMenu"
+            style="@style/Widget.Material3.TextInputLayout.OutlinedBox.Dense.ExposedDropdownMenu"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="@string/dialog_end_date_picker_title">
@@ -165,9 +165,10 @@
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/btnAction"
-            style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+            style="@style/Widget.Eino.DialogButton"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/spacing_default"
             app:iconGravity="textStart"
             tools:icon="@drawable/ic_add"
             tools:text="@string/dialog_book_update_action_text" />
