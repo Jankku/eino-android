@@ -1,27 +1,27 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources>
-    <color name="blue_50">#e4f2fe</color>
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <color name="blue_50" tools:keep="@color/blue_50">#e4f2fe</color>
     <color name="blue_100">#bce0fb</color>
     <color name="blue_200">#90cbf9</color>
     <color name="blue_300">#64b6f7</color>
-    <color name="blue_400">#42a6f5</color>
-    <color name="blue_500">#2196f3</color>
-    <color name="blue_600">#1d8ef1</color>
-    <color name="blue_700">#1883ef</color>
-    <color name="blue_800">#1479ed</color>
+    <color name="blue_400" tools:keep="@color/blue_400">#42a6f5</color>
+    <color name="blue_500" tools:keep="@color/blue_500">#2196f3</color>
+    <color name="blue_600" tools:keep="@color/blue_600">#1d8ef1</color>
+    <color name="blue_700" tools:keep="@color/blue_700">#1883ef</color>
+    <color name="blue_800" tools:keep="@color/blue_800">#1479ed</color>
     <color name="blue_900">#0b68ea</color>
     <color name="blue_1000">#374B85</color>
 
-    <color name="grey_50">#e4e4e4</color>
-    <color name="grey_100">#bcbcbc</color>
-    <color name="grey_200">#909090</color>
-    <color name="grey_300">#646464</color>
+    <color name="grey_50" tools:keep="@color/grey_50">#e4e4e4</color>
+    <color name="grey_100" tools:keep="@color/grey_100">#bcbcbc</color>
+    <color name="grey_200" tools:keep="@color/grey_200">#909090</color>
+    <color name="grey_300" tools:keep="@color/grey_300">#646464</color>
     <color name="grey_400">#424242</color>
-    <color name="grey_500">#212121</color>
-    <color name="grey_600">#1d1d1d</color>
+    <color name="grey_500" tools:keep="@color/grey_500">#212121</color>
+    <color name="grey_600" tools:keep="@color/grey_600">#1d1d1d</color>
     <color name="grey_700">#181818</color>
-    <color name="grey_800">#141414</color>
-    <color name="grey_900">#0b0b0b</color>
+    <color name="grey_800" tools:keep="@color/grey_800">#141414</color>
+    <color name="grey_900" tools:keep="@color/grey_900">#0b0b0b</color>
 
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>

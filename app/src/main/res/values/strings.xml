@@ -1,4 +1,4 @@
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools">
     <string name="app_name" translatable="false">Eino</string>
 
     <!-- Navigation -->
@@ -12,17 +12,12 @@
     <string name="navigation_movie_detail_label">Movie</string>
     <string name="navigation_settings_label">Settings</string>
 
-    <!-- Bottom navigation bar -->
-    <string name="menu_bottom_nav_books">Books</string>
-    <string name="menu_bottom_nav_movies">Movies</string>
-    <string name="menu_bottom_nav_settings">Settings</string>
-
     <!-- Auth -->
     <string name="branding_text">eino</string>
     <string name="btn_register_text">Register</string>
     <string name="btn_login_text">Login</string>
-    <string name="username_help_text">Username length should be between 3–255 characters</string>
-    <string name="password_help_text">Password length should be between 8–255 characters</string>
+    <string name="username_help_text" tools:keep="@string/username_help_text">Username length should be between 3–255 characters</string>
+    <string name="password_help_text" tools:keep="@string/password_help_text">Password length should be between 8–255 characters</string>
     <string name="username_hint">Username</string>
     <string name="password_hint">Password</string>
     <string name="password2_hint">Repeat password</string>

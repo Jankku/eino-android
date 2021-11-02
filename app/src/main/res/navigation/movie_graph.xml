@@ -9,7 +9,7 @@
         android:id="@+id/movieListFragment"
         android:name="com.jankku.eino.ui.movie.MovieListFragment"
         android:label="@string/navigation_movies_label"
-        tools:layout="@layout/fragment_movie_list">
+        tools:layout="@layout/fragment_item_list">
         <action
             android:id="@+id/action_movieListFragment_to_movieDetailFragment"
             app:destination="@id/movieDetailFragment"
@@ -26,7 +26,7 @@
         android:id="@+id/movieDetailFragment"
         android:name="com.jankku.eino.ui.movie.MovieDetailFragment"
         android:label="@string/navigation_movie_detail_label"
-        tools:layout="@layout/fragment_movie_detail">
+        tools:layout="@layout/item_detail">
         <argument
             android:name="movie_id"
             android:defaultValue="null"
