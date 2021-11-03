@@ -10,9 +10,11 @@ import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.navigateUp
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
+import androidx.preference.PreferenceManager
 import com.jankku.eino.R
 import com.jankku.eino.databinding.ActivityMainBinding
 import com.jankku.eino.ui.auth.AuthViewModel
+import com.jankku.eino.util.applyTheme
 import dagger.hilt.android.AndroidEntryPoint
 
 private const val TAG = "MainActivity"
@@ -26,6 +28,7 @@ class MainActivity : AppCompatActivity() {
     private val viewModel: AuthViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        setTheme()
         installSplashScreen()
         super.onCreate(savedInstanceState)
 
@@ -68,6 +71,18 @@ class MainActivity : AppCompatActivity() {
             }
 
             navController.graph = navGraph
+        }
+    }
+
+    private fun setTheme() {
+        val prefs = PreferenceManager.getDefaultSharedPreferences(this)
+        val theme = prefs.getString(
+            getString(R.string.settings_theme_key),
+            getString(R.string.settings_theme_value_system)
+        )
+
+        if (theme != null) {
+            applyTheme(this, theme)
         }
     }
 }

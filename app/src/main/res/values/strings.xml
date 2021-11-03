@@ -69,12 +69,25 @@
     <string name="no_items_text">No Items found</string>
 
     <!-- Settings -->
-    <string name="about_header">About</string>
-    <string name="app_key" translatable="false">app</string>
-    <string name="author_key" translatable="false">author</string>
-    <string name="author_title">Developer</string>
-    <string name="author_summary" translatable="false">Jankku</string>
-    <string name="github_key" translatable="false">github</string>
-    <string name="github_title" translatable="false">GitHub</string>
-    <string name="github_summary" translatable="false">https://github.com/jankku/eino-android</string>
+    <string name="settings_about_header">About</string>
+    <string name="settings_theme_header">Theme</string>
+    <string name="settings_app_key" translatable="false">app</string>
+
+    <string name="settings_author_key" translatable="false">author</string>
+    <string name="settings_author_title">Developer</string>
+    <string name="settings_author_summary" translatable="false">Jankku</string>
+
+    <string name="settings_theme_key" translatable="false">theme</string>
+    <string name="settings_theme_title">Choose Theme</string>
+    <string name="settings_theme_summary">System, Light, Dark</string>
+    <string name="settings_theme_value_system" translatable="false">system</string>
+    <string name="settings_theme_value_light" translatable="false">light</string>
+    <string name="settings_theme_value_dark" translatable="false">dark</string>
+    <string name="settings_theme_entry_system">System default</string>
+    <string name="settings_theme_entry_light">Light</string>
+    <string name="settings_theme_entry_dark">Dark</string>
+
+    <string name="settings_github_key" translatable="false">github</string>
+    <string name="settings_github_title" translatable="false">GitHub</string>
+    <string name="settings_github_summary" translatable="false">https://github.com/jankku/eino-android</string>
 </resources>
