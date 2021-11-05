@@ -55,9 +55,14 @@
     <string name="dialog_movie_writer_hint">Writer</string>
     <string name="dialog_movie_duration_hint">Duration</string>
 
+    <!-- Log out dialog -->
+    <string name="dialog_logout_title">Are you sure you want to log out?</string>
+    <string name="dialog_logout_button_positive_text">Log out</string>
+    <string name="dialog_logout_button_negative_text">Cancel</string>
+
     <!-- Status dialog -->
-    <string name="status_dialog_title">Sort by status</string>
-    <string name="status_dialog_btn_apply">Apply</string>
+    <string name="dialog_status_title">Sort by status</string>
+    <string name="dialog_status_btn_apply">Apply</string>
 
     <!-- Item list -->
     <string name="action_status_label">Status</string>
@@ -69,8 +74,13 @@
     <string name="no_items_text">No Items found</string>
 
     <!-- Settings -->
+    <string name="settings_account_header">Account</string>
     <string name="settings_about_header">About</string>
     <string name="settings_theme_header">Theme</string>
+
+    <string name="settings_account_key">account</string>
+    <string name="settings_account_summary">Click here to log out</string>
+
     <string name="settings_app_key" translatable="false">app</string>
 
     <string name="settings_author_key" translatable="false">author</string>

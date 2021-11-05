@@ -18,4 +18,8 @@ sealed class Event {
     data class DeleteMovieSuccessEvent(val message: String) : Event()
     data class DeleteMovieErrorEvent(val message: String) : Event()
     data class GetMovieErrorEvent(val message: String) : Event()
+
+    // Settings
+    data class LogoutSuccessEvent(val message: String) : Event()
+    data class LogoutErrorEvent(val message: String) : Event()
 }

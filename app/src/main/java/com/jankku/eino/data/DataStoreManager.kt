@@ -2,10 +2,7 @@ package com.jankku.eino.data
 
 import android.content.Context
 import androidx.datastore.core.DataStore
-import androidx.datastore.preferences.core.Preferences
-import androidx.datastore.preferences.core.edit
-import androidx.datastore.preferences.core.emptyPreferences
-import androidx.datastore.preferences.core.stringPreferencesKey
+import androidx.datastore.preferences.core.*
 import androidx.datastore.preferences.preferencesDataStore
 import com.jankku.eino.util.Constant.DATASTORE_NAME
 import dagger.hilt.android.qualifiers.ApplicationContext
@@ -34,9 +31,28 @@ class DataStoreManager @Inject constructor(@ApplicationContext private val conte
         }
     }
 
+    suspend fun getUsername(): String =
+        dataStore.data.first()[USERNAME] ?: throw Exception("No username found")
+
+    suspend fun setUsername(username: String) {
+        dataStore.edit { preferences ->
+            preferences[USERNAME] = username
+        }
+    }
+
+    suspend fun setExpirationTime(time: Long) {
+        dataStore.edit { preferences ->
+            preferences[EXPIRATION_TIME] = time
+        }
+    }
+
+    suspend fun clear() = dataStore.edit { it.clear() }
+
     companion object {
         val ACCESS_TOKEN = stringPreferencesKey("access_token")
         val REFRESH_TOKEN = stringPreferencesKey("refresh_token")
+        val USERNAME = stringPreferencesKey("username")
+        val EXPIRATION_TIME = longPreferencesKey("expiration_time")
     }
 }
 

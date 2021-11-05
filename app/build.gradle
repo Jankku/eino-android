@@ -108,6 +108,9 @@ dependencies {
     // AwesomeValidation
     implementation 'com.basgeekball:awesome-validation:4.3'
 
+    // JWT
+    implementation 'com.auth0.android:jwtdecode:2.0.0'
+
     // LeakCanary
     debugImplementation "com.squareup.leakcanary:leakcanary-android:2.7"
 

@@ -3,12 +3,13 @@ package com.jankku.eino.ui.auth
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
-import androidx.fragment.app.activityViewModels
+import androidx.hilt.navigation.fragment.hiltNavGraphViewModels
 import androidx.navigation.fragment.findNavController
 import androidx.viewbinding.ViewBinding
 import com.basgeekball.awesomevalidation.AwesomeValidation
 import com.basgeekball.awesomevalidation.ValidationStyle
 import com.basgeekball.awesomevalidation.utility.RegexTemplate
+import com.jankku.eino.NavGraphDirections
 import com.jankku.eino.R
 import com.jankku.eino.databinding.FragmentLoginBinding
 import com.jankku.eino.ui.common.BindingFragment
@@ -22,7 +23,7 @@ private const val TAG = "LoginFragment"
 class LoginFragment : BindingFragment<FragmentLoginBinding>() {
     override val bindingInflater: (LayoutInflater) -> ViewBinding
         get() = FragmentLoginBinding::inflate
-    private val viewModel: AuthViewModel by activityViewModels()
+    private val viewModel: AuthViewModel by hiltNavGraphViewModels(R.id.auth_graph)
     private val validation = AwesomeValidation(ValidationStyle.BASIC)
 
     @ExperimentalCoroutinesApi
@@ -59,7 +60,7 @@ class LoginFragment : BindingFragment<FragmentLoginBinding>() {
                 }
                 is Result.Success -> {
                     binding.progressBar.visibility = View.GONE
-                    findNavController().navigateSafe(R.id.action_loginFragment_to_nav_graph)
+                    findNavController().navigateSafe(NavGraphDirections.actionGlobalBookGraph())
                 }
                 is Result.Error -> {
                     binding.progressBar.visibility = View.GONE
@@ -67,7 +68,6 @@ class LoginFragment : BindingFragment<FragmentLoginBinding>() {
                 }
             }
         }
-
         viewModel.networkStatus.observe(viewLifecycleOwner) { status ->
             when (status) {
                 is NetworkStatus.Available -> {

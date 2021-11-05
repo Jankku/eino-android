@@ -131,12 +131,12 @@ class BookListFragment : BindingFragment<FragmentItemListBinding>() {
         val statusArray = BookStatus.toArray()
 
         MaterialAlertDialogBuilder(requireContext())
-            .setTitle(resources.getString(R.string.status_dialog_title))
+            .setTitle(resources.getString(R.string.dialog_status_title))
             .setSingleChoiceItems(statusArray, checkedItem) { _, index ->
                 val status = BookStatus.values()[index]
                 viewModel.setStatus(status)
             }
-            .setPositiveButton(resources.getString(R.string.status_dialog_btn_apply)) { _, _ ->
+            .setPositiveButton(resources.getString(R.string.dialog_status_btn_apply)) { _, _ ->
                 viewModel.getBooksByStatus()
             }
             .show()

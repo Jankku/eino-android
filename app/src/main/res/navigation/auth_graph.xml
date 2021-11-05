@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/auth_graph"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     app:startDestination="@id/landingFragment">
     <fragment
         android:id="@+id/registerFragment"
@@ -21,11 +21,7 @@
         android:id="@+id/loginFragment"
         android:name="com.jankku.eino.ui.auth.LoginFragment"
         android:label="@string/navigation_login_label"
-        tools:layout="@layout/fragment_login">
-        <action
-            android:id="@+id/action_loginFragment_to_nav_graph"
-            app:destination="@id/nav_graph" />
-    </fragment>
+        tools:layout="@layout/fragment_login" />
     <fragment
         android:id="@+id/landingFragment"
         android:name="com.jankku.eino.ui.auth.LandingFragment"
@@ -42,5 +38,4 @@
             android:id="@+id/action_landingFragment_to_loginFragment"
             app:destination="@id/loginFragment" />
     </fragment>
-    <include app:graph="@navigation/nav_graph" />
 </navigation>

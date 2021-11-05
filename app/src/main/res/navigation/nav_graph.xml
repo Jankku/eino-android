@@ -6,10 +6,15 @@
 
     <include app:graph="@navigation/book_graph" />
     <include app:graph="@navigation/movie_graph" />
+    <include app:graph="@navigation/auth_graph" />
+    <include app:graph="@navigation/settings_graph" />
 
-    <fragment
-        android:id="@+id/settingsFragment"
-        android:name="com.jankku.eino.ui.settings.SettingsFragment"
-        android:label="@string/navigation_settings_label" />
+    <action
+        android:id="@+id/action_global_book_graph"
+        app:destination="@id/book_graph" />
+
+    <action
+        android:id="@+id/action_global_auth_graph"
+        app:destination="@id/auth_graph" />
 
 </navigation>

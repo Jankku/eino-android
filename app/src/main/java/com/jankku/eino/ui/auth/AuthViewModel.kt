@@ -1,6 +1,7 @@
 package com.jankku.eino.ui.auth
 
 import androidx.lifecycle.*
+import com.auth0.android.jwt.JWT
 import com.jankku.eino.data.AuthRepository
 import com.jankku.eino.data.DataStoreManager
 import com.jankku.eino.network.request.LoginRequest
@@ -73,8 +74,30 @@ class AuthViewModel @Inject constructor(
             .login(body)
             .catch { e -> _loginResponse.value = Result.Error(e.message) }
             .collect { response ->
-                response.data?.let { dataStoreManager.setTokens(it.accessToken, it.refreshToken) }
-                _loginResponse.value = response
+                try {
+                    if (response.data != null) {
+                        val jwt = JWT(response.data.accessToken)
+                        val jwtUsername = jwt.claims["username"]?.asString()
+                        val expirationTime = jwt.expiresAt?.time
+
+                        if (jwtUsername != null && expirationTime != null) {
+                            dataStoreManager.setUsername(jwtUsername)
+                            dataStoreManager.setExpirationTime(expirationTime)
+                            dataStoreManager.setTokens(
+                                response.data.accessToken,
+                                response.data.refreshToken
+                            )
+                            _loginResponse.value = Result.Success(response.data)
+                        } else {
+                            _loginResponse.value =
+                                Result.Error("Username or token expiration time is null")
+                        }
+                    } else {
+                        _loginResponse.value = Result.Error(response.message)
+                    }
+                } catch (e: Exception) {
+                    _loginResponse.value = Result.Error(e.message)
+                }
             }
     }
 }

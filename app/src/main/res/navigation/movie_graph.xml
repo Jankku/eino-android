@@ -45,5 +45,4 @@
         android:name="com.jankku.eino.ui.movie.dialog.UpdateMovieDialogFragment"
         android:label="UpdateMovieDialogFragment"
         tools:layout="@layout/fragment_base_movie_dialog" />
-
 </navigation>
