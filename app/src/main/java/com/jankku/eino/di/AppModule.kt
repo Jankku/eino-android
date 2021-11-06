@@ -4,6 +4,7 @@ import android.content.Context
 import com.jankku.eino.BuildConfig
 import com.jankku.eino.data.DataStoreManager
 import com.jankku.eino.network.EinoApiInterface
+import com.jankku.eino.network.TokenAuthenticator
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
 import dagger.Module
@@ -42,9 +43,18 @@ object AppModule {
 
     @Provides
     @Singleton
-    fun provideOkHttpClient(): OkHttpClient = OkHttpClient.Builder()
-        .addInterceptor(HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.BASIC))
-        .build()
+    fun provideOkHttpClient(authenticator: TokenAuthenticator): OkHttpClient =
+        OkHttpClient.Builder()
+            .addInterceptor(HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.BASIC))
+            .authenticator(authenticator)
+            .build()
+
+    @Provides
+    @Singleton
+    fun provideAuthenticator(
+        dataStoreManager: DataStoreManager,
+        moshi: Moshi
+    ): TokenAuthenticator = TokenAuthenticator(dataStoreManager, moshi)
 
     @Provides
     @Singleton

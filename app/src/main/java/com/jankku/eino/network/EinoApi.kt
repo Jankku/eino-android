@@ -1,10 +1,8 @@
 package com.jankku.eino.network
 
-import com.jankku.eino.network.request.BookRequest
-import com.jankku.eino.network.request.LoginRequest
-import com.jankku.eino.network.request.MovieRequest
-import com.jankku.eino.network.request.RegisterRequest
+import com.jankku.eino.network.request.*
 import com.jankku.eino.network.response.auth.LoginResponse
+import com.jankku.eino.network.response.auth.RefreshTokenResponse
 import com.jankku.eino.network.response.auth.RegisterResponse
 import com.jankku.eino.network.response.book.AddBookResponse
 import com.jankku.eino.network.response.book.BookListResponse
@@ -29,6 +27,10 @@ interface EinoApiInterface {
     @Headers(REQUEST_HEADERS)
     @POST("auth/login")
     suspend fun login(@Body body: LoginRequest): LoginResponse
+
+    @Headers(REQUEST_HEADERS)
+    @POST("auth/refreshtoken")
+    suspend fun refreshToken(@Body body: RefreshTokenRequest): RefreshTokenResponse
 
     /**
      *  Book routes

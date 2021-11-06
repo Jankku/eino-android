@@ -76,17 +76,24 @@ class AuthViewModel @Inject constructor(
             .collect { response ->
                 try {
                     if (response.data != null) {
-                        val jwt = JWT(response.data.accessToken)
-                        val jwtUsername = jwt.claims["username"]?.asString()
-                        val expirationTime = jwt.expiresAt?.time
+                        val accessToken = JWT(response.data.accessToken)
+                        val refreshToken = JWT(response.data.refreshToken)
+                        val jwtUsername = accessToken.claims["username"]?.asString()
+                        val accessTokenExpirationTime = accessToken.expiresAt?.time
+                        val refreshTokenExpirationTime = refreshToken.expiresAt?.time
 
-                        if (jwtUsername != null && expirationTime != null) {
-                            dataStoreManager.setUsername(jwtUsername)
-                            dataStoreManager.setExpirationTime(expirationTime)
-                            dataStoreManager.setTokens(
-                                response.data.accessToken,
-                                response.data.refreshToken
-                            )
+                        if (jwtUsername != null &&
+                            accessTokenExpirationTime != null &&
+                            refreshTokenExpirationTime != null
+                        ) {
+                            dataStoreManager.run {
+                                setUsername(jwtUsername)
+                                setAccessToken(response.data.accessToken)
+                                setAccessTokenExpirationTime(accessTokenExpirationTime)
+                                setRefreshToken(response.data.refreshToken)
+                                setRefreshTokenExpirationTime(refreshTokenExpirationTime)
+                            }
+
                             _loginResponse.value = Result.Success(response.data)
                         } else {
                             _loginResponse.value =
