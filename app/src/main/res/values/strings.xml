@@ -66,12 +66,15 @@
 
     <!-- Item list -->
     <string name="action_status_label">Status</string>
+    <string name="fab_add_desc">Add item</string>
 
     <!-- Item detail -->
     <string name="action_delete_label">Delete</string>
+    <string name="fab_edit_desc">Edit item</string>
 
     <!-- No item layout -->
     <string name="no_items_text">No Items found</string>
+    <string name="icon_frown_desc">Frown emoji</string>
 
     <!-- Settings -->
     <string name="settings_account_header">Account</string>

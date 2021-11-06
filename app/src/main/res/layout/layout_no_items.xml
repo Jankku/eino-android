@@ -9,6 +9,7 @@
         android:layout_width="@dimen/spacing_4x"
         android:layout_height="@dimen/spacing_4x"
         android:src="@drawable/ic_emoticon_frown"
+        android:contentDescription="@string/icon_frown_desc"
         app:layout_constraintBottom_toTopOf="@id/tvMessage"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

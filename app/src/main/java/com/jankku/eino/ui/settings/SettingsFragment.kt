@@ -97,7 +97,7 @@ class SettingsFragment : PreferenceFragmentCompat() {
         true
     }
 
-    private val accountListener = Preference.OnPreferenceClickListener { _ ->
+    private val accountListener = Preference.OnPreferenceClickListener {
         MaterialAlertDialogBuilder(requireContext())
             .setTitle(R.string.dialog_logout_title)
             .setPositiveButton(R.string.dialog_logout_button_positive_text) { dialog: DialogInterface, _: Int ->
