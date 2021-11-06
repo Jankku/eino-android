@@ -3,7 +3,7 @@ package com.jankku.eino.di
 import android.content.Context
 import com.jankku.eino.BuildConfig
 import com.jankku.eino.data.DataStoreManager
-import com.jankku.eino.network.EinoApiInterface
+import com.jankku.eino.network.EinoApi
 import com.jankku.eino.network.TokenAuthenticator
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
@@ -30,8 +30,8 @@ object AppModule {
 
     @Provides
     @Singleton
-    fun provideEinoApi(retrofit: Retrofit): EinoApiInterface =
-        retrofit.create(EinoApiInterface::class.java)
+    fun provideEinoApi(retrofit: Retrofit): EinoApi =
+        retrofit.create(EinoApi::class.java)
 
     @Provides
     @Singleton

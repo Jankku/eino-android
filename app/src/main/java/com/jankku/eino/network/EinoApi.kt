@@ -15,7 +15,7 @@ import com.jankku.eino.network.response.movie.UpdateMovieResponse
 import com.jankku.eino.util.Constant.REQUEST_HEADERS
 import retrofit2.http.*
 
-interface EinoApiInterface {
+interface EinoApi {
 
     /**
      *  Auth routes

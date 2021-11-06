@@ -23,12 +23,12 @@ class TokenAuthenticator @Inject constructor(
         .addInterceptor(HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.BASIC))
         .build()
 
-    private val api: EinoApiInterface = Retrofit.Builder()
+    private val api: EinoApi = Retrofit.Builder()
         .baseUrl(BuildConfig.baseUrl)
         .client(okHttpClient)
         .addConverterFactory(MoshiConverterFactory.create(moshi))
         .build()
-        .create(EinoApiInterface::class.java)
+        .create(EinoApi::class.java)
 
     override fun authenticate(route: Route?, response: Response): Request? {
         var shouldGetNewToken = false

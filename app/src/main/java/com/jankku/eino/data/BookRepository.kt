@@ -1,13 +1,13 @@
 package com.jankku.eino.data
 
-import com.jankku.eino.network.EinoApiInterface
+import com.jankku.eino.network.EinoApi
 import com.jankku.eino.network.request.BookRequest
 import com.jankku.eino.util.Result
 import kotlinx.coroutines.flow.flowOf
 import javax.inject.Inject
 
 class BookRepository @Inject constructor(
-    private val api: EinoApiInterface,
+    private val api: EinoApi,
     private val dataStoreManager: DataStoreManager
 ) {
     suspend fun getBooksByStatus(status: String) = flowOf(
