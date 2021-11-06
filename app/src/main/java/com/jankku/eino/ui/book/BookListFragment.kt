@@ -51,9 +51,11 @@ class BookListFragment : BindingFragment<FragmentItemListBinding>() {
 
     private fun setupRecyclerView() {
         _adapter = BookListAdapter { bookId ->
-            val action =
-                BookListFragmentDirections.actionBookListFragmentToBookDetailFragment(bookId)
-            findNavController().navigateSafe(action)
+            findNavController().navigateSafe(
+                BookListFragmentDirections.actionBookListFragmentToBookDetailFragment(
+                    bookId
+                )
+            )
         }
 
         adapter.stateRestorationPolicy =

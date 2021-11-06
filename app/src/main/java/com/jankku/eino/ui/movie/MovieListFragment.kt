@@ -51,9 +51,11 @@ class MovieListFragment : BindingFragment<FragmentItemListBinding>() {
 
     private fun setupRecyclerView() {
         _adapter = MovieListAdapter { movieId ->
-            val action =
-                MovieListFragmentDirections.actionMovieListFragmentToMovieDetailFragment(movieId)
-            findNavController().navigateSafe(action)
+            findNavController().navigateSafe(
+                MovieListFragmentDirections.actionMovieListFragmentToMovieDetailFragment(
+                    movieId
+                )
+            )
         }
 
         adapter.stateRestorationPolicy =
