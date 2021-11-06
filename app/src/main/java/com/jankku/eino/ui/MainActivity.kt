@@ -63,14 +63,16 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun setNavigationGraph() {
+        val graph = navController.navInflater.inflate(R.navigation.nav_graph)
+
         viewModel.isLoggedIn.observe(this) { isLoggedIn ->
-            val navGraph = if (isLoggedIn) {
-                navController.navInflater.inflate(R.navigation.nav_graph)
+            if (isLoggedIn) {
+                graph.setStartDestination(R.id.book_graph)
             } else {
-                navController.navInflater.inflate(R.navigation.auth_graph)
+                graph.setStartDestination(R.id.auth_graph)
             }
 
-            navController.graph = navGraph
+            navController.graph = graph
         }
     }
 
