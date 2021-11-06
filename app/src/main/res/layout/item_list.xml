@@ -16,16 +16,16 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:paddingTop="@dimen/spacing_three_fours"
-        android:paddingBottom="@dimen/spacing_default"
         android:paddingStart="@dimen/spacing_default"
+        android:paddingTop="@dimen/spacing_three_fours"
         android:paddingEnd="@dimen/spacing_half"
+        android:paddingBottom="@dimen/spacing_default"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
-        <TextView
+        <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/tvFirst"
             style="@style/TextAppearance.Eino.BodyMedium"
             android:layout_width="0dp"
@@ -51,7 +51,7 @@
             tools:ignore="TouchTargetSizeCheck"
             tools:text="10" />
 
-        <TextView
+        <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/tvSecond"
             style="@style/TextAppearance.Eino.BodyMedium"
             android:layout_width="0dp"

@@ -1,7 +1,8 @@
 // Top-level build file where you can add configuration options common to all sub-projects/modules.
 buildscript {
     ext {
-        nav_version = "2.4.0-beta01"
+        appcompat_version = "1.4.0-rc01"
+        nav_version = "2.4.0-beta02"
         lifecycle_version = "2.4.0"
         coroutines_version = '1.5.0'
         retrofit_version = "2.9.0"

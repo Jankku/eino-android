@@ -14,7 +14,7 @@
         android:orientation="vertical"
         android:padding="@dimen/spacing_default">
 
-        <TextView
+        <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/tvTitle"
             style="@style/TextAppearance.Eino.TitleMedium"
             android:layout_width="match_parent"
@@ -24,7 +24,7 @@
             android:paddingBottom="@dimen/spacing_quarter"
             tools:text="Title" />
 
-        <TextView
+        <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/tvText"
             style="@style/TextAppearance.Eino.BodyMedium"
             android:layout_width="match_parent"
