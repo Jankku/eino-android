@@ -8,7 +8,6 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:paddingHorizontal="@dimen/spacing_default"
         tools:context=".ui.auth.LoginFragment">
 
         <include
@@ -28,6 +27,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="@string/username_hint"
+            android:paddingHorizontal="@dimen/spacing_default"
             app:layout_constraintBottom_toTopOf="@id/tilPassword"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -49,6 +49,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/spacing_1_5x"
             android:hint="@string/password_hint"
+            android:paddingHorizontal="@dimen/spacing_default"
             app:endIconMode="password_toggle"
             app:layout_constraintBottom_toTopOf="@id/btnLogin"
             app:layout_constraintEnd_toEndOf="parent"
@@ -70,6 +71,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/spacing_1_5x"
+            android:layout_marginHorizontal="@dimen/spacing_default"
             android:text="@string/btn_login_text"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
