@@ -1,6 +1,9 @@
 package com.jankku.eino.ui.auth
 
-import androidx.lifecycle.*
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import com.auth0.android.jwt.JWT
 import com.jankku.eino.data.AuthRepository
 import com.jankku.eino.data.DataStoreManager
@@ -8,13 +11,8 @@ import com.jankku.eino.network.request.LoginRequest
 import com.jankku.eino.network.request.RegisterRequest
 import com.jankku.eino.network.response.auth.LoginResponse
 import com.jankku.eino.network.response.auth.RegisterResponse
-import com.jankku.eino.util.NetworkStatus
-import com.jankku.eino.util.NetworkStatusTracker
 import com.jankku.eino.util.Result
-import com.jankku.eino.util.map
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
@@ -26,7 +24,6 @@ private const val TAG = "AuthViewModel"
 class AuthViewModel @Inject constructor(
     private val repository: AuthRepository,
     private val dataStoreManager: DataStoreManager,
-    networkStatusTracker: NetworkStatusTracker
 ) : ViewModel() {
     private val _registerResponse: MutableLiveData<Result<RegisterResponse>> = MutableLiveData()
     val registerResponse: LiveData<Result<RegisterResponse>> get() = _registerResponse
@@ -36,12 +33,6 @@ class AuthViewModel @Inject constructor(
 
     private val _isLoggedIn: MutableLiveData<Boolean> = MutableLiveData()
     val isLoggedIn: LiveData<Boolean> get() = _isLoggedIn
-
-    @ExperimentalCoroutinesApi
-    val networkStatus = networkStatusTracker.networkStatus.map(
-        onUnavailable = { NetworkStatus.Unavailable },
-        onAvailable = { NetworkStatus.Available },
-    ).asLiveData(Dispatchers.IO)
 
     init {
         isAlreadyLoggedIn()

@@ -13,9 +13,11 @@ import com.jankku.eino.NavGraphDirections
 import com.jankku.eino.R
 import com.jankku.eino.databinding.FragmentLoginBinding
 import com.jankku.eino.ui.common.BindingFragment
-import com.jankku.eino.util.*
+import com.jankku.eino.util.Result
+import com.jankku.eino.util.hideBottomNav
+import com.jankku.eino.util.navigateSafe
+import com.jankku.eino.util.showSnackBar
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.ExperimentalCoroutinesApi
 
 private const val TAG = "LoginFragment"
 
@@ -26,7 +28,6 @@ class LoginFragment : BindingFragment<FragmentLoginBinding>() {
     private val viewModel: AuthViewModel by activityViewModels()
     private val validation = AwesomeValidation(ValidationStyle.BASIC)
 
-    @ExperimentalCoroutinesApi
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         hideBottomNav(requireActivity())
@@ -51,7 +52,6 @@ class LoginFragment : BindingFragment<FragmentLoginBinding>() {
         }
     }
 
-    @ExperimentalCoroutinesApi
     private fun setupObservers() {
         viewModel.loginResponse.observe(viewLifecycleOwner) { response ->
             when (response) {
@@ -65,15 +65,6 @@ class LoginFragment : BindingFragment<FragmentLoginBinding>() {
                 is Result.Error -> {
                     binding.progressBar.visibility = View.GONE
                     showSnackBar(binding.root, response.message.toString())
-                }
-            }
-        }
-        viewModel.networkStatus.observe(viewLifecycleOwner) { status ->
-            when (status) {
-                is NetworkStatus.Available -> {
-                }
-                is NetworkStatus.Unavailable -> {
-                    showSnackBar(binding.root, "No network available")
                 }
             }
         }

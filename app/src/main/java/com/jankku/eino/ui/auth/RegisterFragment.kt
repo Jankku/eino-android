@@ -12,9 +12,11 @@ import com.basgeekball.awesomevalidation.utility.RegexTemplate
 import com.jankku.eino.R
 import com.jankku.eino.databinding.FragmentRegisterBinding
 import com.jankku.eino.ui.common.BindingFragment
-import com.jankku.eino.util.*
+import com.jankku.eino.util.Result
+import com.jankku.eino.util.hideBottomNav
+import com.jankku.eino.util.navigateSafe
+import com.jankku.eino.util.showSnackBar
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.ExperimentalCoroutinesApi
 
 private const val TAG = "RegisterFragment"
 
@@ -25,7 +27,6 @@ class RegisterFragment : BindingFragment<FragmentRegisterBinding>() {
     private val viewModel: AuthViewModel by activityViewModels()
     private val validation = AwesomeValidation(ValidationStyle.BASIC)
 
-    @ExperimentalCoroutinesApi
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         hideBottomNav(requireActivity())
@@ -51,7 +52,6 @@ class RegisterFragment : BindingFragment<FragmentRegisterBinding>() {
         }
     }
 
-    @ExperimentalCoroutinesApi
     private fun setupObservers() {
         viewModel.registerResponse.observe(viewLifecycleOwner) { response ->
             when (response) {
@@ -65,16 +65,6 @@ class RegisterFragment : BindingFragment<FragmentRegisterBinding>() {
                 is Result.Error -> {
                     binding.progressBar.visibility = View.GONE
                     showSnackBar(binding.root, response.message.toString())
-                }
-            }
-        }
-
-        viewModel.networkStatus.observe(viewLifecycleOwner) { status ->
-            when (status) {
-                is NetworkStatus.Available -> {
-                }
-                is NetworkStatus.Unavailable -> {
-                    showSnackBar(binding.root, "No network available")
                 }
             }
         }
