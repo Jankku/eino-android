@@ -107,6 +107,7 @@ class BookListFragment : BindingFragment<FragmentItemListBinding>() {
                 }
                 is Result.Error -> {
                     binding.progressBar.visibility = View.GONE
+                    binding.layoutNoItems.root.visibility = View.VISIBLE
                     showSnackBar(binding.root, response.message.toString())
                 }
             }

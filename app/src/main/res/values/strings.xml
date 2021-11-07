@@ -72,9 +72,12 @@
     <string name="action_delete_label">Delete</string>
     <string name="fab_edit_desc">Edit item</string>
 
-    <!-- No item layout -->
-    <string name="no_items_text">No Items found</string>
+    <!-- List error layout -->
+    <string name="error_no_items_text">No Items found</string>
     <string name="icon_frown_desc">Frown emoji</string>
+
+    <!-- Item error layout -->
+    <string name="error_no_item_text">Couldn\'t find item</string>
 
     <!-- Settings -->
     <string name="settings_account_header">Account</string>

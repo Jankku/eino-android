@@ -52,7 +52,7 @@
 
     <include
         android:id="@+id/layoutNoItems"
-        layout="@layout/layout_no_items"
+        layout="@layout/layout_error_list"
         android:visibility="gone" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

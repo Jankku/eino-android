@@ -44,6 +44,7 @@ class BookDetailFragment : BindingFragment<FragmentItemDetailBinding>() {
         setupRecyclerView()
         setupEditFabClickListener()
         setupObservers()
+        setupSwipeToRefresh()
     }
 
     override fun onDestroyView() {
@@ -70,6 +71,13 @@ class BookDetailFragment : BindingFragment<FragmentItemDetailBinding>() {
         }
     }
 
+    private fun setupSwipeToRefresh() {
+        binding.swipeRefresh.setOnRefreshListener {
+            viewModel.getBookById()
+            binding.swipeRefresh.isRefreshing = false
+        }
+    }
+
     private fun setupObservers() {
         viewModel.detailItemList.observe(viewLifecycleOwner) {
             when (it) {
@@ -78,10 +86,12 @@ class BookDetailFragment : BindingFragment<FragmentItemDetailBinding>() {
                 }
                 is Result.Success -> {
                     binding.progressBar.visibility = View.GONE
+                    binding.layoutNoItem.root.visibility = View.GONE
                     adapter.submitList(it.data)
                 }
                 is Result.Error -> {
                     binding.progressBar.visibility = View.GONE
+                    binding.layoutNoItem.root.visibility = View.VISIBLE
                     viewModel.sendEvent { Event.GetBookErrorEvent(it.message.toString()) }
                 }
             }
