@@ -3,7 +3,7 @@ package com.jankku.eino.ui.auth
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
-import androidx.fragment.app.activityViewModels
+import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.viewbinding.ViewBinding
 import com.basgeekball.awesomevalidation.AwesomeValidation
@@ -25,7 +25,7 @@ private const val TAG = "LoginFragment"
 class LoginFragment : BindingFragment<FragmentLoginBinding>() {
     override val bindingInflater: (LayoutInflater) -> ViewBinding
         get() = FragmentLoginBinding::inflate
-    private val viewModel: AuthViewModel by activityViewModels()
+    private val viewModel: AuthViewModel by viewModels()
     private val validation = AwesomeValidation(ValidationStyle.BASIC)
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {

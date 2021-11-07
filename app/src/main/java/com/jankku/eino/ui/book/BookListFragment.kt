@@ -107,8 +107,9 @@ class BookListFragment : BindingFragment<FragmentItemListBinding>() {
                 }
                 is Result.Error -> {
                     binding.progressBar.visibility = View.GONE
+                    binding.rvList.visibility = View.GONE
                     binding.layoutNoItems.root.visibility = View.VISIBLE
-                    showSnackBar(binding.root, response.message.toString())
+                    viewModel.sendEvent { Event.GetItemListError(response.message.toString()) }
                 }
             }
         }
@@ -118,10 +119,11 @@ class BookListFragment : BindingFragment<FragmentItemListBinding>() {
                 .flowWithLifecycle(lifecycle, Lifecycle.State.STARTED)
                 .collect { event ->
                     when (event) {
-                        is Event.AddBookSuccessEvent -> showSnackBar(binding.root, event.message)
-                        is Event.AddBookErrorEvent -> showSnackBar(binding.root, event.message)
-                        is Event.DeleteBookSuccessEvent -> showSnackBar(binding.root, event.message)
-                        is Event.DeleteBookErrorEvent -> showSnackBar(binding.root, event.message)
+                        is Event.GetItemListError -> showSnackBar(binding.root, event.message)
+                        is Event.AddItemSuccessEvent -> showSnackBar(binding.root, event.message)
+                        is Event.AddItemErrorEvent -> showSnackBar(binding.root, event.message)
+                        is Event.DeleteItemSuccess -> showSnackBar(binding.root, event.message)
+                        is Event.DeleteItemError -> showSnackBar(binding.root, event.message)
                         else -> {
                         }
                     }

@@ -107,8 +107,9 @@ class MovieListFragment : BindingFragment<FragmentItemListBinding>() {
                 }
                 is Result.Error -> {
                     binding.progressBar.visibility = View.GONE
+                    binding.rvList.visibility = View.GONE
                     binding.layoutNoItems.root.visibility = View.VISIBLE
-                    showSnackBar(binding.root, response.message.toString())
+                    viewModel.sendEvent { Event.GetItemListError(response.message.toString()) }
                 }
             }
         }
@@ -118,13 +119,11 @@ class MovieListFragment : BindingFragment<FragmentItemListBinding>() {
                 .flowWithLifecycle(lifecycle, Lifecycle.State.STARTED)
                 .collect { event ->
                     when (event) {
-                        is Event.AddMovieSuccessEvent -> showSnackBar(binding.root, event.message)
-                        is Event.AddMovieErrorEvent -> showSnackBar(binding.root, event.message)
-                        is Event.DeleteMovieSuccessEvent -> showSnackBar(
-                            binding.root,
-                            event.message
-                        )
-                        is Event.DeleteMovieErrorEvent -> showSnackBar(binding.root, event.message)
+                        is Event.GetItemListError -> showSnackBar(binding.root, event.message)
+                        is Event.AddItemSuccessEvent -> showSnackBar(binding.root, event.message)
+                        is Event.AddItemErrorEvent -> showSnackBar(binding.root, event.message)
+                        is Event.DeleteItemSuccess -> showSnackBar(binding.root, event.message)
+                        is Event.DeleteItemError -> showSnackBar(binding.root, event.message)
                         else -> {
                         }
                     }

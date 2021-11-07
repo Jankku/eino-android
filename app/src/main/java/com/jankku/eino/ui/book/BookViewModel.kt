@@ -77,12 +77,12 @@ class BookViewModel @Inject constructor(
     fun addBook(book: BookRequest) = viewModelScope.launch {
         repository
             .addBook(book)
-            .catch { e -> sendEvent { Event.AddBookErrorEvent(e.message.toString()) } }
+            .catch { e -> sendEvent { Event.AddItemErrorEvent(e.message.toString()) } }
             .collect { response ->
                 if (response.data?.results?.get(0) != null) {
-                    sendEvent { Event.AddBookSuccessEvent(response.data.results[0].message) }
+                    sendEvent { Event.AddItemSuccessEvent(response.data.results[0].message) }
                 } else {
-                    sendEvent { Event.AddBookErrorEvent(response.message.toString()) }
+                    sendEvent { Event.AddItemErrorEvent(response.message.toString()) }
                 }
                 getBooksByStatus()
             }
@@ -91,12 +91,12 @@ class BookViewModel @Inject constructor(
     fun editBook(book: BookRequest) = viewModelScope.launch {
         repository
             .editBook(bookId, book)
-            .catch { e -> sendEvent { Event.EditBookErrorEvent(e.message.toString()) } }
+            .catch { e -> sendEvent { Event.EditItemError(e.message.toString()) } }
             .collect { response ->
                 if (response.data?.results?.get(0) != null) {
-                    sendEvent { Event.EditBookSuccessEvent(response.data.results[0].message) }
+                    sendEvent { Event.EditItemSuccess(response.data.results[0].message) }
                 } else {
-                    sendEvent { Event.EditBookErrorEvent(response.message.toString()) }
+                    sendEvent { Event.EditItemError(response.message.toString()) }
                 }
                 getBookById()
             }
@@ -105,12 +105,12 @@ class BookViewModel @Inject constructor(
     fun deleteBook() = viewModelScope.launch {
         repository
             .deleteBook(bookId)
-            .catch { e -> sendEvent { Event.DeleteBookErrorEvent(e.message.toString()) } }
+            .catch { e -> sendEvent { Event.DeleteItemError(e.message.toString()) } }
             .collect { response ->
                 if (response.data?.results?.get(0) != null) {
-                    sendEvent { Event.DeleteBookSuccessEvent(response.data.results[0].message) }
+                    sendEvent { Event.DeleteItemSuccess(response.data.results[0].message) }
                 } else {
-                    sendEvent { Event.DeleteBookErrorEvent(response.message.toString()) }
+                    sendEvent { Event.DeleteItemError(response.message.toString()) }
                 }
                 getBooksByStatus()
             }

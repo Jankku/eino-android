@@ -77,12 +77,12 @@ class MovieViewModel @Inject constructor(
     fun addMovie(movie: MovieRequest) = viewModelScope.launch {
         repository
             .addMovie(movie)
-            .catch { e -> sendEvent { Event.AddMovieErrorEvent(e.message.toString()) } }
+            .catch { e -> sendEvent { Event.AddItemErrorEvent(e.message.toString()) } }
             .collect { response ->
                 if (response.data?.results?.get(0) != null) {
-                    sendEvent { Event.AddMovieSuccessEvent(response.data.results[0].message) }
+                    sendEvent { Event.AddItemSuccessEvent(response.data.results[0].message) }
                 } else {
-                    sendEvent { Event.AddMovieErrorEvent(response.message.toString()) }
+                    sendEvent { Event.AddItemErrorEvent(response.message.toString()) }
                 }
                 getMoviesByStatus()
             }
@@ -91,12 +91,12 @@ class MovieViewModel @Inject constructor(
     fun editMovie(movie: MovieRequest) = viewModelScope.launch {
         repository
             .editMovie(movieId, movie)
-            .catch { e -> sendEvent { Event.EditMovieErrorEvent(e.message.toString()) } }
+            .catch { e -> sendEvent { Event.EditItemError(e.message.toString()) } }
             .collect { response ->
                 if (response.data?.results?.get(0) != null) {
-                    sendEvent { Event.EditMovieSuccessEvent(response.data.results[0].message) }
+                    sendEvent { Event.EditItemSuccess(response.data.results[0].message) }
                 } else {
-                    sendEvent { Event.EditMovieErrorEvent(response.message.toString()) }
+                    sendEvent { Event.EditItemError(response.message.toString()) }
                 }
                 getMovieById()
             }
@@ -105,12 +105,12 @@ class MovieViewModel @Inject constructor(
     fun deleteMovie() = viewModelScope.launch {
         repository
             .deleteMovie(movieId)
-            .catch { e -> sendEvent { Event.DeleteMovieErrorEvent(e.message.toString()) } }
+            .catch { e -> sendEvent { Event.DeleteItemError(e.message.toString()) } }
             .collect { response ->
                 if (response.data?.results?.get(0) != null) {
-                    sendEvent { Event.DeleteMovieSuccessEvent(response.data.results[0].message) }
+                    sendEvent { Event.DeleteItemSuccess(response.data.results[0].message) }
                 } else {
-                    sendEvent { Event.DeleteMovieErrorEvent(response.message.toString()) }
+                    sendEvent { Event.DeleteItemError(response.message.toString()) }
                 }
                 getMoviesByStatus()
             }
