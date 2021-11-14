@@ -1,11 +1,9 @@
 package com.jankku.eino.ui.movie
 
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.viewModelScope
+import androidx.lifecycle.*
 import com.jankku.eino.data.MovieRepository
 import com.jankku.eino.data.enums.MovieStatus
+import com.jankku.eino.data.enums.Sort
 import com.jankku.eino.data.model.DetailItem
 import com.jankku.eino.data.model.Movie
 import com.jankku.eino.network.request.MovieRequest
@@ -27,6 +25,9 @@ private const val TAG = "MovieViewModel"
 class MovieViewModel @Inject constructor(
     private val repository: MovieRepository
 ) : ViewModel() {
+    private val _eventChannel = Channel<Event>(Channel.BUFFERED)
+    val eventChannel = _eventChannel.receiveAsFlow()
+
     private var movieId = "null"
 
     private val _movie: MutableLiveData<Movie> = MutableLiveData()
@@ -36,26 +37,52 @@ class MovieViewModel @Inject constructor(
         MutableLiveData()
     val detailItemList: LiveData<Result<MutableList<DetailItem>>> get() = _detailItemList
 
-    private val _movieList: MutableLiveData<Result<MovieListResponse>> = MutableLiveData()
-    val movieList: LiveData<Result<MovieListResponse>> = _movieList
+    val movieList: MediatorLiveData<List<Movie>> = MediatorLiveData()
 
-    private val _selectedStatus: MutableLiveData<MovieStatus> = MutableLiveData(MovieStatus.ALL)
-    val selectedStatus: LiveData<MovieStatus> get() = _selectedStatus
+    private val _movieListState: MutableLiveData<Result<MovieListResponse>> = MutableLiveData()
+    val movieListState: LiveData<Result<MovieListResponse>> = _movieListState
 
-    private val _eventChannel = Channel<Event>(Channel.BUFFERED)
-    val eventChannel = _eventChannel.receiveAsFlow()
+    private val _ascTitleAscScoreMovieList: LiveData<List<Movie>?> =
+        _movieListState.map { response ->
+            response.data?.results?.sortedWith(compareBy<Movie> { it.title }.thenBy { it.score })
+        }
+    private val _ascTitleDescScoreMovieList: LiveData<List<Movie>?> =
+        _movieListState.map { response ->
+            response.data?.results?.sortedWith(compareBy<Movie> { it.title }.thenByDescending { it.score })
+        }
+
+    private val _descTitleAscScoreMovieList: LiveData<List<Movie>?> =
+        _movieListState.map { response ->
+            response.data?.results?.sortedWith(compareByDescending<Movie> { it.title }.thenBy { it.score })
+        }
+
+    private val _descTitleDescScoreMovieList: LiveData<List<Movie>?> =
+        _movieListState.map { response ->
+            response.data?.results?.sortedWith(compareBy<Movie> { it.title }.thenBy { it.score })
+                ?.asReversed()
+        }
+
+    private val _selectedTitleSort: MutableLiveData<Sort> = MutableLiveData(Sort.ASCENDING)
+    val selectedTitleSort: LiveData<Sort> get() = _selectedTitleSort
+
+    private val _selectedStatusSort: MutableLiveData<MovieStatus> = MutableLiveData(MovieStatus.ALL)
+    val selectedStatusSort: LiveData<MovieStatus> get() = _selectedStatusSort
+
+    private val _selectedScoreSort: MutableLiveData<Sort> = MutableLiveData(Sort.ASCENDING)
+    val selectedScoreSort: LiveData<Sort> get() = _selectedScoreSort
 
     init {
         getMoviesByStatus()
+        setupMovieListSources()
     }
 
     fun getMoviesByStatus() = viewModelScope.launch {
-        _movieList.postValue(Result.Loading())
+        _movieListState.postValue(Result.Loading())
         repository
-            .getMoviesByStatus(selectedStatus.value!!.value)
-            .catch { e -> _movieList.value = Result.Error(e.message) }
+            .getMoviesByStatus(selectedStatusSort.value!!.value)
+            .catch { e -> _movieListState.value = Result.Error(e.message) }
             .collect { response ->
-                _movieList.postValue(response)
+                _movieListState.postValue(response)
             }
     }
 
@@ -116,8 +143,16 @@ class MovieViewModel @Inject constructor(
             }
     }
 
-    fun setStatus(status: MovieStatus) {
-        _selectedStatus.value = status
+    fun setTitleSort(status: Sort) {
+        _selectedTitleSort.value = status
+    }
+
+    fun setStatusSort(status: MovieStatus) {
+        _selectedStatusSort.value = status
+    }
+
+    fun setScoreSort(status: Sort) {
+        _selectedScoreSort.value = status
     }
 
     fun setMovieId(id: String) {
@@ -126,6 +161,48 @@ class MovieViewModel @Inject constructor(
 
     fun sendEvent(event: () -> Event) = viewModelScope.launch {
         _eventChannel.trySend(event())
+    }
+
+    private fun setupMovieListSources() {
+        movieList.addSource(_ascTitleAscScoreMovieList) { result ->
+            result?.let {
+                if (_selectedTitleSort.value == Sort.ASCENDING &&
+                    _selectedScoreSort.value == Sort.ASCENDING
+                ) {
+                    movieList.value = result
+                }
+            }
+        }
+
+        movieList.addSource(_ascTitleDescScoreMovieList) { result ->
+            result?.let {
+                if (_selectedTitleSort.value == Sort.ASCENDING &&
+                    _selectedScoreSort.value == Sort.DESCENDING
+                ) {
+                    movieList.value = result
+                }
+            }
+        }
+
+        movieList.addSource(_descTitleAscScoreMovieList) { result ->
+            result?.let {
+                if (_selectedTitleSort.value == Sort.DESCENDING &&
+                    _selectedScoreSort.value == Sort.ASCENDING
+                ) {
+                    movieList.value = result
+                }
+            }
+        }
+
+        movieList.addSource(_descTitleDescScoreMovieList) { result ->
+            result?.let {
+                if (_selectedTitleSort.value == Sort.DESCENDING &&
+                    _selectedScoreSort.value == Sort.DESCENDING
+                ) {
+                    movieList.value = result
+                }
+            }
+        }
     }
 
     private fun movieToDetailItemList(movie: Movie) {

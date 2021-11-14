@@ -9,9 +9,7 @@ import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import androidx.viewbinding.ViewBinding
-import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.jankku.eino.R
-import com.jankku.eino.data.enums.BookStatus
 import com.jankku.eino.databinding.FragmentItemListBinding
 import com.jankku.eino.ui.common.BindingFragment
 import com.jankku.eino.ui.common.MarginItemDecoration
@@ -39,6 +37,7 @@ class BookListFragment : BindingFragment<FragmentItemListBinding>() {
         super.onViewCreated(view, savedInstanceState)
         showBottomNav(requireActivity())
         setupObservers()
+        setupAdapter()
         setupRecyclerView()
         setupAddBookFabClickListener()
         setupSwipeToRefresh()
@@ -49,7 +48,7 @@ class BookListFragment : BindingFragment<FragmentItemListBinding>() {
         _adapter = null
     }
 
-    private fun setupRecyclerView() {
+    private fun setupAdapter() {
         _adapter = BookListAdapter { bookId ->
             findNavController().navigateSafe(
                 BookListFragmentDirections.actionBookListFragmentToBookDetailFragment(
@@ -60,7 +59,9 @@ class BookListFragment : BindingFragment<FragmentItemListBinding>() {
 
         adapter.stateRestorationPolicy =
             RecyclerView.Adapter.StateRestorationPolicy.PREVENT_WHEN_EMPTY
+    }
 
+    private fun setupRecyclerView() {
         binding.rvList.let {
             it.setHasFixedSize(true)
             it.addOnScrollListener(HideFabOnScroll(binding.fabAddItem))
@@ -89,7 +90,7 @@ class BookListFragment : BindingFragment<FragmentItemListBinding>() {
     }
 
     private fun setupObservers() {
-        viewModel.bookList.observe(viewLifecycleOwner) { response ->
+        viewModel.bookListState.observe(viewLifecycleOwner) { response ->
             when (response) {
                 is Result.Loading -> {
                     binding.progressBar.visibility = View.VISIBLE
@@ -99,7 +100,6 @@ class BookListFragment : BindingFragment<FragmentItemListBinding>() {
                     if (response.data?.results?.isNotEmpty() == true) {
                         binding.layoutNoItems.root.visibility = View.GONE
                         binding.rvList.visibility = View.VISIBLE
-                        adapter.submitList(response.data.results)
                     } else {
                         binding.layoutNoItems.root.visibility = View.VISIBLE
                         binding.rvList.visibility = View.GONE
@@ -111,6 +111,14 @@ class BookListFragment : BindingFragment<FragmentItemListBinding>() {
                     binding.layoutNoItems.root.visibility = View.VISIBLE
                     viewModel.sendEvent { Event.GetItemListError(response.message.toString()) }
                 }
+            }
+        }
+
+        viewModel.bookList.observe(viewLifecycleOwner) { list ->
+            if (list.isNotEmpty()) {
+                setupAdapter()
+                binding.rvList.swapAdapter(adapter, false)
+                adapter.submitList(list)
             }
         }
 
@@ -131,30 +139,14 @@ class BookListFragment : BindingFragment<FragmentItemListBinding>() {
         }
     }
 
-    private fun statusDialog() {
-        val checkedItem = viewModel.selectedStatus.value!!.ordinal
-        val statusArray = BookStatus.toArray()
-
-        MaterialAlertDialogBuilder(requireContext())
-            .setTitle(resources.getString(R.string.dialog_status_title))
-            .setSingleChoiceItems(statusArray, checkedItem) { _, index ->
-                val status = BookStatus.values()[index]
-                viewModel.setStatus(status)
-            }
-            .setPositiveButton(resources.getString(R.string.dialog_status_btn_apply)) { _, _ ->
-                viewModel.getBooksByStatus()
-            }
-            .show()
-    }
-
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
         inflater.inflate(R.menu.menu_item_list, menu)
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         return when (item.itemId) {
-            R.id.action_status -> {
-                statusDialog()
+            R.id.action_sort -> {
+                findNavController().navigateSafe(R.id.action_bookListFragment_to_bookSortDialogFragment)
                 true
             }
             else -> super.onOptionsItemSelected(item)

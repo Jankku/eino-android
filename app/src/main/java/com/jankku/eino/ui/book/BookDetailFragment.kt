@@ -87,12 +87,14 @@ class BookDetailFragment : BindingFragment<FragmentItemDetailBinding>() {
                 is Result.Success -> {
                     binding.progressBar.visibility = View.GONE
                     binding.rvDetail.visibility = View.VISIBLE
+                    binding.fabEditItem.visibility = View.VISIBLE
                     binding.layoutNoItem.root.visibility = View.GONE
                     adapter.submitList(it.data)
                 }
                 is Result.Error -> {
                     binding.progressBar.visibility = View.GONE
                     binding.rvDetail.visibility = View.GONE
+                    binding.fabEditItem.visibility = View.GONE
                     binding.layoutNoItem.root.visibility = View.VISIBLE
                     viewModel.sendEvent { Event.GetItemError(it.message.toString()) }
                 }

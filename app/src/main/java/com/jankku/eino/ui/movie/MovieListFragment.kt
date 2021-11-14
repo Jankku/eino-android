@@ -9,9 +9,7 @@ import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import androidx.viewbinding.ViewBinding
-import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.jankku.eino.R
-import com.jankku.eino.data.enums.MovieStatus
 import com.jankku.eino.databinding.FragmentItemListBinding
 import com.jankku.eino.ui.common.BindingFragment
 import com.jankku.eino.ui.common.MarginItemDecoration
@@ -47,6 +45,19 @@ class MovieListFragment : BindingFragment<FragmentItemListBinding>() {
     override fun onDestroyView() {
         super.onDestroyView()
         _adapter = null
+    }
+
+    private fun setupAdapter() {
+        _adapter = MovieListAdapter { movieId ->
+            findNavController().navigateSafe(
+                MovieListFragmentDirections.actionMovieListFragmentToMovieDetailFragment(
+                    movieId
+                )
+            )
+        }
+
+        adapter.stateRestorationPolicy =
+            RecyclerView.Adapter.StateRestorationPolicy.PREVENT_WHEN_EMPTY
     }
 
     private fun setupRecyclerView() {
@@ -89,7 +100,7 @@ class MovieListFragment : BindingFragment<FragmentItemListBinding>() {
     }
 
     private fun setupObservers() {
-        viewModel.movieList.observe(viewLifecycleOwner) { response ->
+        viewModel.movieListState.observe(viewLifecycleOwner) { response ->
             when (response) {
                 is Result.Loading -> {
                     binding.progressBar.visibility = View.VISIBLE
@@ -99,7 +110,6 @@ class MovieListFragment : BindingFragment<FragmentItemListBinding>() {
                     if (response.data?.results?.isNotEmpty() == true) {
                         binding.layoutNoItems.root.visibility = View.GONE
                         binding.rvList.visibility = View.VISIBLE
-                        adapter.submitList(response.data.results)
                     } else {
                         binding.layoutNoItems.root.visibility = View.VISIBLE
                         binding.rvList.visibility = View.GONE
@@ -111,6 +121,14 @@ class MovieListFragment : BindingFragment<FragmentItemListBinding>() {
                     binding.layoutNoItems.root.visibility = View.VISIBLE
                     viewModel.sendEvent { Event.GetItemListError(response.message.toString()) }
                 }
+            }
+        }
+
+        viewModel.movieList.observe(viewLifecycleOwner) { list ->
+            if (list.isNotEmpty()) {
+                setupAdapter()
+                binding.rvList.swapAdapter(adapter, false)
+                adapter.submitList(list)
             }
         }
 
@@ -131,30 +149,14 @@ class MovieListFragment : BindingFragment<FragmentItemListBinding>() {
         }
     }
 
-    private fun statusDialog() {
-        val checkedItem = viewModel.selectedStatus.value!!.ordinal
-        val statusArray = MovieStatus.toArray()
-
-        MaterialAlertDialogBuilder(requireContext())
-            .setTitle(resources.getString(R.string.dialog_status_title))
-            .setSingleChoiceItems(statusArray, checkedItem) { _, index ->
-                val status = MovieStatus.values()[index]
-                viewModel.setStatus(status)
-            }
-            .setPositiveButton(resources.getString(R.string.dialog_status_btn_apply)) { _, _ ->
-                viewModel.getMoviesByStatus()
-            }
-            .show()
-    }
-
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
         inflater.inflate(R.menu.menu_item_list, menu)
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         return when (item.itemId) {
-            R.id.action_status -> {
-                statusDialog()
+            R.id.action_sort -> {
+                findNavController().navigateSafe(R.id.action_movieListFragment_to_movieSortDialogFragment)
                 true
             }
             else -> super.onOptionsItemSelected(item)

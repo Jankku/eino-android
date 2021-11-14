@@ -1,11 +1,9 @@
 package com.jankku.eino.ui.book
 
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.viewModelScope
+import androidx.lifecycle.*
 import com.jankku.eino.data.BookRepository
 import com.jankku.eino.data.enums.BookStatus
+import com.jankku.eino.data.enums.Sort
 import com.jankku.eino.data.model.Book
 import com.jankku.eino.data.model.DetailItem
 import com.jankku.eino.network.request.BookRequest
@@ -27,6 +25,9 @@ private const val TAG = "BookViewModel"
 class BookViewModel @Inject constructor(
     private val repository: BookRepository
 ) : ViewModel() {
+    private val _eventChannel = Channel<Event>(Channel.BUFFERED)
+    val eventChannel = _eventChannel.receiveAsFlow()
+
     private var bookId = "null"
 
     private val _book: MutableLiveData<Book> = MutableLiveData()
@@ -36,26 +37,49 @@ class BookViewModel @Inject constructor(
         MutableLiveData()
     val detailItemList: LiveData<Result<MutableList<DetailItem>>> get() = _detailItemList
 
-    private val _bookList: MutableLiveData<Result<BookListResponse>> = MutableLiveData()
-    val bookList: LiveData<Result<BookListResponse>> = _bookList
+    val bookList: MediatorLiveData<List<Book>> = MediatorLiveData()
 
-    private val _selectedStatus: MutableLiveData<BookStatus> = MutableLiveData(BookStatus.ALL)
-    val selectedStatus: LiveData<BookStatus> get() = _selectedStatus
+    private val _bookListState: MutableLiveData<Result<BookListResponse>> = MutableLiveData()
+    val bookListState: LiveData<Result<BookListResponse>> = _bookListState
 
-    private val _eventChannel = Channel<Event>(Channel.BUFFERED)
-    val eventChannel = _eventChannel.receiveAsFlow()
+    private val _ascTitleAscScoreBookList: LiveData<List<Book>?> = _bookListState.map { response ->
+        response.data?.results?.sortedWith(compareBy<Book> { it.title }.thenBy { it.score })
+    }
+    private val _ascTitleDescScoreBookList: LiveData<List<Book>?> = _bookListState.map { response ->
+        response.data?.results?.sortedWith(compareBy<Book> { it.title }.thenByDescending { it.score })
+    }
+
+    private val _descTitleAscScoreBookList: LiveData<List<Book>?> = _bookListState.map { response ->
+        response.data?.results?.sortedWith(compareByDescending<Book> { it.title }.thenBy { it.score })
+    }
+
+    private val _descTitleDescScoreBookList: LiveData<List<Book>?> =
+        _bookListState.map { response ->
+            response.data?.results?.sortedWith(compareBy<Book> { it.title }.thenBy { it.score })
+                ?.asReversed()
+        }
+
+    private val _selectedTitleSort: MutableLiveData<Sort> = MutableLiveData(Sort.ASCENDING)
+    val selectedTitleSort: LiveData<Sort> get() = _selectedTitleSort
+
+    private val _selectedStatusSort: MutableLiveData<BookStatus> = MutableLiveData(BookStatus.ALL)
+    val selectedStatusSort: LiveData<BookStatus> get() = _selectedStatusSort
+
+    private val _selectedScoreSort: MutableLiveData<Sort> = MutableLiveData(Sort.ASCENDING)
+    val selectedScoreSort: LiveData<Sort> get() = _selectedScoreSort
 
     init {
         getBooksByStatus()
+        setupBookListSources()
     }
 
     fun getBooksByStatus() = viewModelScope.launch {
-        _bookList.postValue(Result.Loading())
+        _bookListState.postValue(Result.Loading())
         repository
-            .getBooksByStatus(selectedStatus.value!!.value)
-            .catch { e -> _bookList.value = Result.Error(e.message) }
+            .getBooksByStatus(_selectedStatusSort.value!!.value)
+            .catch { e -> _bookListState.value = Result.Error(e.message) }
             .collect { response ->
-                _bookList.postValue(response)
+                _bookListState.postValue(response)
             }
     }
 
@@ -116,8 +140,16 @@ class BookViewModel @Inject constructor(
             }
     }
 
-    fun setStatus(status: BookStatus) {
-        _selectedStatus.value = status
+    fun setTitleSort(status: Sort) {
+        _selectedTitleSort.value = status
+    }
+
+    fun setStatusSort(status: BookStatus) {
+        _selectedStatusSort.value = status
+    }
+
+    fun setScoreSort(status: Sort) {
+        _selectedScoreSort.value = status
     }
 
     fun setBookId(id: String) {
@@ -126,6 +158,48 @@ class BookViewModel @Inject constructor(
 
     fun sendEvent(event: () -> Event) = viewModelScope.launch {
         _eventChannel.trySend(event())
+    }
+
+    private fun setupBookListSources() {
+        bookList.addSource(_ascTitleAscScoreBookList) { result ->
+            result?.let {
+                if (_selectedTitleSort.value == Sort.ASCENDING &&
+                    _selectedScoreSort.value == Sort.ASCENDING
+                ) {
+                    bookList.value = result
+                }
+            }
+        }
+
+        bookList.addSource(_ascTitleDescScoreBookList) { result ->
+            result?.let {
+                if (_selectedTitleSort.value == Sort.ASCENDING &&
+                    _selectedScoreSort.value == Sort.DESCENDING
+                ) {
+                    bookList.value = result
+                }
+            }
+        }
+
+        bookList.addSource(_descTitleAscScoreBookList) { result ->
+            result?.let {
+                if (_selectedTitleSort.value == Sort.DESCENDING &&
+                    _selectedScoreSort.value == Sort.ASCENDING
+                ) {
+                    bookList.value = result
+                }
+            }
+        }
+
+        bookList.addSource(_descTitleDescScoreBookList) { result ->
+            result?.let {
+                if (_selectedTitleSort.value == Sort.DESCENDING &&
+                    _selectedScoreSort.value == Sort.DESCENDING
+                ) {
+                    bookList.value = result
+                }
+            }
+        }
     }
 
     private fun bookToDetailItemList(book: Book) {
