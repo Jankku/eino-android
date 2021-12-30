@@ -37,11 +37,11 @@ class SettingsViewModel @Inject constructor(
     fun logOut() = viewModelScope.launch {
         repository
             .logOut()
-            .catch { e -> sendEvent { Event.LogoutErrorEvent(e.message.toString()) } }
-            .collect { response -> sendEvent { Event.LogoutSuccessEvent(response.data.toString()) } }
+            .catch { e -> sendEvent(Event.LogoutErrorEvent(e.message.toString())) }
+            .collect { response -> sendEvent(Event.LogoutSuccessEvent(response.data.toString())) }
     }
 
-    private fun sendEvent(event: () -> Event) = viewModelScope.launch {
-        _eventChannel.trySend(event())
+    private fun sendEvent(event: Event) = viewModelScope.launch {
+        _eventChannel.trySend(event)
     }
 }

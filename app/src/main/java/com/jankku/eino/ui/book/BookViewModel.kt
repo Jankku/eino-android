@@ -15,6 +15,7 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.flow.onStart
 import kotlinx.coroutines.flow.receiveAsFlow
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -74,19 +75,19 @@ class BookViewModel @Inject constructor(
     }
 
     fun getBooksByStatus() = viewModelScope.launch {
-        _bookListState.postValue(Result.Loading())
         repository
             .getBooksByStatus(_selectedStatusSort.value!!.value)
+            .onStart { _bookListState.value = Result.Loading() }
             .catch { e -> _bookListState.value = Result.Error(e.message) }
             .collect { response ->
-                _bookListState.postValue(response)
+                _bookListState.value = response
             }
     }
 
     fun getBookById() = viewModelScope.launch {
-        _detailItemList.value = Result.Loading()
         repository
             .getBookById(bookId)
+            .onStart { _detailItemList.value = Result.Loading() }
             .catch { e -> _detailItemList.value = Result.Error(e.message) }
             .collect { response ->
                 if (response.data?.results?.get(0) != null) {
@@ -101,12 +102,12 @@ class BookViewModel @Inject constructor(
     fun addBook(book: BookRequest) = viewModelScope.launch {
         repository
             .addBook(book)
-            .catch { e -> sendEvent { Event.AddItemErrorEvent(e.message.toString()) } }
+            .catch { e -> sendEvent(Event.AddItemErrorEvent(e.message.toString())) }
             .collect { response ->
                 if (response.data?.results?.get(0) != null) {
-                    sendEvent { Event.AddItemSuccessEvent(response.data.results[0].message) }
+                    sendEvent(Event.AddItemSuccessEvent(response.data.results[0].message))
                 } else {
-                    sendEvent { Event.AddItemErrorEvent(response.message.toString()) }
+                    sendEvent(Event.AddItemErrorEvent(response.message.toString()))
                 }
                 getBooksByStatus()
             }
@@ -115,12 +116,12 @@ class BookViewModel @Inject constructor(
     fun editBook(book: BookRequest) = viewModelScope.launch {
         repository
             .editBook(bookId, book)
-            .catch { e -> sendEvent { Event.EditItemError(e.message.toString()) } }
+            .catch { e -> sendEvent(Event.EditItemError(e.message.toString())) }
             .collect { response ->
                 if (response.data?.results?.get(0) != null) {
-                    sendEvent { Event.EditItemSuccess(response.data.results[0].message) }
+                    sendEvent(Event.EditItemSuccess(response.data.results[0].message))
                 } else {
-                    sendEvent { Event.EditItemError(response.message.toString()) }
+                    sendEvent(Event.EditItemError(response.message.toString()))
                 }
                 getBookById()
             }
@@ -129,12 +130,12 @@ class BookViewModel @Inject constructor(
     fun deleteBook() = viewModelScope.launch {
         repository
             .deleteBook(bookId)
-            .catch { e -> sendEvent { Event.DeleteItemError(e.message.toString()) } }
+            .catch { e -> sendEvent(Event.DeleteItemError(e.message.toString())) }
             .collect { response ->
                 if (response.data?.results?.get(0) != null) {
-                    sendEvent { Event.DeleteItemSuccess(response.data.results[0].message) }
+                    sendEvent(Event.DeleteItemSuccess(response.data.results[0].message))
                 } else {
-                    sendEvent { Event.DeleteItemError(response.message.toString()) }
+                    sendEvent(Event.DeleteItemError(response.message.toString()))
                 }
                 getBooksByStatus()
             }
@@ -156,8 +157,8 @@ class BookViewModel @Inject constructor(
         bookId = id
     }
 
-    fun sendEvent(event: () -> Event) = viewModelScope.launch {
-        _eventChannel.trySend(event())
+    fun sendEvent(event: Event) = viewModelScope.launch {
+        _eventChannel.trySend(event)
     }
 
     private fun setupBookListSources() {

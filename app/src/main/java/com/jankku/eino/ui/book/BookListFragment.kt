@@ -109,7 +109,7 @@ class BookListFragment : BindingFragment<FragmentItemListBinding>() {
                     binding.progressBar.visibility = View.GONE
                     binding.rvList.visibility = View.GONE
                     binding.layoutNoItems.root.visibility = View.VISIBLE
-                    viewModel.sendEvent { Event.GetItemListError(response.message.toString()) }
+                    viewModel.sendEvent(Event.GetItemListError(response.message.toString()))
                 }
             }
         }

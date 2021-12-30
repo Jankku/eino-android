@@ -96,7 +96,7 @@ class BookDetailFragment : BindingFragment<FragmentItemDetailBinding>() {
                     binding.rvDetail.visibility = View.GONE
                     binding.fabEditItem.visibility = View.GONE
                     binding.layoutNoItem.root.visibility = View.VISIBLE
-                    viewModel.sendEvent { Event.GetItemError(it.message.toString()) }
+                    viewModel.sendEvent(Event.GetItemError(it.message.toString()))
                 }
             }
         }

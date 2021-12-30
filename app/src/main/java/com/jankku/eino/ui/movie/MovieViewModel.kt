@@ -15,6 +15,7 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.flow.onStart
 import kotlinx.coroutines.flow.receiveAsFlow
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -77,19 +78,19 @@ class MovieViewModel @Inject constructor(
     }
 
     fun getMoviesByStatus() = viewModelScope.launch {
-        _movieListState.postValue(Result.Loading())
         repository
             .getMoviesByStatus(selectedStatusSort.value!!.value)
+            .onStart { _movieListState.value = Result.Loading() }
             .catch { e -> _movieListState.value = Result.Error(e.message) }
             .collect { response ->
-                _movieListState.postValue(response)
+                _movieListState.value = response
             }
     }
 
     fun getMovieById() = viewModelScope.launch {
-        _detailItemList.value = Result.Loading()
         repository
             .getMovieById(movieId)
+            .onStart { _detailItemList.value = Result.Loading() }
             .catch { e -> _detailItemList.value = Result.Error(e.message) }
             .collect { response ->
                 if (response.data?.results?.get(0) != null) {
@@ -104,12 +105,12 @@ class MovieViewModel @Inject constructor(
     fun addMovie(movie: MovieRequest) = viewModelScope.launch {
         repository
             .addMovie(movie)
-            .catch { e -> sendEvent { Event.AddItemErrorEvent(e.message.toString()) } }
+            .catch { e -> sendEvent(Event.AddItemErrorEvent(e.message.toString())) }
             .collect { response ->
                 if (response.data?.results?.get(0) != null) {
-                    sendEvent { Event.AddItemSuccessEvent(response.data.results[0].message) }
+                    sendEvent(Event.AddItemSuccessEvent(response.data.results[0].message))
                 } else {
-                    sendEvent { Event.AddItemErrorEvent(response.message.toString()) }
+                    sendEvent(Event.AddItemErrorEvent(response.message.toString()))
                 }
                 getMoviesByStatus()
             }
@@ -118,12 +119,12 @@ class MovieViewModel @Inject constructor(
     fun editMovie(movie: MovieRequest) = viewModelScope.launch {
         repository
             .editMovie(movieId, movie)
-            .catch { e -> sendEvent { Event.EditItemError(e.message.toString()) } }
+            .catch { e -> sendEvent(Event.EditItemError(e.message.toString())) }
             .collect { response ->
                 if (response.data?.results?.get(0) != null) {
-                    sendEvent { Event.EditItemSuccess(response.data.results[0].message) }
+                    sendEvent(Event.EditItemSuccess(response.data.results[0].message))
                 } else {
-                    sendEvent { Event.EditItemError(response.message.toString()) }
+                    sendEvent(Event.EditItemError(response.message.toString()))
                 }
                 getMovieById()
             }
@@ -132,12 +133,12 @@ class MovieViewModel @Inject constructor(
     fun deleteMovie() = viewModelScope.launch {
         repository
             .deleteMovie(movieId)
-            .catch { e -> sendEvent { Event.DeleteItemError(e.message.toString()) } }
+            .catch { e -> sendEvent(Event.DeleteItemError(e.message.toString())) }
             .collect { response ->
                 if (response.data?.results?.get(0) != null) {
-                    sendEvent { Event.DeleteItemSuccess(response.data.results[0].message) }
+                    sendEvent(Event.DeleteItemSuccess(response.data.results[0].message))
                 } else {
-                    sendEvent { Event.DeleteItemError(response.message.toString()) }
+                    sendEvent(Event.DeleteItemError(response.message.toString()))
                 }
                 getMoviesByStatus()
             }
@@ -159,8 +160,8 @@ class MovieViewModel @Inject constructor(
         movieId = id
     }
 
-    fun sendEvent(event: () -> Event) = viewModelScope.launch {
-        _eventChannel.trySend(event())
+    fun sendEvent(event: Event) = viewModelScope.launch {
+        _eventChannel.trySend(event)
     }
 
     private fun setupMovieListSources() {
