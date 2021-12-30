@@ -3,7 +3,9 @@ package com.jankku.eino.data
 import com.jankku.eino.network.EinoApi
 import com.jankku.eino.network.request.MovieRequest
 import com.jankku.eino.util.Result
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.flowOf
+import kotlinx.coroutines.flow.flowOn
 import javax.inject.Inject
 
 class MovieRepository @Inject constructor(
@@ -16,7 +18,7 @@ class MovieRepository @Inject constructor(
         } catch (e: Exception) {
             Result.Error(e.message)
         }
-    )
+    ).flowOn(Dispatchers.IO)
 
     suspend fun getMovieById(movieId: String) = flowOf(
         try {
@@ -24,7 +26,7 @@ class MovieRepository @Inject constructor(
         } catch (e: Exception) {
             Result.Error(e.message)
         }
-    )
+    ).flowOn(Dispatchers.IO)
 
     suspend fun addMovie(movie: MovieRequest) = flowOf(
         try {
@@ -32,7 +34,7 @@ class MovieRepository @Inject constructor(
         } catch (e: Exception) {
             Result.Error(e.message)
         }
-    )
+    ).flowOn(Dispatchers.IO)
 
     suspend fun editMovie(id: String, movie: MovieRequest) = flowOf(
         try {
@@ -40,7 +42,7 @@ class MovieRepository @Inject constructor(
         } catch (e: Exception) {
             Result.Error(e.message)
         }
-    )
+    ).flowOn(Dispatchers.IO)
 
     suspend fun deleteMovie(id: String) = flowOf(
         try {
@@ -48,5 +50,5 @@ class MovieRepository @Inject constructor(
         } catch (e: Exception) {
             Result.Error(e.message)
         }
-    )
+    ).flowOn(Dispatchers.IO)
 }

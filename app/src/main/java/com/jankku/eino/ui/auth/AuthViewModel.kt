@@ -15,6 +15,7 @@ import com.jankku.eino.util.Result
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.flow.onStart
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -59,39 +60,39 @@ class AuthViewModel @Inject constructor(
         }
 
     fun login(username: String, password: String) = viewModelScope.launch {
-        _loginResponse.value = Result.Loading()
         val body = LoginRequest(username, password)
         repository
             .login(body)
+            .onStart { _loginResponse.value = Result.Loading() }
             .catch { e -> _loginResponse.value = Result.Error(e.message) }
             .collect { response ->
                 try {
-                    if (response.data != null) {
-                        val accessToken = JWT(response.data.accessToken)
-                        val refreshToken = JWT(response.data.refreshToken)
-                        val jwtUsername = accessToken.claims["username"]?.asString()
-                        val accessTokenExpirationTime = accessToken.expiresAt?.time
-                        val refreshTokenExpirationTime = refreshToken.expiresAt?.time
-
-                        if (jwtUsername != null &&
-                            accessTokenExpirationTime != null &&
-                            refreshTokenExpirationTime != null
-                        ) {
-                            dataStoreManager.run {
-                                setUsername(jwtUsername)
-                                setAccessToken(response.data.accessToken)
-                                setAccessTokenExpirationTime(accessTokenExpirationTime)
-                                setRefreshToken(response.data.refreshToken)
-                                setRefreshTokenExpirationTime(refreshTokenExpirationTime)
-                            }
-
-                            _loginResponse.value = Result.Success(response.data)
-                        } else {
-                            _loginResponse.value =
-                                Result.Error("Username or token expiration time is null")
-                        }
-                    } else {
+                    if (response.data == null) {
                         _loginResponse.value = Result.Error(response.message)
+                        return@collect
+                    }
+
+                    val accessToken = JWT(response.data.accessToken)
+                    val refreshToken = JWT(response.data.refreshToken)
+                    val jwtUsername = accessToken.claims["username"]?.asString()
+                    val accessTokenExpirationTime = accessToken.expiresAt?.time
+                    val refreshTokenExpirationTime = refreshToken.expiresAt?.time
+
+                    if (jwtUsername != null &&
+                        accessTokenExpirationTime != null &&
+                        refreshTokenExpirationTime != null
+                    ) {
+                        dataStoreManager.run {
+                            setUsername(jwtUsername)
+                            setAccessToken(response.data.accessToken)
+                            setAccessTokenExpirationTime(accessTokenExpirationTime)
+                            setRefreshToken(response.data.refreshToken)
+                            setRefreshTokenExpirationTime(refreshTokenExpirationTime)
+                        }
+                        _loginResponse.value = Result.Success(response.data)
+                    } else {
+                        _loginResponse.value =
+                            Result.Error("Username or token expiration time is null")
                     }
                 } catch (e: Exception) {
                     _loginResponse.value = Result.Error(e.message)

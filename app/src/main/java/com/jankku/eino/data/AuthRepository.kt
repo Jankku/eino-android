@@ -4,7 +4,9 @@ import com.jankku.eino.network.EinoApi
 import com.jankku.eino.network.request.LoginRequest
 import com.jankku.eino.network.request.RegisterRequest
 import com.jankku.eino.util.Result
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.flowOf
+import kotlinx.coroutines.flow.flowOn
 import javax.inject.Inject
 
 class AuthRepository @Inject constructor(
@@ -17,7 +19,7 @@ class AuthRepository @Inject constructor(
         } catch (e: Exception) {
             Result.Error(e.message)
         }
-    )
+    ).flowOn(Dispatchers.IO)
 
     suspend fun login(body: LoginRequest) = flowOf(
         try {
@@ -25,7 +27,7 @@ class AuthRepository @Inject constructor(
         } catch (e: Exception) {
             Result.Error(e.message)
         }
-    )
+    ).flowOn(Dispatchers.IO)
 
     suspend fun logOut() = flowOf(
         try {
@@ -34,7 +36,7 @@ class AuthRepository @Inject constructor(
         } catch (e: Exception) {
             Result.Error(e.message)
         }
-    )
+    ).flowOn(Dispatchers.IO)
 
     suspend fun getUsername() = flowOf(
         try {
@@ -42,5 +44,5 @@ class AuthRepository @Inject constructor(
         } catch (e: Exception) {
             Result.Error(e.message)
         }
-    )
+    ).flowOn(Dispatchers.IO)
 }

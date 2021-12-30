@@ -3,7 +3,9 @@ package com.jankku.eino.data
 import com.jankku.eino.network.EinoApi
 import com.jankku.eino.network.request.BookRequest
 import com.jankku.eino.util.Result
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.flowOf
+import kotlinx.coroutines.flow.flowOn
 import javax.inject.Inject
 
 class BookRepository @Inject constructor(
@@ -16,7 +18,7 @@ class BookRepository @Inject constructor(
         } catch (e: Exception) {
             Result.Error(e.message)
         }
-    )
+    ).flowOn(Dispatchers.IO)
 
     suspend fun getBookById(bookId: String) = flowOf(
         try {
@@ -24,7 +26,7 @@ class BookRepository @Inject constructor(
         } catch (e: Exception) {
             Result.Error(e.message)
         }
-    )
+    ).flowOn(Dispatchers.IO)
 
     suspend fun addBook(book: BookRequest) = flowOf(
         try {
@@ -32,7 +34,7 @@ class BookRepository @Inject constructor(
         } catch (e: Exception) {
             Result.Error(e.message)
         }
-    )
+    ).flowOn(Dispatchers.IO)
 
     suspend fun editBook(id: String, book: BookRequest) = flowOf(
         try {
@@ -40,7 +42,7 @@ class BookRepository @Inject constructor(
         } catch (e: Exception) {
             Result.Error(e.message)
         }
-    )
+    ).flowOn(Dispatchers.IO)
 
     suspend fun deleteBook(id: String) = flowOf(
         try {
@@ -48,5 +50,5 @@ class BookRepository @Inject constructor(
         } catch (e: Exception) {
             Result.Error(e.message)
         }
-    )
+    ).flowOn(Dispatchers.IO)
 }

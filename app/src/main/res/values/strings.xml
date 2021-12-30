@@ -111,7 +111,7 @@
     <string name="settings_author_summary" translatable="false">Jankku</string>
 
     <string name="settings_theme_key" translatable="false">theme</string>
-    <string name="settings_theme_title">Choose Theme</string>
+    <string name="settings_theme_title">Choose theme</string>
     <string name="settings_theme_summary">System, Light, Dark</string>
     <string name="settings_theme_value_system" translatable="false">system</string>
     <string name="settings_theme_value_light" translatable="false">light</string>
