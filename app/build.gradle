@@ -34,7 +34,7 @@ android {
                 keyAlias "key0"
                 keyPassword signingProperties['keyPassword']
             } catch (ignored) {
-                throw new InvalidUserDataException("You should define 'storeFile', 'storePassword' and 'keyPassword' in signing.properties.")
+                throw new InvalidPropertiesFormatException("You should define 'storeFile', 'storePassword' and 'keyPassword' in signing.properties.")
             }
         }
     }
@@ -65,10 +65,10 @@ dependencies {
     implementation "androidx.appcompat:appcompat-resources:$appcompat_version"
 
     implementation "androidx.core:core-ktx:1.7.0"
-    implementation "androidx.constraintlayout:constraintlayout:2.1.1"
+    implementation "androidx.constraintlayout:constraintlayout:2.1.2"
     implementation "androidx.activity:activity-ktx:1.4.0"
-    implementation "androidx.fragment:fragment-ktx:1.3.6"
-    implementation "com.google.android.material:material:1.5.0-beta01"
+    implementation "androidx.fragment:fragment-ktx:1.4.0"
+    implementation "com.google.android.material:material:1.6.0-alpha01"
     implementation "androidx.recyclerview:recyclerview:1.2.1"
     implementation "androidx.preference:preference-ktx:1.1.1"
     implementation "androidx.swiperefreshlayout:swiperefreshlayout:1.1.0"
