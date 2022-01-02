@@ -23,6 +23,9 @@
         <action
             android:id="@+id/action_movieListFragment_to_movieSortDialogFragment"
             app:destination="@id/movieSortDialogFragment" />
+        <action
+            android:id="@+id/action_movieListFragment_to_movieSearchFragment"
+            app:destination="@id/movieSearchFragment" />
     </fragment>
 
     <fragment
@@ -37,6 +40,14 @@
         <action
             android:id="@+id/action_movieDetailFragment_to_updateMovieDialogFragment"
             app:destination="@id/updateMovieDialogFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/movieSearchFragment"
+        android:name="com.jankku.eino.ui.movie.MovieSearchFragment"
+        android:label="@string/navigation_search_movie_label">
+        <action
+            android:id="@+id/action_movieSearchFragment_to_movieDetailFragment"
+            app:destination="@id/movieDetailFragment" />
     </fragment>
     <dialog
         android:id="@+id/addMovieDialogFragment"

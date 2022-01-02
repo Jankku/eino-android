@@ -12,6 +12,14 @@ class MovieRepository @Inject constructor(
     private val api: EinoApi,
     private val dataStoreManager: DataStoreManager
 ) {
+    suspend fun searchMovies(query: String) = flowOf(
+        try {
+            Result.Success(api.searchMovies(query, dataStoreManager.getAccessToken()))
+        } catch (e: Exception) {
+            Result.Error(e.message)
+        }
+    ).flowOn(Dispatchers.IO)
+
     suspend fun getMoviesByStatus(status: String) = flowOf(
         try {
             Result.Success(api.getMoviesByStatus(status, dataStoreManager.getAccessToken()))

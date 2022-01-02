@@ -155,6 +155,10 @@ class MovieListFragment : BindingFragment<FragmentItemListBinding>() {
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         return when (item.itemId) {
+            R.id.action_search -> {
+                findNavController().navigateSafe(R.id.action_movieListFragment_to_movieSearchFragment)
+                true
+            }
             R.id.action_sort -> {
                 findNavController().navigateSafe(R.id.action_movieListFragment_to_movieSortDialogFragment)
                 true

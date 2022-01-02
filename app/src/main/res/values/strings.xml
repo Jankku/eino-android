@@ -6,6 +6,8 @@
     <string name="navigation_register_label">Register</string>
     <string name="navigation_login_label">Login</string>
     <string name="navigation_books_label">Books</string>
+    <string name="navigation_search_book_label">Search books</string>
+    <string name="navigation_search_movie_label">Search movies</string>
     <string name="navigation_add_book_dialog_label">Add book</string>
     <string name="navigation_book_detail_label">Book</string>
     <string name="navigation_movies_label">Movies</string>
@@ -60,8 +62,6 @@
     <string name="dialog_logout_button_positive_text">Log out</string>
     <string name="dialog_logout_button_negative_text">Cancel</string>
 
-    <!-- Status dialog -->
-
     <!-- Sort dialog -->
     <string name="dialog_sort_title">Sort by</string>
     <string name="dialog_sort_status_title">Status</string>
@@ -83,6 +83,7 @@
 
     <!-- Item list -->
     <string name="action_sort_label">Sort</string>
+    <string name="action_search_label">Search</string>
     <string name="fab_add_desc">Add item</string>
 
     <!-- Item detail -->

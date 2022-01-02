@@ -4,14 +4,8 @@ import com.jankku.eino.network.request.*
 import com.jankku.eino.network.response.auth.LoginResponse
 import com.jankku.eino.network.response.auth.RefreshTokenResponse
 import com.jankku.eino.network.response.auth.RegisterResponse
-import com.jankku.eino.network.response.book.AddBookResponse
-import com.jankku.eino.network.response.book.BookListResponse
-import com.jankku.eino.network.response.book.DeleteBookResponse
-import com.jankku.eino.network.response.book.UpdateBookResponse
-import com.jankku.eino.network.response.movie.AddMovieResponse
-import com.jankku.eino.network.response.movie.DeleteMovieResponse
-import com.jankku.eino.network.response.movie.MovieListResponse
-import com.jankku.eino.network.response.movie.UpdateMovieResponse
+import com.jankku.eino.network.response.book.*
+import com.jankku.eino.network.response.movie.*
 import com.jankku.eino.util.Constant.REQUEST_HEADERS
 import retrofit2.http.*
 
@@ -35,6 +29,13 @@ interface EinoApi {
     /**
      *  Book routes
      */
+    @Headers(REQUEST_HEADERS)
+    @GET("list/books/search")
+    suspend fun searchBooks(
+        @Query("query") query: String,
+        @Header("Authorization") accessToken: String
+    ): BookSearchResponse
+
     @Headers(REQUEST_HEADERS)
     @GET("list/books/{status}")
     suspend fun getBooksByStatus(
@@ -74,6 +75,13 @@ interface EinoApi {
     /**
      *  Movie routes
      */
+    @Headers(REQUEST_HEADERS)
+    @GET("list/movies/search")
+    suspend fun searchMovies(
+        @Query("query") query: String,
+        @Header("Authorization") accessToken: String
+    ): MovieSearchResponse
+
     @Headers(REQUEST_HEADERS)
     @GET("list/movies/{status}")
     suspend fun getMoviesByStatus(

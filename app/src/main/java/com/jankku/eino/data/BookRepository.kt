@@ -12,6 +12,14 @@ class BookRepository @Inject constructor(
     private val api: EinoApi,
     private val dataStoreManager: DataStoreManager
 ) {
+    suspend fun searchBooks(query: String) = flowOf(
+        try {
+            Result.Success(api.searchBooks(query, dataStoreManager.getAccessToken()))
+        } catch (e: Exception) {
+            Result.Error(e.message)
+        }
+    ).flowOn(Dispatchers.IO)
+
     suspend fun getBooksByStatus(status: String) = flowOf(
         try {
             Result.Success(api.getBooksByStatus(status, dataStoreManager.getAccessToken()))

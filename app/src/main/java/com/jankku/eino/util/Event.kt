@@ -11,4 +11,5 @@ sealed class Event {
     data class DeleteItemError(val message: String) : Event()
     data class LogoutSuccessEvent(val message: String) : Event()
     data class LogoutErrorEvent(val message: String) : Event()
+    data class SearchErrorEvent(val message: String) : Event()
 }

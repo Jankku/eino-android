@@ -149,6 +149,10 @@ class BookListFragment : BindingFragment<FragmentItemListBinding>() {
                 findNavController().navigateSafe(R.id.action_bookListFragment_to_bookSortDialogFragment)
                 true
             }
+            R.id.action_search -> {
+                findNavController().navigateSafe(R.id.action_bookListFragment_to_bookSearchFragment)
+                true
+            }
             else -> super.onOptionsItemSelected(item)
         }
     }
