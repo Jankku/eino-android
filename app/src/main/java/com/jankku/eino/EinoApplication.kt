@@ -1,7 +1,13 @@
 package com.jankku.eino
 
 import android.app.Application
+import com.google.android.material.color.DynamicColors
 import dagger.hilt.android.HiltAndroidApp
 
 @HiltAndroidApp
-class EinoApplication : Application()
+class EinoApplication : Application() {
+    override fun onCreate() {
+        super.onCreate()
+        DynamicColors.applyToActivitiesIfAvailable(this)
+    }
+}

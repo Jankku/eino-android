@@ -5,7 +5,7 @@ import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
 import android.view.View
-import androidx.fragment.app.activityViewModels
+import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.flowWithLifecycle
 import androidx.lifecycle.lifecycleScope
@@ -28,7 +28,7 @@ class SettingsFragment : PreferenceFragmentCompat() {
     private var versionPref: Preference? = null
     private var themePref: Preference? = null
     private var githubPref: Preference? = null
-    private val viewModel: SettingsViewModel by activityViewModels()
+    private val viewModel: SettingsViewModel by viewModels()
 
     override fun onCreatePreferences(savedInstanceState: Bundle?, rootKey: String?) {
         setPreferencesFromResource(R.xml.root_preferences, rootKey)
@@ -47,7 +47,6 @@ class SettingsFragment : PreferenceFragmentCompat() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        viewModel.getUsername()
         setupObservers()
     }
 
@@ -55,9 +54,8 @@ class SettingsFragment : PreferenceFragmentCompat() {
         viewModel.username.observe(viewLifecycleOwner) {
             when (it) {
                 is Result.Success -> accountPref?.title = it.data
-                is Result.Error -> accountPref?.title = it.message
-                else -> {
-                }
+                is Result.Error -> accountPref?.title = "Error: couldn't find username"
+                else -> {}
             }
         }
 
@@ -78,8 +76,7 @@ class SettingsFragment : PreferenceFragmentCompat() {
                                 )
                             }
                         }
-                        else -> {
-                        }
+                        else -> {}
                     }
                 }
         }

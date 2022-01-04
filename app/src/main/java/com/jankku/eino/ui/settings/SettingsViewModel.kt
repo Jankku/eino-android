@@ -27,7 +27,11 @@ class SettingsViewModel @Inject constructor(
     private val _eventChannel = Channel<Event>(Channel.BUFFERED)
     val eventChannel = _eventChannel.receiveAsFlow()
 
-    fun getUsername() = viewModelScope.launch {
+    init {
+        getUsername()
+    }
+
+    private fun getUsername() = viewModelScope.launch {
         repository
             .getUsername()
             .catch { e -> _username.value = Result.Error(e.message.toString()) }

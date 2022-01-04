@@ -3,7 +3,7 @@
 
     <style name="TextAppearance.Eino.Branding" parent="TextAppearance.Material3.DisplayLarge">
         <item name="android:textSize">120sp</item>
-        <item name="android:textColor">?android:textColor</item>
+        <item name="android:textColor">?colorOnBackground</item>
         <item name="fontFamily">@font/pacifico</item>
         <item name="android:fontFamily">@font/pacifico</item>
     </style>
