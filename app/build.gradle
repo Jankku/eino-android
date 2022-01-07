@@ -21,8 +21,8 @@ android {
         applicationId "com.jankku.eino"
         minSdk 23
         targetSdk 31
-        versionCode 3
-        versionName "0.5"
+        versionCode 4
+        versionName "0.6"
         buildConfigField "String", "baseUrl", baseUrlProperties['baseUrl']
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
