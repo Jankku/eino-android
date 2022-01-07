@@ -42,6 +42,11 @@ class MovieListFragment : BindingFragment<FragmentItemListBinding>() {
         setupSwipeToRefresh()
     }
 
+    override fun onStart() {
+        super.onStart()
+        viewModel.getMoviesByStatus()
+    }
+
     override fun onDestroyView() {
         super.onDestroyView()
         _adapter = null
@@ -140,10 +145,7 @@ class MovieListFragment : BindingFragment<FragmentItemListBinding>() {
                         is Event.GetItemListError -> showSnackBar(binding.root, event.message)
                         is Event.AddItemSuccessEvent -> showSnackBar(binding.root, event.message)
                         is Event.AddItemErrorEvent -> showSnackBar(binding.root, event.message)
-                        is Event.DeleteItemSuccess -> showSnackBar(binding.root, event.message)
-                        is Event.DeleteItemError -> showSnackBar(binding.root, event.message)
-                        else -> {
-                        }
+                        else -> {}
                     }
                 }
         }

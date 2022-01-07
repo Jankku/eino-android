@@ -73,7 +73,6 @@ class MovieViewModel @Inject constructor(
     val selectedScoreSort: LiveData<Sort> get() = _selectedScoreSort
 
     init {
-        getMoviesByStatus()
         setupMovieListSources()
     }
 

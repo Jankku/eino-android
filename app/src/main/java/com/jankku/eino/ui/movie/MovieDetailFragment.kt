@@ -106,9 +106,13 @@ class MovieDetailFragment : BindingFragment<FragmentItemDetailBinding>() {
                 .flowWithLifecycle(lifecycle, Lifecycle.State.STARTED)
                 .collect { event ->
                     when (event) {
-                        is Event.GetItemError -> showSnackBar(binding.root, event.message)
                         is Event.EditItemSuccess -> showSnackBar(binding.root, event.message)
                         is Event.EditItemError -> showSnackBar(binding.root, event.message)
+                        is Event.DeleteItemSuccess -> {
+                            showSnackBar(binding.root, event.message)
+                            findNavController().navigateUp()
+                        }
+                        is Event.DeleteItemError -> showSnackBar(binding.root, event.message)
                         else -> {
                         }
                     }
@@ -130,7 +134,6 @@ class MovieDetailFragment : BindingFragment<FragmentItemDetailBinding>() {
         return when (item.itemId) {
             R.id.action_delete -> {
                 viewModel.deleteMovie()
-                findNavController().navigateUp()
                 true
             }
             else -> super.onOptionsItemSelected(item)

@@ -70,7 +70,6 @@ class BookViewModel @Inject constructor(
     val selectedScoreSort: LiveData<Sort> get() = _selectedScoreSort
 
     init {
-        getBooksByStatus()
         setupBookListSources()
     }
 
