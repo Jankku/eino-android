@@ -1,25 +1,24 @@
 package com.jankku.eino.util
 
 import android.os.CountDownTimer
-import android.text.Editable
-import android.text.TextWatcher
+import androidx.appcompat.widget.SearchView
 
 class DebounceTextWatcher(
     private val delay: Long = 500L,
-    private val block: (Editable?) -> Unit
-) : TextWatcher {
+    private val block: (String?) -> Unit
+) : SearchView.OnQueryTextListener {
     private var timer: CountDownTimer? = null
 
-    override fun afterTextChanged(s: Editable?) {
+    override fun onQueryTextChange(newText: String?): Boolean {
         timer?.cancel()
         timer = object : CountDownTimer(delay, delay) {
             override fun onTick(millisUntilFinished: Long) {}
             override fun onFinish() {
-                block(s)
+                block(newText)
             }
         }.start()
+        return true
     }
 
-    override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
-    override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {}
+    override fun onQueryTextSubmit(query: String?): Boolean = true
 }

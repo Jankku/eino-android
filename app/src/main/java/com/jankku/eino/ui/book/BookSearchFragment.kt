@@ -2,7 +2,10 @@ package com.jankku.eino.ui.book
 
 import android.os.Bundle
 import android.view.LayoutInflater
+import android.view.Menu
+import android.view.MenuInflater
 import android.view.View
+import androidx.appcompat.widget.SearchView
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.flowWithLifecycle
@@ -29,12 +32,16 @@ class BookSearchFragment : BindingFragment<FragmentBookSearchBinding>() {
     private val adapter get() = _adapter!!
     private var keyboardShownOnce = false
 
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setHasOptionsMenu(true)
+    }
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         hideBottomNav(requireActivity())
         setupObservers()
         setupRecyclerView()
-        setupSearch()
     }
 
     override fun onDestroyView() {
@@ -42,17 +49,24 @@ class BookSearchFragment : BindingFragment<FragmentBookSearchBinding>() {
         _adapter = null
     }
 
-    private fun setupSearch() {
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        inflater.inflate(R.menu.menu_search, menu)
+        setupSearch(menu.findItem(R.id.action_search).actionView as SearchView)
+    }
+
+    private fun setupSearch(searchView: SearchView) {
+        searchView.queryHint = "Search books"
 
         // Show keyboard only on initial load
         if (!keyboardShownOnce) {
-            binding.tietSearch.showKeyboard()
+            searchView.isIconified = false
+            searchView.showKeyboard()
             keyboardShownOnce = true
         }
 
-        binding.tietSearch.addTextChangedListener(DebounceTextWatcher {
+        searchView.setOnQueryTextListener(DebounceTextWatcher {
             if (it?.isNotBlank() == true) {
-                viewModel.search(it.toString())
+                viewModel.search(it)
             }
         })
     }
@@ -64,6 +78,7 @@ class BookSearchFragment : BindingFragment<FragmentBookSearchBinding>() {
                     bookId
                 )
             )
+            requireView().hideKeyboard()
         }
 
         binding.rvSearch.let {
