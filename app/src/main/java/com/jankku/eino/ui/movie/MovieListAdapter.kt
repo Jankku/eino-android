@@ -28,10 +28,16 @@ class MovieListAdapter(private val clickListener: (String) -> Unit) :
         }
     }
 
-    class ViewHolder(val binding: ItemListBinding, clickAtPosition: (Int) -> Unit) :
-        RecyclerView.ViewHolder(binding.root) {
+    class ViewHolder(
+        val binding: ItemListBinding,
+        clickAtPosition: (Int) -> Unit
+    ) : RecyclerView.ViewHolder(binding.root) {
         init {
-            itemView.setOnClickListener { clickAtPosition(absoluteAdapterPosition) }
+            itemView.setOnClickListener {
+                if (bindingAdapterPosition != -1) {
+                    clickAtPosition(bindingAdapterPosition)
+                }
+            }
         }
     }
 
