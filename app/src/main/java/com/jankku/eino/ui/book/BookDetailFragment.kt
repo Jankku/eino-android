@@ -12,6 +12,7 @@ import androidx.recyclerview.widget.RecyclerView
 import androidx.viewbinding.ViewBinding
 import com.jankku.eino.R
 import com.jankku.eino.databinding.FragmentItemDetailBinding
+import com.jankku.eino.ui.MainActivity
 import com.jankku.eino.ui.common.BindingFragment
 import com.jankku.eino.ui.common.DetailAdapter
 import com.jankku.eino.ui.common.MarginItemDecoration
@@ -42,7 +43,7 @@ class BookDetailFragment : BindingFragment<FragmentItemDetailBinding>() {
         viewModel.setBookId(args.bookId)
         viewModel.getBookById()
         setupRecyclerView()
-        setupEditFabClickListener()
+        setupEditFab()
         setupObservers()
         setupSwipeToRefresh()
     }
@@ -87,14 +88,15 @@ class BookDetailFragment : BindingFragment<FragmentItemDetailBinding>() {
                 is Result.Success -> {
                     binding.progressBar.visibility = View.GONE
                     binding.rvDetail.visibility = View.VISIBLE
-                    binding.fabEditItem.visibility = View.VISIBLE
+                    if (requireContext().isNotTablet()) binding.fabEditItem.visibility =
+                        View.VISIBLE
                     binding.layoutNoItem.root.visibility = View.GONE
                     adapter.submitList(it.data)
                 }
                 is Result.Error -> {
                     binding.progressBar.visibility = View.GONE
                     binding.rvDetail.visibility = View.GONE
-                    binding.fabEditItem.visibility = View.GONE
+                    if (requireContext().isNotTablet()) binding.fabEditItem.visibility = View.GONE
                     binding.layoutNoItem.root.visibility = View.VISIBLE
                     viewModel.sendEvent(Event.GetItemError(it.message.toString()))
                 }
@@ -119,9 +121,23 @@ class BookDetailFragment : BindingFragment<FragmentItemDetailBinding>() {
         }
     }
 
-    private fun setupEditFabClickListener() {
-        binding.fabEditItem.setOnClickListener {
-            findNavController().navigateSafe(R.id.action_bookDetailFragment_to_updateBookDialogFragment)
+    private fun setupEditFab() {
+        when (requireContext().isTablet()) {
+            true -> {
+                (requireActivity() as MainActivity).setupNavRail(R.layout.layout_nav_rail_header_detail) { fab ->
+                    fab.setOnClickListener {
+                        findNavController().navigateSafe(R.id.action_bookDetailFragment_to_updateBookDialogFragment)
+                    }
+                }
+            }
+            false -> {
+                binding.fabEditItem.apply {
+                    visibility = View.VISIBLE
+                    setOnClickListener {
+                        findNavController().navigateSafe(R.id.action_bookDetailFragment_to_updateBookDialogFragment)
+                    }
+                }
+            }
         }
     }
 

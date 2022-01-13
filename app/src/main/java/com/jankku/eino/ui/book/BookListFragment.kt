@@ -1,6 +1,7 @@
 package com.jankku.eino.ui.book
 
 import android.os.Bundle
+import android.util.Log
 import android.view.*
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Lifecycle
@@ -11,6 +12,7 @@ import androidx.recyclerview.widget.RecyclerView
 import androidx.viewbinding.ViewBinding
 import com.jankku.eino.R
 import com.jankku.eino.databinding.FragmentItemListBinding
+import com.jankku.eino.ui.MainActivity
 import com.jankku.eino.ui.common.BindingFragment
 import com.jankku.eino.ui.common.MarginItemDecoration
 import com.jankku.eino.util.*
@@ -35,17 +37,24 @@ class BookListFragment : BindingFragment<FragmentItemListBinding>() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        showNavRail(requireActivity())
         showBottomNav(requireActivity())
         setupObservers()
         setupAdapter()
         setupRecyclerView()
-        setupAddBookFabClickListener()
         setupSwipeToRefresh()
     }
 
     override fun onStart() {
         super.onStart()
         viewModel.getBooksByStatus()
+        setupAddFab()
+    }
+
+    override fun onResume() {
+        super.onResume()
+        Log.d(TAG, "onResume")
+        setupAddFab()
     }
 
     override fun onDestroyView() {
@@ -81,9 +90,23 @@ class BookListFragment : BindingFragment<FragmentItemListBinding>() {
         }
     }
 
-    private fun setupAddBookFabClickListener() {
-        binding.fabAddItem.setOnClickListener {
-            findNavController().navigateSafe(R.id.action_bookListFragment_to_addBookDialogFragment)
+    private fun setupAddFab() {
+        when (requireContext().isTablet()) {
+            true -> {
+                (requireActivity() as MainActivity).setupNavRail(R.layout.layout_nav_rail_header_list) { fab ->
+                    fab.setOnClickListener {
+                        findNavController().navigateSafe(R.id.action_bookListFragment_to_addBookDialogFragment)
+                    }
+                }
+            }
+            false -> {
+                binding.fabAddItem.apply {
+                    visibility = View.VISIBLE
+                    setOnClickListener {
+                        findNavController().navigateSafe(R.id.action_bookListFragment_to_addBookDialogFragment)
+                    }
+                }
+            }
         }
     }
 

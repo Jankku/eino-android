@@ -11,6 +11,7 @@ import androidx.navigation.ui.navigateUp
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import androidx.preference.PreferenceManager
+import com.google.android.material.navigationrail.NavigationRailView
 import com.jankku.eino.R
 import com.jankku.eino.databinding.ActivityMainBinding
 import com.jankku.eino.ui.auth.AuthViewModel
@@ -26,6 +27,7 @@ class MainActivity : AppCompatActivity() {
     private lateinit var navController: NavController
     private lateinit var appBarConfiguration: AppBarConfiguration
     private val viewModel: AuthViewModel by viewModels()
+    var navRail: NavigationRailView? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         setTheme()
@@ -35,14 +37,16 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        navHostFragment = supportFragmentManager
-            .findFragmentById(R.id.nav_host_container) as NavHostFragment
-        navController = navHostFragment.navController
+        setupNavigation()
+        setupStartDestination()
+        setupActionBar()
+    }
 
-        setNavigationGraph()
+    override fun onSupportNavigateUp(): Boolean {
+        return navController.navigateUp(appBarConfiguration) || super.onSupportNavigateUp()
+    }
 
-        binding.bottomNavigation.setupWithNavController(navController)
-
+    private fun setupActionBar() {
         appBarConfiguration = AppBarConfiguration(
             setOf(
                 R.id.landingFragment,
@@ -54,15 +58,17 @@ class MainActivity : AppCompatActivity() {
         setupActionBarWithNavController(navController, appBarConfiguration)
     }
 
-    fun setBottomNavigationVisibility(visibility: Int) {
-        binding.bottomNavigation.visibility = visibility
+    private fun setupNavigation() {
+        navHostFragment =
+            supportFragmentManager.findFragmentById(R.id.nav_host_container) as NavHostFragment
+        navController = navHostFragment.navController
+        navRail = binding.navigationRail
+
+        binding.navigationRail?.setupWithNavController(navController)
+        binding.bottomNavigation?.setupWithNavController(navController)
     }
 
-    override fun onSupportNavigateUp(): Boolean {
-        return navController.navigateUp(appBarConfiguration) || super.onSupportNavigateUp()
-    }
-
-    private fun setNavigationGraph() {
+    private fun setupStartDestination() {
         val graph = navController.navInflater.inflate(R.navigation.nav_graph)
 
         viewModel.isLoggedIn.observe(this) { isLoggedIn ->
@@ -83,8 +89,14 @@ class MainActivity : AppCompatActivity() {
             getString(R.string.settings_theme_value_system)
         )
 
-        if (theme != null) {
-            applyTheme(this, theme)
-        }
+        if (theme != null) applyTheme(this, theme)
+    }
+
+    fun setBottomNavigationVisibility(visibility: Int) {
+        binding.bottomNavigation?.visibility = visibility
+    }
+
+    fun setNavigationRailVisibility(visibility: Int) {
+        binding.navigationRail?.visibility = visibility
     }
 }

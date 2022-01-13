@@ -37,6 +37,7 @@
         android:layout_height="wrap_content"
         android:contentDescription="@string/fab_add_desc"
         android:src="@drawable/ic_add"
+        android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
 

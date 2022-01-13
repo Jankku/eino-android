@@ -1,6 +1,7 @@
 package com.jankku.eino.ui.movie
 
 import android.os.Bundle
+import android.util.Log
 import android.view.*
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Lifecycle
@@ -11,6 +12,7 @@ import androidx.recyclerview.widget.RecyclerView
 import androidx.viewbinding.ViewBinding
 import com.jankku.eino.R
 import com.jankku.eino.databinding.FragmentItemListBinding
+import com.jankku.eino.ui.MainActivity
 import com.jankku.eino.ui.common.BindingFragment
 import com.jankku.eino.ui.common.MarginItemDecoration
 import com.jankku.eino.util.*
@@ -38,13 +40,19 @@ class MovieListFragment : BindingFragment<FragmentItemListBinding>() {
         showBottomNav(requireActivity())
         setupObservers()
         setupRecyclerView()
-        setupAddMovieFabClickListener()
         setupSwipeToRefresh()
     }
 
     override fun onStart() {
         super.onStart()
         viewModel.getMoviesByStatus()
+        setupAddFab()
+    }
+
+    override fun onResume() {
+        super.onResume()
+        Log.d(TAG, "onResume")
+        setupAddFab()
     }
 
     override fun onDestroyView() {
@@ -91,9 +99,23 @@ class MovieListFragment : BindingFragment<FragmentItemListBinding>() {
         }
     }
 
-    private fun setupAddMovieFabClickListener() {
-        binding.fabAddItem.setOnClickListener {
-            findNavController().navigateSafe(R.id.action_movieListFragment_to_addMovieDialogFragment)
+    private fun setupAddFab() {
+        when (requireContext().isTablet()) {
+            true -> {
+                (requireActivity() as MainActivity).setupNavRail(R.layout.layout_nav_rail_header_list) { fab ->
+                    fab.setOnClickListener {
+                        findNavController().navigateSafe(R.id.action_movieListFragment_to_addMovieDialogFragment)
+                    }
+                }
+            }
+            false -> {
+                binding.fabAddItem.apply {
+                    visibility = View.VISIBLE
+                    setOnClickListener {
+                        findNavController().navigateSafe(R.id.action_movieListFragment_to_addMovieDialogFragment)
+                    }
+                }
+            }
         }
     }
 

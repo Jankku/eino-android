@@ -9,6 +9,7 @@ import com.jankku.eino.R
 import com.jankku.eino.databinding.FragmentLandingBinding
 import com.jankku.eino.ui.common.BindingFragment
 import com.jankku.eino.util.hideBottomNav
+import com.jankku.eino.util.hideNavRail
 import com.jankku.eino.util.navigateSafe
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -21,6 +22,7 @@ class LandingFragment : BindingFragment<FragmentLandingBinding>() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        hideNavRail(requireActivity())
         hideBottomNav(requireActivity())
         setupClickListeners()
     }
