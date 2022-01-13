@@ -32,6 +32,13 @@ class MarginItemDecoration(
                             1 -> applyMargin(outRect, space / 2, space, space)
                         }
                     }
+                    3 -> {
+                        when (column) {
+                            0 -> applyMargin(outRect, space, space / 2, space)
+                            1 -> applyMargin(outRect, space, space, space)
+                            2 -> applyMargin(outRect, space / 2, space, space)
+                        }
+                    }
                 }
             }
             Configuration.ORIENTATION_LANDSCAPE -> {
@@ -48,6 +55,14 @@ class MarginItemDecoration(
                             0 -> applyMargin(outRect, space * 2, space / 2, space)
                             1 -> applyMargin(outRect, space / 2, space / 2, space)
                             2 -> applyMargin(outRect, space / 2, space * 2, space)
+                        }
+                    }
+                    4 -> {
+                        when (column) {
+                            0 -> applyMargin(outRect, space * 2, space / 2, space)
+                            1 -> applyMargin(outRect, space / 2, space / 2, space)
+                            2 -> applyMargin(outRect, space / 2, space / 2, space)
+                            3 -> applyMargin(outRect, space / 2, space * 2, space)
                         }
                     }
                 }
