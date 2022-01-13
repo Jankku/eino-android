@@ -34,25 +34,32 @@ class TokenAuthenticator @Inject constructor(
         var shouldGetNewToken = false
 
         runBlocking(Dispatchers.IO) {
-            val accessTokenExpirationTime = dataStoreManager.getAccessTokenExpirationTime()
-            val refreshTokenExpirationTime = dataStoreManager.getRefreshTokenExpirationTime()
-            val currentUnixTime = System.currentTimeMillis()
+            try {
+                val accessTokenExpirationTime = dataStoreManager.getAccessTokenExpirationTime()
+                val refreshTokenExpirationTime = dataStoreManager.getRefreshTokenExpirationTime()
+                val currentUnixTime = System.currentTimeMillis()
 
-            if (currentUnixTime > refreshTokenExpirationTime) return@runBlocking
-            if (currentUnixTime > accessTokenExpirationTime) shouldGetNewToken = true
+                if (currentUnixTime > refreshTokenExpirationTime) return@runBlocking
+                if (currentUnixTime > accessTokenExpirationTime) shouldGetNewToken = true
+            } catch (e: Exception) {
+                return@runBlocking
+            }
         }
 
         if (!shouldGetNewToken) return null
 
-        var newRequest: Request?
+        var newRequest: Request? = null
 
         runBlocking(Dispatchers.IO) {
-            val updatedToken = getNewAccessToken(dataStoreManager.getRefreshToken())
+            try {
+                val updatedToken = getNewAccessToken(dataStoreManager.getRefreshToken())
 
-            newRequest = updatedToken?.let {
-                response.request.newBuilder()
-                    .header("Authorization", "Bearer $it")
-                    .build()
+                if (updatedToken?.isNotBlank() == true) {
+                    newRequest = response.request.newBuilder()
+                        .header("Authorization", "Bearer $updatedToken")
+                        .build()
+                }
+            } catch (e: Exception) {
             }
         }
 
