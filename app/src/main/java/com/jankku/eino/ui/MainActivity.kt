@@ -7,7 +7,6 @@ import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.AppBarConfiguration
-import androidx.navigation.ui.navigateUp
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import androidx.preference.PreferenceManager
@@ -25,7 +24,6 @@ class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
     private lateinit var navHostFragment: NavHostFragment
     private lateinit var navController: NavController
-    private lateinit var appBarConfiguration: AppBarConfiguration
     private val viewModel: AuthViewModel by viewModels()
     var navRail: NavigationRailView? = null
 
@@ -43,19 +41,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     override fun onSupportNavigateUp(): Boolean {
-        return navController.navigateUp(appBarConfiguration) || super.onSupportNavigateUp()
-    }
-
-    private fun setupActionBar() {
-        appBarConfiguration = AppBarConfiguration(
-            setOf(
-                R.id.landingFragment,
-                R.id.bookListFragment,
-                R.id.movieListFragment,
-                R.id.settingsFragment
-            )
-        )
-        setupActionBarWithNavController(navController, appBarConfiguration)
+        return navController.navigateUp() || super.onSupportNavigateUp()
     }
 
     private fun setupNavigation() {
@@ -80,6 +66,19 @@ class MainActivity : AppCompatActivity() {
 
             navController.graph = graph
         }
+    }
+
+    private fun setupActionBar() {
+        setSupportActionBar(binding.toolbar)
+        val appBarConfiguration = AppBarConfiguration(
+            setOf(
+                R.id.landingFragment,
+                R.id.bookListFragment,
+                R.id.movieListFragment,
+                R.id.settingsFragment
+            )
+        )
+        setupActionBarWithNavController(navController, appBarConfiguration)
     }
 
     private fun setTheme() {

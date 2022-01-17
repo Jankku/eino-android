@@ -6,9 +6,10 @@
         <item name="postSplashScreenTheme">@style/Theme.Eino</item>
     </style>
 
-    <style name="Base.Theme.Eino" parent="Theme.Material3.DayNight">
+    <style name="Base.Theme.Eino" parent="Theme.Material3.DayNight.NoActionBar">
         <item name="chipStyle">@style/Widget.Eino.Chip</item>
         <item name="toolbarStyle">@style/Widget.Eino.Toolbar</item>
+        <item name="appBarLayoutStyle">@style/Widget.Eino.AppBarLayout</item>
         <item name="bottomNavigationStyle">@style/Widget.Eino.BottomNavigationView</item>
 
         <item name="textAppearanceDisplayLarge">@style/TextAppearance.Eino.DisplayLarge</item>

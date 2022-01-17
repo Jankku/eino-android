@@ -34,9 +34,15 @@
     </style>
 
     <style name="Widget.Eino.Toolbar" parent="Widget.Material3.Toolbar">
-        <item name="titleTextAppearance">@style/TextAppearance.Eino.HeadlineLarge</item>
-        <item name="android:titleTextAppearance">@style/TextAppearance.Eino.HeadlineLarge</item>
-        <item name="titleTextStyle">@style/TextAppearance.Eino.HeadlineLarge</item>
+        <item name="android:background">@android:color/transparent</item>
+        <item name="background">@android:color/transparent</item>
+        <item name="elevationOverlayEnabled">true</item>
+        <item name="elevationOverlayColor">?colorPrimary</item>
+        <item name="elevationOverlayAccentColor">?colorPrimary</item>
+    </style>
+
+    <style name="Widget.Eino.AppBarLayout" parent="Widget.Material3.AppBarLayout">
+        <item name="android:background">@android:color/transparent</item>
     </style>
 
     <style name="Widget.Eino.BottomNavigationView" parent="Widget.Material3.BottomNavigationView" />
