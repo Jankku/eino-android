@@ -1,7 +1,6 @@
 package com.jankku.eino.ui.book
 
 import android.os.Bundle
-import android.util.Log
 import android.view.*
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Lifecycle
@@ -53,7 +52,6 @@ class BookListFragment : BindingFragment<FragmentItemListBinding>() {
 
     override fun onResume() {
         super.onResume()
-        Log.d(TAG, "onResume")
         setupAddFab()
     }
 

@@ -9,8 +9,10 @@ class MarginItemDecoration(
     private val orientation: Int,
     private val columns: Int,
     private val space: Float
-) :
-    RecyclerView.ItemDecoration() {
+) : RecyclerView.ItemDecoration() {
+    private val halfSpace = space / 2
+    private val doubleSpace = space * 2
+
     override fun getItemOffsets(
         outRect: Rect, view: View,
         parent: RecyclerView,
@@ -28,41 +30,41 @@ class MarginItemDecoration(
                     1 -> applyMargin(outRect, space, space, space)
                     2 -> {
                         when (column) {
-                            0 -> applyMargin(outRect, space, space / 2, space)
-                            1 -> applyMargin(outRect, space / 2, space, space)
+                            0 -> applyMargin(outRect, space, halfSpace, space)
+                            1 -> applyMargin(outRect, halfSpace, space, space)
                         }
                     }
                     3 -> {
                         when (column) {
-                            0 -> applyMargin(outRect, space, space / 2, space)
+                            0 -> applyMargin(outRect, space, halfSpace, space)
                             1 -> applyMargin(outRect, space, space, space)
-                            2 -> applyMargin(outRect, space / 2, space, space)
+                            2 -> applyMargin(outRect, halfSpace, space, space)
                         }
                     }
                 }
             }
             Configuration.ORIENTATION_LANDSCAPE -> {
                 when (columns) {
-                    1 -> applyMargin(outRect, space * 2, space * 2, space)
+                    1 -> applyMargin(outRect, doubleSpace, doubleSpace, space)
                     2 -> {
                         when (column) {
-                            0 -> applyMargin(outRect, space * 2, space / 2, space)
-                            1 -> applyMargin(outRect, space / 2, space * 2, space)
+                            0 -> applyMargin(outRect, doubleSpace, halfSpace, space)
+                            1 -> applyMargin(outRect, halfSpace, doubleSpace, space)
                         }
                     }
                     3 -> {
                         when (column) {
-                            0 -> applyMargin(outRect, space * 2, space / 2, space)
-                            1 -> applyMargin(outRect, space / 2, space / 2, space)
-                            2 -> applyMargin(outRect, space / 2, space * 2, space)
+                            0 -> applyMargin(outRect, doubleSpace, halfSpace, space)
+                            1 -> applyMargin(outRect, halfSpace, halfSpace, space)
+                            2 -> applyMargin(outRect, halfSpace, doubleSpace, space)
                         }
                     }
                     4 -> {
                         when (column) {
-                            0 -> applyMargin(outRect, space * 2, space / 2, space)
-                            1 -> applyMargin(outRect, space / 2, space / 2, space)
-                            2 -> applyMargin(outRect, space / 2, space / 2, space)
-                            3 -> applyMargin(outRect, space / 2, space * 2, space)
+                            0 -> applyMargin(outRect, doubleSpace, halfSpace, space)
+                            1 -> applyMargin(outRect, halfSpace, halfSpace, space)
+                            2 -> applyMargin(outRect, halfSpace, halfSpace, space)
+                            3 -> applyMargin(outRect, halfSpace, doubleSpace, space)
                         }
                     }
                 }

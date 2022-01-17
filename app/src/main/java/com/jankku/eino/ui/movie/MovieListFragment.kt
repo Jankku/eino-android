@@ -1,7 +1,6 @@
 package com.jankku.eino.ui.movie
 
 import android.os.Bundle
-import android.util.Log
 import android.view.*
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Lifecycle
@@ -51,7 +50,6 @@ class MovieListFragment : BindingFragment<FragmentItemListBinding>() {
 
     override fun onResume() {
         super.onResume()
-        Log.d(TAG, "onResume")
         setupAddFab()
     }
 

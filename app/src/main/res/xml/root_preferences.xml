@@ -22,7 +22,7 @@
 
     <PreferenceCategory app:title="@string/settings_about_header">
         <Preference
-            app:icon="@drawable/eino_icon_white_small"
+            app:icon="@drawable/ic_eino"
             app:key="@string/settings_app_key"
             app:title="@string/app_name" />
 
