@@ -100,6 +100,11 @@
     <!-- Item error layout -->
     <string name="error_no_item_text">Couldn\'t find item</string>
 
+    <!-- Search -->
+    <string name="search_book_hint">Search books</string>
+    <string name="search_movie_hint">Search movies</string>
+
+
     <!-- Settings -->
     <string name="settings_account_header">Account</string>
     <string name="settings_about_header">About</string>

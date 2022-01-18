@@ -55,7 +55,7 @@ class MovieSearchFragment : BindingFragment<FragmentMovieSearchBinding>() {
     }
 
     private fun setupSearch(searchView: SearchView) {
-        searchView.queryHint = "Search movies"
+        searchView.queryHint = getString(R.string.search_movie_hint)
 
         // Show keyboard only on initial load
         if (!keyboardShownOnce) {

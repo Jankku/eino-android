@@ -55,7 +55,7 @@ class BookSearchFragment : BindingFragment<FragmentBookSearchBinding>() {
     }
 
     private fun setupSearch(searchView: SearchView) {
-        searchView.queryHint = "Search books"
+        searchView.queryHint = getString(R.string.search_book_hint)
 
         // Show keyboard only on initial load
         if (!keyboardShownOnce) {
