@@ -49,7 +49,7 @@
     <dialog
         android:id="@+id/addBookDialogFragment"
         android:name="com.jankku.eino.ui.book.dialog.AddBookDialogFragment"
-        android:label="@string/navigation_add_book_dialog_label"
+        android:label="AddBookDialogFragment"
         tools:layout="@layout/fragment_base_book_dialog" />
     <dialog
         android:id="@+id/bookSortDialogFragment"

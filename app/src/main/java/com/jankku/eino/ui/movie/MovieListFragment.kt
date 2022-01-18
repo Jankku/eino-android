@@ -155,6 +155,12 @@ class MovieListFragment : BindingFragment<FragmentItemListBinding>() {
                 binding.rvList.swapAdapter(adapter, false)
                 adapter.submitList(list)
             }
+            (requireActivity() as? MainActivity)?.setCustomTitle(
+                getString(
+                    R.string.appbar_movies_title,
+                    list.size
+                )
+            )
         }
 
         lifecycleScope.launch {

@@ -28,9 +28,9 @@ class MainActivity : AppCompatActivity() {
     var navRail: NavigationRailView? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        setTheme()
-        installSplashScreen()
+        setTheme() // Prevents screen flashing when it's called before super.onCreate()
         super.onCreate(savedInstanceState)
+        installSplashScreen()
 
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
@@ -89,6 +89,10 @@ class MainActivity : AppCompatActivity() {
         )
 
         if (theme != null) applyTheme(this, theme)
+    }
+
+    fun setCustomTitle(title: String) {
+        supportActionBar?.title = title
     }
 
     fun setBottomNavigationVisibility(visibility: Int) {

@@ -146,6 +146,12 @@ class BookListFragment : BindingFragment<FragmentItemListBinding>() {
                 binding.rvList.swapAdapter(adapter, false)
                 adapter.submitList(list)
             }
+            (requireActivity() as? MainActivity)?.setCustomTitle(
+                getString(
+                    R.string.appbar_books_title,
+                    list.size
+                )
+            )
         }
 
         lifecycleScope.launch {
