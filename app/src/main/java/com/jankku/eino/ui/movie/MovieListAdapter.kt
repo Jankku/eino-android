@@ -15,7 +15,8 @@ class MovieListAdapter(private val clickListener: (String) -> Unit) :
         val binding =
             ItemListBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         return ViewHolder(binding) { position ->
-            getItem(position)?.let { clickListener(it.movie_id) }
+            val item = getItem(position)
+            clickListener(item.movie_id)
         }
     }
 
