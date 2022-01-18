@@ -55,7 +55,7 @@ class SettingsFragment : PreferenceFragmentCompat() {
         viewModel.username.observe(viewLifecycleOwner) {
             when (it) {
                 is Result.Success -> accountPref?.title = it.data
-                is Result.Error -> accountPref?.title = "Error: couldn't find username"
+                is Result.Error -> accountPref?.title = getString(R.string.settings_username_error)
                 else -> {}
             }
         }
@@ -69,13 +69,12 @@ class SettingsFragment : PreferenceFragmentCompat() {
                             findNavController().navigateSafe(NavGraphDirections.actionGlobalAuthGraph())
                         }
                         is Event.LogoutErrorEvent -> {
-                            view?.let { view ->
                                 showSnackBar(
-                                    view,
+                                    requireView(),
+                                    requireView(),
                                     it.message,
                                     BaseTransientBottomBar.LENGTH_LONG
                                 )
-                            }
                         }
                         else -> {}
                     }

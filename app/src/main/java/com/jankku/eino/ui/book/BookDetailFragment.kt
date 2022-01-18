@@ -108,13 +108,25 @@ class BookDetailFragment : BindingFragment<FragmentItemDetailBinding>() {
                 .flowWithLifecycle(lifecycle, Lifecycle.State.STARTED)
                 .collect { event ->
                     when (event) {
-                        is Event.EditItemSuccess -> showSnackBar(binding.root, event.message)
-                        is Event.EditItemError -> showSnackBar(binding.root, event.message)
+                        is Event.EditItemSuccess -> showSnackBar(
+                            binding.root,
+                            binding.fabEditItem,
+                            event.message
+                        )
+                        is Event.EditItemError -> showSnackBar(
+                            binding.root,
+                            binding.fabEditItem,
+                            event.message
+                        )
                         is Event.DeleteItemSuccess -> {
-                            showSnackBar(binding.root, event.message)
+                            showSnackBar(binding.root, binding.fabEditItem, event.message)
                             findNavController().navigateUp()
                         }
-                        is Event.DeleteItemError -> showSnackBar(binding.root, event.message)
+                        is Event.DeleteItemError -> showSnackBar(
+                            binding.root,
+                            binding.fabEditItem,
+                            event.message
+                        )
                         else -> {}
                     }
                 }

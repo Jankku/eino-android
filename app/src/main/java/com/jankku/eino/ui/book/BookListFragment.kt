@@ -159,9 +159,21 @@ class BookListFragment : BindingFragment<FragmentItemListBinding>() {
                 .flowWithLifecycle(lifecycle, Lifecycle.State.STARTED)
                 .collect { event ->
                     when (event) {
-                        is Event.GetItemListError -> showSnackBar(binding.root, event.message)
-                        is Event.AddItemSuccessEvent -> showSnackBar(binding.root, event.message)
-                        is Event.AddItemErrorEvent -> showSnackBar(binding.root, event.message)
+                        is Event.GetItemListError -> showSnackBar(
+                            binding.root,
+                            binding.fabAddItem,
+                            event.message
+                        )
+                        is Event.AddItemSuccessEvent -> showSnackBar(
+                            binding.root,
+                            binding.fabAddItem,
+                            event.message
+                        )
+                        is Event.AddItemErrorEvent -> showSnackBar(
+                            binding.root,
+                            binding.fabAddItem,
+                            event.message
+                        )
                         else -> {}
                     }
                 }

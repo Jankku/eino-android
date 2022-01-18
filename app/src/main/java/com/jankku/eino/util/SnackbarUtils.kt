@@ -4,6 +4,20 @@ import android.view.View
 import com.google.android.material.snackbar.BaseTransientBottomBar
 import com.google.android.material.snackbar.Snackbar
 
-fun showSnackBar(view: View, message: String, duration: Int = BaseTransientBottomBar.LENGTH_SHORT) {
-    Snackbar.make(view, message, duration).show()
-}
+fun showSnackBar(
+    view: View,
+    message: String,
+    duration: Int = BaseTransientBottomBar.LENGTH_SHORT
+) = Snackbar
+    .make(view, message, duration)
+    .show()
+
+fun showSnackBar(
+    view: View,
+    anchor: View,
+    message: String,
+    duration: Int = BaseTransientBottomBar.LENGTH_SHORT
+) = Snackbar
+    .make(view, message, duration)
+    .setAnchorView(anchor)
+    .show()
