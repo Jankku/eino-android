@@ -56,16 +56,17 @@ class LoginFragment : BindingFragment<FragmentLoginBinding>() {
         viewModel.loginResponse.observe(viewLifecycleOwner) { response ->
             when (response) {
                 is Result.Loading -> {
-                    binding.progressBar.visibility = View.VISIBLE
+                    binding.progressBar.show()
                 }
                 is Result.Success -> {
-                    binding.progressBar.visibility = View.GONE
+                    binding.progressBar.hide()
                     findNavController().navigateSafe(NavGraphDirections.actionGlobalBookGraph())
                 }
                 is Result.Error -> {
-                    binding.progressBar.visibility = View.GONE
+                    binding.progressBar.hide()
                     showSnackBar(binding.root, response.message.toString())
                 }
+                else -> {}
             }
         }
     }

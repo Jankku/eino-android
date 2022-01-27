@@ -56,16 +56,17 @@ class RegisterFragment : BindingFragment<FragmentRegisterBinding>() {
         viewModel.registerResponse.observe(viewLifecycleOwner) { response ->
             when (response) {
                 is Result.Loading -> {
-                    binding.progressBar.visibility = View.VISIBLE
+                    binding.progressBar.show()
                 }
                 is Result.Success -> {
-                    binding.progressBar.visibility = View.GONE
+                    binding.progressBar.hide()
                     findNavController().navigateSafe(R.id.action_registerFragment_to_loginFragment)
                 }
                 is Result.Error -> {
-                    binding.progressBar.visibility = View.GONE
+                    binding.progressBar.hide()
                     showSnackBar(binding.root, response.message.toString())
                 }
+                else -> {}
             }
         }
     }

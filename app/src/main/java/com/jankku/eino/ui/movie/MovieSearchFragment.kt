@@ -98,25 +98,26 @@ class MovieSearchFragment : BindingFragment<FragmentMovieSearchBinding>() {
         viewModel.searchResults.observe(viewLifecycleOwner) { response ->
             when (response) {
                 is Result.Loading -> {
-                    binding.progressBar.visibility = View.VISIBLE
+                    binding.progressBar.show()
                 }
                 is Result.Success -> {
-                    binding.progressBar.visibility = View.GONE
+                    binding.progressBar.hide()
                     if (response.data?.results?.isNotEmpty() == true) {
-                        binding.layoutNoItems.root.visibility = View.GONE
-                        binding.rvSearch.visibility = View.VISIBLE
+                        binding.layoutNoItems.root.hide()
+                        binding.rvSearch.show()
                         adapter.submitList(response.data.results)
                     } else {
-                        binding.layoutNoItems.root.visibility = View.VISIBLE
-                        binding.rvSearch.visibility = View.GONE
+                        binding.layoutNoItems.root.show()
+                        binding.rvSearch.hide()
                     }
                 }
                 is Result.Error -> {
-                    binding.layoutNoItems.root.visibility = View.VISIBLE
-                    binding.progressBar.visibility = View.GONE
-                    binding.rvSearch.visibility = View.GONE
+                    binding.layoutNoItems.root.show()
+                    binding.progressBar.hide()
+                    binding.rvSearch.hide()
                     viewModel.sendEvent(Event.SearchErrorEvent(response.message.toString()))
                 }
+                else -> {}
             }
         }
 

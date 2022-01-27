@@ -83,23 +83,24 @@ class BookDetailFragment : BindingFragment<FragmentItemDetailBinding>() {
         viewModel.detailItemList.observe(viewLifecycleOwner) {
             when (it) {
                 is Result.Loading -> {
-                    binding.progressBar.visibility = View.VISIBLE
+                    binding.progressBar.show()
                 }
                 is Result.Success -> {
-                    binding.progressBar.visibility = View.GONE
-                    binding.rvDetail.visibility = View.VISIBLE
+                    binding.progressBar.hide()
+                    binding.rvDetail.show()
                     if (requireContext().isNotTablet()) binding.fabEditItem.visibility =
                         View.VISIBLE
-                    binding.layoutNoItem.root.visibility = View.GONE
+                    binding.layoutNoItem.root.hide()
                     adapter.submitList(it.data)
                 }
                 is Result.Error -> {
-                    binding.progressBar.visibility = View.GONE
-                    binding.rvDetail.visibility = View.GONE
-                    if (requireContext().isNotTablet()) binding.fabEditItem.visibility = View.GONE
-                    binding.layoutNoItem.root.visibility = View.VISIBLE
+                    binding.progressBar.hide()
+                    binding.rvDetail.hide()
+                    if (requireContext().isNotTablet()) binding.fabEditItem.hide()
+                    binding.layoutNoItem.root.show()
                     viewModel.sendEvent(Event.GetItemError(it.message.toString()))
                 }
+                else -> {}
             }
         }
 
@@ -144,7 +145,7 @@ class BookDetailFragment : BindingFragment<FragmentItemDetailBinding>() {
             }
             false -> {
                 binding.fabEditItem.apply {
-                    visibility = View.VISIBLE
+                    show()
                     setOnClickListener {
                         findNavController().navigateSafe(R.id.action_bookDetailFragment_to_updateBookDialogFragment)
                     }

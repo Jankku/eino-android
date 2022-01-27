@@ -99,7 +99,7 @@ class BookListFragment : BindingFragment<FragmentItemListBinding>() {
             }
             false -> {
                 binding.fabAddItem.apply {
-                    visibility = View.VISIBLE
+                    show()
                     setOnClickListener {
                         findNavController().navigateSafe(R.id.action_bookListFragment_to_addBookDialogFragment)
                     }
@@ -119,24 +119,25 @@ class BookListFragment : BindingFragment<FragmentItemListBinding>() {
         viewModel.bookListState.observe(viewLifecycleOwner) { response ->
             when (response) {
                 is Result.Loading -> {
-                    binding.progressBar.visibility = View.VISIBLE
+                    binding.progressBar.show()
                 }
                 is Result.Success -> {
-                    binding.progressBar.visibility = View.GONE
+                    binding.progressBar.hide()
                     if (response.data?.results?.isNotEmpty() == true) {
-                        binding.layoutNoItems.root.visibility = View.GONE
-                        binding.rvList.visibility = View.VISIBLE
+                        binding.layoutNoItems.root.hide()
+                        binding.rvList.show()
                     } else {
-                        binding.layoutNoItems.root.visibility = View.VISIBLE
-                        binding.rvList.visibility = View.GONE
+                        binding.layoutNoItems.root.show()
+                        binding.rvList.hide()
                     }
                 }
                 is Result.Error -> {
-                    binding.progressBar.visibility = View.GONE
-                    binding.rvList.visibility = View.GONE
-                    binding.layoutNoItems.root.visibility = View.VISIBLE
+                    binding.progressBar.hide()
+                    binding.rvList.hide()
+                    binding.layoutNoItems.root.show()
                     viewModel.sendEvent(Event.GetItemListError(response.message.toString()))
                 }
+                else -> {}
             }
         }
 
