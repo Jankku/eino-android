@@ -29,8 +29,8 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         setTheme() // Prevents screen flashing when it's called before super.onCreate()
-        super.onCreate(savedInstanceState)
         installSplashScreen()
+        super.onCreate(savedInstanceState)
 
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
@@ -75,7 +75,7 @@ class MainActivity : AppCompatActivity() {
                 R.id.landingFragment,
                 R.id.bookListFragment,
                 R.id.movieListFragment,
-                R.id.settingsFragment
+                R.id.profileFragment
             )
         )
         setupActionBarWithNavController(navController, appBarConfiguration)
