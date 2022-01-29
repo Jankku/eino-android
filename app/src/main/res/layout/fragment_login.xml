@@ -23,8 +23,8 @@
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/tilUsername"
-            style="@style/Widget.Material3.TextInputLayout.OutlinedBox"
-            android:layout_width="match_parent"
+            style="@style/Widget.Eino.TextInputLayout.OutlinedBox"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:hint="@string/username_hint"
             android:paddingHorizontal="@dimen/spacing_default"
@@ -44,8 +44,8 @@
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/tilPassword"
-            style="@style/Widget.Material3.TextInputLayout.OutlinedBox"
-            android:layout_width="match_parent"
+            style="@style/Widget.Eino.TextInputLayout.OutlinedBox"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/spacing_1_5x"
             android:hint="@string/password_hint"
@@ -68,7 +68,7 @@
         <Button
             android:id="@+id/btnLogin"
             style="@style/Widget.Eino.BigButton"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/spacing_1_5x"
             android:layout_marginHorizontal="@dimen/spacing_default"

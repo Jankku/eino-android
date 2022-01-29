@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
+    <style name="Widget.Eino.TextInputLayout.OutlinedBox" parent="@style/Widget.Material3.TextInputLayout.OutlinedBox">
+        <item name="android:minWidth">500dp</item>
+    </style>
+
     <style name="Widget.Eino.Chip" parent="Widget.Material3.Chip.Input">
         <item name="android:focusable">false</item>
         <item name="android:clickable">false</item>
@@ -17,6 +21,7 @@
     </style>
 
     <style name="Widget.Eino.BigButton" parent="Widget.Material3.Button">
+        <item name="android:minWidth">500dp</item>
         <item name="android:paddingTop">@dimen/spacing_default</item>
         <item name="android:paddingBottom">@dimen/spacing_default</item>
         <item name="android:textAppearance">@style/TextAppearance.Eino.BodyLarge</item>

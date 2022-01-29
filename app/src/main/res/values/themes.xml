@@ -49,6 +49,7 @@
         <item name="colorOutline">@color/blue_900</item>
 
         <item name="colorSurface">@color/white</item>
+        <item name="colorOnSurface">@color/black</item>
 
         <item name="android:textColor">@color/black</item>
         <item name="android:textColorPrimary">@color/black</item>
