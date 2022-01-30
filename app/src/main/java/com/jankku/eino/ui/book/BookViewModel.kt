@@ -101,12 +101,12 @@ class BookViewModel @Inject constructor(
     fun addBook(book: BookRequest) = viewModelScope.launch {
         repository
             .addBook(book)
-            .catch { e -> sendEvent(Event.AddItemErrorEvent(e.message.toString())) }
+            .catch { e -> sendEvent(Event.AddItemError(e.message.toString())) }
             .collect { response ->
                 if (response.data?.results?.get(0) != null) {
-                    sendEvent(Event.AddItemSuccessEvent(response.data.results[0].message))
+                    sendEvent(Event.AddItemSuccess(response.data.results[0].message))
                 } else {
-                    sendEvent(Event.AddItemErrorEvent(response.message.toString()))
+                    sendEvent(Event.AddItemError(response.message.toString()))
                 }
                 getBooksByStatus()
             }

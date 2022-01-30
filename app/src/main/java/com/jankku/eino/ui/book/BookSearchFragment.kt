@@ -115,7 +115,7 @@ class BookSearchFragment : BindingFragment<FragmentBookSearchBinding>() {
                     binding.layoutNoItems.root.show()
                     binding.progressBar.hide()
                     binding.rvSearch.hide()
-                    viewModel.sendEvent(Event.SearchErrorEvent(response.message.toString()))
+                    viewModel.sendEvent(Event.SearchError(response.message.toString()))
                 }
                 else -> {}
             }
@@ -126,7 +126,7 @@ class BookSearchFragment : BindingFragment<FragmentBookSearchBinding>() {
                 .flowWithLifecycle(lifecycle, Lifecycle.State.STARTED)
                 .collect { event ->
                     when (event) {
-                        is Event.SearchErrorEvent -> showSnackBar(binding.root, event.message)
+                        is Event.SearchError -> showSnackBar(binding.root, event.message)
                         else -> {}
                     }
                 }

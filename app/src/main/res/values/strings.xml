@@ -12,6 +12,7 @@
     <string name="navigation_search_book_label">Search books</string>
     <string name="navigation_search_movie_label">Search movies</string>
     <string name="navigation_settings_label">Settings</string>
+    <string name="navigation_profile_label">Profile</string>
 
     <!-- App bar -->
     <string name="appbar_books_title">Books (%1$d)</string>
@@ -103,6 +104,20 @@
     <!-- Search -->
     <string name="search_book_hint">Search books</string>
     <string name="search_movie_hint">Search movies</string>
+
+    <!-- Profile -->
+    <string name="profile_settings_title">Settings</string>
+    <string name="profile_chart_no_data">Error rendering chart</string>
+    <string name="profile_user_info_title">User info</string>
+    <string name="profile_user_info_username">Username</string>
+    <string name="profile_user_info_registration_date">Registration date</string>
+    <string name="profile_user_info_btn_logout_text">Log out</string>
+    <string name="profile_stats_book_title">Book stats</string>
+    <string name="profile_stats_movie_title">Movie stats</string>
+    <string name="profile_item_count">Count</string>
+    <string name="profile_item_score_average">Average score</string>
+    <string name="profile_pages_read">Pages read</string>
+    <string name="profile_watch_time">Watch time</string>
 
     <!-- Settings -->
     <string name="settings_account_header">Account</string>

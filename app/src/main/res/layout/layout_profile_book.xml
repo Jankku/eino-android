@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8"?>
+<merge xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/mcvBook"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginVertical="@dimen/spacing_half"
+        app:cardCornerRadius="@dimen/card_corner_radius"
+        app:cardElevation="@dimen/card_elevation">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:padding="@dimen/spacing_default">
+
+            <TextView
+                android:id="@+id/tvBookStatTitle"
+                style="@style/TextAppearance.Eino.HeadlineSmall"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingBottom="@dimen/spacing_half"
+                android:text="@string/profile_stats_book_title"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/tvBookCountTitle"
+                style="@style/TextAppearance.Eino.TitleMedium"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/profile_item_count"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tvBookStatTitle" />
+
+            <TextView
+                android:id="@+id/tvBookCountValue"
+                style="@style/TextAppearance.Eino.BodyMedium"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintStart_toStartOf="@+id/tvBookCountTitle"
+                app:layout_constraintTop_toBottomOf="@+id/tvBookCountTitle"
+                tools:text="123" />
+
+            <TextView
+                android:id="@+id/tvBookPagesReadTitle"
+                style="@style/TextAppearance.Eino.TitleMedium"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingTop="@dimen/spacing_half"
+                android:text="@string/profile_pages_read"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tvBookCountValue" />
+
+            <TextView
+                android:id="@+id/tvBookPagesReadValue"
+                style="@style/TextAppearance.Eino.BodyMedium"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintStart_toStartOf="@+id/tvBookPagesReadTitle"
+                app:layout_constraintTop_toBottomOf="@+id/tvBookPagesReadTitle"
+                tools:text="1234" />
+
+            <TextView
+                android:id="@+id/tvBookScoreAverageTitle"
+                style="@style/TextAppearance.Eino.TitleMedium"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingTop="@dimen/spacing_half"
+                android:text="@string/profile_item_score_average"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tvBookPagesReadValue" />
+
+            <TextView
+                android:id="@+id/tvBookScoreAverageValue"
+                style="@style/TextAppearance.Eino.BodyMedium"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintStart_toStartOf="@+id/tvBookScoreAverageTitle"
+                app:layout_constraintTop_toBottomOf="@+id/tvBookScoreAverageTitle"
+                tools:text="8.3" />
+
+            <com.github.mikephil.charting.charts.BarChart
+                android:id="@+id/bookChart"
+                android:layout_width="match_parent"
+                android:layout_height="250dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tvBookScoreAverageValue" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </com.google.android.material.card.MaterialCardView>
+</merge>

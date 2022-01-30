@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8"?>
+<merge xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/mcvMovie"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginVertical="@dimen/spacing_half"
+        app:cardCornerRadius="@dimen/card_corner_radius"
+        app:cardElevation="@dimen/card_elevation">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:padding="@dimen/spacing_default">
+
+            <TextView
+                android:id="@+id/tvMovieStatTitle"
+                style="@style/TextAppearance.Eino.HeadlineSmall"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingBottom="@dimen/spacing_half"
+                android:text="@string/profile_stats_movie_title"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/tvMovieCountTitle"
+                style="@style/TextAppearance.Eino.TitleMedium"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/profile_item_count"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tvMovieStatTitle" />
+
+            <TextView
+                android:id="@+id/tvMovieCountValue"
+                style="@style/TextAppearance.Eino.BodyMedium"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintStart_toStartOf="@+id/tvMovieCountTitle"
+                app:layout_constraintTop_toBottomOf="@+id/tvMovieCountTitle"
+                tools:text="123" />
+
+            <TextView
+                android:id="@+id/tvMovieWatchtimeTitle"
+                style="@style/TextAppearance.Eino.TitleMedium"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingTop="@dimen/spacing_half"
+                android:text="@string/profile_watch_time"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tvMovieCountValue" />
+
+            <TextView
+                android:id="@+id/tvMovieWatchtimeValue"
+                style="@style/TextAppearance.Eino.BodyMedium"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintStart_toStartOf="@+id/tvMovieWatchtimeTitle"
+                app:layout_constraintTop_toBottomOf="@+id/tvMovieWatchtimeTitle"
+                tools:text="1234 minutes" />
+
+            <TextView
+                android:id="@+id/tvMovieScoreAverageTitle"
+                style="@style/TextAppearance.Eino.TitleMedium"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingTop="@dimen/spacing_half"
+                android:text="@string/profile_item_score_average"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tvMovieWatchtimeValue" />
+
+            <TextView
+                android:id="@+id/tvMovieScoreAverageValue"
+                style="@style/TextAppearance.Eino.BodyMedium"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintStart_toStartOf="@+id/tvMovieScoreAverageTitle"
+                app:layout_constraintTop_toBottomOf="@+id/tvMovieScoreAverageTitle"
+                tools:text="8.3" />
+
+            <com.github.mikephil.charting.charts.BarChart
+                android:id="@+id/movieChart"
+                android:layout_width="match_parent"
+                android:layout_height="250dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tvMovieScoreAverageValue" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </com.google.android.material.card.MaterialCardView>
+</merge>

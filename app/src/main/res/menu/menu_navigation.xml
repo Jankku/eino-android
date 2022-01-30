@@ -12,8 +12,8 @@
         android:title="@string/navigation_movies_label" />
 
     <item
-        android:id="@+id/settings_graph"
-        android:icon="@drawable/selector_settings"
-        android:title="@string/navigation_settings_label" />
+        android:id="@+id/profile_graph"
+        android:icon="@drawable/selector_profile"
+        android:title="@string/navigation_profile_label" />
 
 </menu>

@@ -165,12 +165,12 @@ class BookListFragment : BindingFragment<FragmentItemListBinding>() {
                             binding.fabAddItem,
                             event.message
                         )
-                        is Event.AddItemSuccessEvent -> showSnackBar(
+                        is Event.AddItemSuccess -> showSnackBar(
                             binding.root,
                             binding.fabAddItem,
                             event.message
                         )
-                        is Event.AddItemErrorEvent -> showSnackBar(
+                        is Event.AddItemError -> showSnackBar(
                             binding.root,
                             binding.fabAddItem,
                             event.message

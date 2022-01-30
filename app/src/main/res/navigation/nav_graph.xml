@@ -6,7 +6,7 @@
     <include app:graph="@navigation/book_graph" />
     <include app:graph="@navigation/movie_graph" />
     <include app:graph="@navigation/auth_graph" />
-    <include app:graph="@navigation/settings_graph" />
+    <include app:graph="@navigation/profile_graph" />
 
     <action
         android:id="@+id/action_global_book_graph"
