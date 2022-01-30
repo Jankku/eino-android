@@ -142,7 +142,7 @@ class ProfileFragment : BindingFragment<FragmentProfileBinding>() {
     private fun setupUserInfo(profile: ProfileResponse) {
         with(profile) {
             infoBinding.tvUsernameValue.text = username
-            infoBinding.tvRegistrationDateValue.text = registration_date
+            infoBinding.tvRegistrationDateValue.text = utcToLocal(registration_date)
         }
     }
 
