@@ -114,6 +114,7 @@
     <string name="profile_user_info_btn_logout_text">Log out</string>
     <string name="profile_stats_book_title">Book stats</string>
     <string name="profile_stats_movie_title">Movie stats</string>
+    <string name="profile_stats_score_distribution">Score distribution</string>
     <string name="profile_item_count">Count</string>
     <string name="profile_item_score_average">Average score</string>
     <string name="profile_pages_read">Pages read</string>

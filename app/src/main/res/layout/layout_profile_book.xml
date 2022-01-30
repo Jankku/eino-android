@@ -82,6 +82,17 @@
                 app:layout_constraintTop_toBottomOf="@+id/tvBookScoreAverageTitle"
                 tools:text="8.3" />
 
+            <TextView
+                android:id="@+id/tvScoreDistribution"
+                style="@style/TextAppearance.Eino.TitleSmall"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingTop="@dimen/spacing_half"
+                android:text="@string/profile_stats_score_distribution"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tvBookScoreAverageValue" />
+
             <com.github.mikephil.charting.charts.BarChart
                 android:id="@+id/bookChart"
                 android:layout_width="match_parent"
@@ -89,7 +100,7 @@
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/tvBookScoreAverageValue" />
+                app:layout_constraintTop_toBottomOf="@+id/tvScoreDistribution" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </com.google.android.material.card.MaterialCardView>
