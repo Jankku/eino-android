@@ -1,11 +1,18 @@
-<div style="text-align: center;">
-<img src="./screenshots/Eino.png" style="width: 80px;" />
-<h1>Eino</h1>
-<p>Book and movie tracker with web and Android clients.</p>
-<p>You can find backend code <a href="https://github.com/jankku/eino-backend/">here</a> and web frontend
-code <a href="https://github.com/jankku/eino-web/">here</a>.</p>
+<h1 align="center">
+<br>
+  <img src="./screenshots/Eino.png" style="width: 80px;" />
+<br>
+Eino
+</h1>
+<div align="center">
+<h4>Book and movie tracker with web and Android clients.</h4>
+<h4>You can find backend code <a href="https://github.com/jankku/eino-backend/">here</a> and web frontend
+code <a href="https://github.com/jankku/eino-web/">here</a>.</h4>
 </div>
 
+## Download
+
+Get the app from [releases page](https://github.com/Jankku/eino-android/releases).
 
 ## Building
 
