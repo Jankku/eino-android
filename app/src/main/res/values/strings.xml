@@ -63,8 +63,14 @@
 
     <!-- Log out dialog -->
     <string name="dialog_logout_title">Are you sure you want to log out?</string>
-    <string name="dialog_logout_button_positive_text">Log out</string>
-    <string name="dialog_logout_button_negative_text">Cancel</string>
+    <string name="dialog_logout_btn_positive_text">Log out</string>
+    <string name="dialog_logout_btn_negative_text">Cancel</string>
+
+    <!-- Delete account dialog -->
+    <string name="dialog_delete_account_title">Are you sure you want to delete account?</string>
+    <string name="dialog_delete_account_warning">NOTE: THIS ACTION IS IRREVERSIBLE!</string>
+    <string name="dialog_delete_account_message">This action will permanently delete your account and all associated data. Please confirm your password before proceeding.</string>
+    <string name="dialog_delete_account_btn_text">Delete account</string>
 
     <!-- Sort dialog -->
     <string name="dialog_sort_title">Sort by</string>
@@ -112,6 +118,7 @@
     <string name="profile_user_info_username">Username</string>
     <string name="profile_user_info_registration_date">Registration date</string>
     <string name="profile_user_info_btn_logout_text">Log out</string>
+    <string name="profile_user_info_btn_delete_account_text">Delete account</string>
     <string name="profile_stats_book_title">Book stats</string>
     <string name="profile_stats_movie_title">Movie stats</string>
     <string name="profile_stats_score_distribution">Score distribution</string>
@@ -119,6 +126,7 @@
     <string name="profile_item_score_average">Average score</string>
     <string name="profile_pages_read">Pages read</string>
     <string name="profile_watch_time">Watch time</string>
+    <string name="profile_watch_time_value">%1$s hours</string>
 
     <!-- Settings -->
     <string name="settings_account_header">Account</string>

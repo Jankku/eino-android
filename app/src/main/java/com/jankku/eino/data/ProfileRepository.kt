@@ -1,6 +1,7 @@
 package com.jankku.eino.data
 
 import com.jankku.eino.network.EinoApi
+import com.jankku.eino.network.request.DeleteAccountRequest
 import com.jankku.eino.util.Result
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.flowOf
@@ -14,6 +15,14 @@ class ProfileRepository @Inject constructor(
     suspend fun getProfile() = flowOf(
         try {
             Result.Success(api.getProfile(dataStoreManager.getAccessToken()))
+        } catch (e: Exception) {
+            Result.Error(e.message)
+        }
+    ).flowOn(Dispatchers.IO)
+
+    suspend fun deleteAccount(body: DeleteAccountRequest) = flowOf(
+        try {
+            Result.Success(api.deleteAccount(body, dataStoreManager.getAccessToken()))
         } catch (e: Exception) {
             Result.Error(e.message)
         }

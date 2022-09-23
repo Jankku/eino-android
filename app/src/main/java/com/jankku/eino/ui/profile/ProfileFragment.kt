@@ -4,7 +4,7 @@ import android.content.DialogInterface
 import android.graphics.Color
 import android.os.Bundle
 import android.view.*
-import androidx.fragment.app.viewModels
+import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.flowWithLifecycle
 import androidx.lifecycle.lifecycleScope
@@ -31,7 +31,6 @@ import com.jankku.eino.network.response.profile.ScoreDistribution
 import com.jankku.eino.ui.common.BindingFragment
 import com.jankku.eino.util.*
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 
 private const val TAG = "ProfileFragment"
@@ -40,7 +39,7 @@ private const val TAG = "ProfileFragment"
 class ProfileFragment : BindingFragment<FragmentProfileBinding>() {
     override val bindingInflater: (LayoutInflater) -> ViewBinding
         get() = FragmentProfileBinding::inflate
-    private val viewModel: ProfileViewModel by viewModels()
+    private val viewModel: ProfileViewModel by activityViewModels()
     private var _bookBinding: LayoutProfileBookBinding? = null
     private var _movieBinding: LayoutProfileMovieBinding? = null
     private var _infoBinding: LayoutProfileInfoBinding? = null
@@ -62,7 +61,6 @@ class ProfileFragment : BindingFragment<FragmentProfileBinding>() {
         showNavRail(requireActivity())
         showBottomNav(requireActivity())
         setupObservers()
-        setupLogOutButton()
         setupSwipeToRefresh()
     }
 
@@ -118,24 +116,18 @@ class ProfileFragment : BindingFragment<FragmentProfileBinding>() {
                                 BaseTransientBottomBar.LENGTH_LONG
                             )
                         }
+                        is Event.DeleteAccountError -> showSnackBar(binding.root, event.message)
+                        is Event.DeleteAccountSuccess -> {
+                            showSnackBar(
+                                binding.root,
+                                event.message,
+                                BaseTransientBottomBar.LENGTH_LONG
+                            )
+                            findNavController().navigateSafe(NavGraphDirections.actionGlobalAuthGraph())
+                        }
                         else -> {}
                     }
                 }
-        }
-    }
-
-    private fun setupLogOutButton() {
-        infoBinding.btnLogout.setOnClickListener {
-            MaterialAlertDialogBuilder(requireContext())
-                .setTitle(R.string.dialog_logout_title)
-                .setPositiveButton(R.string.dialog_logout_button_positive_text) { dialog: DialogInterface, _: Int ->
-                    viewModel.logOut()
-                    dialog.dismiss()
-                }
-                .setNegativeButton(R.string.dialog_logout_button_negative_text) { dialog: DialogInterface, _: Int ->
-                    dialog.dismiss()
-                }
-                .show()
         }
     }
 
@@ -143,6 +135,23 @@ class ProfileFragment : BindingFragment<FragmentProfileBinding>() {
         with(profile) {
             infoBinding.tvUsernameValue.text = username
             infoBinding.tvRegistrationDateValue.text = utcToLocal(registration_date)
+        }
+
+        infoBinding.btnLogout.setOnClickListener {
+            MaterialAlertDialogBuilder(requireContext())
+                .setTitle(R.string.dialog_logout_title)
+                .setPositiveButton(R.string.dialog_logout_btn_positive_text) { dialog: DialogInterface, _: Int ->
+                    viewModel.logOut()
+                    dialog.dismiss()
+                }
+                .setNeutralButton(R.string.dialog_logout_btn_negative_text) { dialog: DialogInterface, _: Int ->
+                    dialog.dismiss()
+                }
+                .show()
+        }
+
+        infoBinding.btnDeleteAccount.setOnClickListener {
+            findNavController().navigateSafe(R.id.action_profileFragment_to_deleteAccountDialogFragment)
         }
     }
 
@@ -159,7 +168,8 @@ class ProfileFragment : BindingFragment<FragmentProfileBinding>() {
         with(stats) {
             setupChart(movieBinding.movieChart, score_distribution)
             movieBinding.tvMovieCountValue.text = count
-            movieBinding.tvMovieWatchtimeValue.text = watch_time
+            movieBinding.tvMovieWatchtimeValue.text =
+                String.format(resources.getString(R.string.profile_watch_time_value), watch_time)
             movieBinding.tvMovieScoreAverageValue.text = score_average
         }
     }

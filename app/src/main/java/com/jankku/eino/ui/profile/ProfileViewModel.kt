@@ -5,13 +5,13 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.jankku.eino.data.AuthRepository
 import com.jankku.eino.data.ProfileRepository
+import com.jankku.eino.network.request.DeleteAccountRequest
 import com.jankku.eino.network.response.profile.ProfileResponse
 import com.jankku.eino.util.Event
 import com.jankku.eino.util.Result
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.catch
-import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.onStart
 import kotlinx.coroutines.flow.receiveAsFlow
 import kotlinx.coroutines.launch
@@ -47,6 +47,20 @@ class ProfileViewModel @Inject constructor(
             .logOut()
             .catch { e -> sendEvent(Event.LogoutError(e.message.toString())) }
             .collect { response -> sendEvent(Event.LogoutSuccess(response.data.toString())) }
+    }
+
+    fun deleteAccount(password: String) = viewModelScope.launch {
+        val body = DeleteAccountRequest(password)
+        profileRepository
+            .deleteAccount(body)
+            .catch { e -> sendEvent(Event.DeleteAccountError(e.message.toString())) }
+            .collect { response ->
+                if (response.data != null) {
+                    sendEvent(Event.DeleteAccountSuccess(response.data.results[0].message))
+                } else {
+                    sendEvent(Event.DeleteAccountError("Couldn't delete account"))
+                }
+            }
     }
 
     fun sendEvent(event: Event) = viewModelScope.launch {

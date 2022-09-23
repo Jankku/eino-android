@@ -14,7 +14,6 @@ import com.jankku.eino.util.utcToLocal
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.catch
-import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.onStart
 import kotlinx.coroutines.flow.receiveAsFlow
 import kotlinx.coroutines.launch
@@ -213,7 +212,7 @@ class MovieViewModel @Inject constructor(
                 add(DetailItem("Studio", studio))
                 add(DetailItem("Director", director))
                 add(DetailItem("Writer", writer))
-                add(DetailItem("Duration", duration.toString()))
+                add(DetailItem("Duration", "$duration minutes"))
                 add(DetailItem("Year", year.toString()))
                 add(DetailItem("Status", status.replaceFirstChar { it.uppercase() }))
                 add(DetailItem("Score", score.toString()))

@@ -16,5 +16,13 @@
         <action
             android:id="@+id/action_profileFragment_to_settingsFragment"
             app:destination="@id/settingsFragment" />
+        <action
+            android:id="@+id/action_profileFragment_to_deleteAccountDialogFragment"
+            app:destination="@id/deleteAccountDialogFragment" />
     </fragment>
+    <dialog
+        android:id="@+id/deleteAccountDialogFragment"
+        android:name="com.jankku.eino.ui.profile.DeleteAccountDialogFragment"
+        android:label="@string/dialog_delete_account_title"
+        tools:layout="@layout/fragment_delete_account_dialog" />
 </navigation>

@@ -6,6 +6,7 @@ import com.jankku.eino.network.response.auth.RefreshTokenResponse
 import com.jankku.eino.network.response.auth.RegisterResponse
 import com.jankku.eino.network.response.book.*
 import com.jankku.eino.network.response.movie.*
+import com.jankku.eino.network.response.profile.DeleteAccountResponse
 import com.jankku.eino.network.response.profile.ProfileResponse
 import com.jankku.eino.util.Constant.REQUEST_HEADERS
 import retrofit2.http.*
@@ -127,4 +128,11 @@ interface EinoApi {
     suspend fun getProfile(
         @Header("Authorization") accessToken: String
     ): ProfileResponse
+
+    @Headers(REQUEST_HEADERS)
+    @POST("profile/deleteaccount")
+    suspend fun deleteAccount(
+        @Body password: DeleteAccountRequest,
+        @Header("Authorization") accessToken: String
+    ): DeleteAccountResponse
 }
