@@ -24,7 +24,7 @@ class MovieListAdapter(private val clickListener: (String) -> Unit) :
         val item = getItem(position)
         with(holder.binding) {
             tvFirst.text = if (item.title.isNotEmpty()) item.title else "-"
-            tvSecond.text = if (item.studio.isNotEmpty()) item.studio else "-"
+            tvSecond.text = if (item.director.isNotEmpty()) item.director else "-"
             tvScore.text = item.score.toString()
         }
     }
