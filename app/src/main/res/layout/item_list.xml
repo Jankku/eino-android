@@ -25,6 +25,20 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guidelineScore"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_begin="320dp" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guidelineSecondText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_begin="35dp" />
+
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/tvFirst"
             style="@style/TextAppearance.Eino.BodyMedium"
@@ -34,7 +48,7 @@
             android:maxLines="1"
             android:paddingBottom="@dimen/spacing_half"
             app:layout_constraintBottom_toTopOf="@id/tvSecond"
-            app:layout_constraintEnd_toStartOf="@id/tvScore"
+            app:layout_constraintEnd_toStartOf="@id/guidelineScore"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             tools:text="First text" />
@@ -43,10 +57,10 @@
             android:id="@+id/tvScore"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:layout_constraintBottom_toTopOf="@id/guideline"
+            app:layout_constraintBottom_toTopOf="@id/guidelineSecondText"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@id/tvFirst"
-            app:layout_constraintTop_toTopOf="@id/tvSecond"
+            app:layout_constraintStart_toStartOf="@id/guidelineScore"
+            app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_bias="0.95"
             tools:ignore="TouchTargetSizeCheck"
             tools:text="10" />
@@ -59,16 +73,10 @@
             android:ellipsize="end"
             android:maxLines="1"
             app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/guidelineScore"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/tvFirst"
             tools:text="Second text" />
-
-        <androidx.constraintlayout.widget.Guideline
-            android:id="@+id/guideline"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            app:layout_constraintGuide_begin="35dp" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
