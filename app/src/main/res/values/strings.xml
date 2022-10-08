@@ -39,9 +39,9 @@
     <string name="dialog_status_hint">Status</string>
     <string name="dialog_score_hint">Score</string>
     <string name="dialog_score_slider_desc">Score slider</string>
-    <string name="dialog_start_date_picker_title">Start date</string>
-    <string name="dialog_end_date_picker_title">End date</string>
-    <string name="dialog_year_hint">Year</string>
+    <string name="dialog_start_date_picker_title">Started</string>
+    <string name="dialog_end_date_picker_title">Finished</string>
+    <string name="dialog_year_hint">Publication year</string>
 
     <!-- Book dialogs -->
     <string name="dialog_book_add_action_text">Add book</string>
@@ -59,7 +59,7 @@
     <string name="dialog_movie_studio_hint">Studio</string>
     <string name="dialog_movie_director_hint">Director</string>
     <string name="dialog_movie_writer_hint">Writer</string>
-    <string name="dialog_movie_duration_hint">Duration</string>
+    <string name="dialog_movie_duration_hint">Duration in minutes</string>
 
     <!-- Log out dialog -->
     <string name="dialog_logout_title">Are you sure you want to log out?</string>

@@ -5,21 +5,30 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <LinearLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:divider="@drawable/divider"
-        android:orientation="vertical"
+        android:layout_height="match_parent"
         android:padding="@dimen/spacing_default"
-        android:showDividers="middle"
         tools:context=".ui.movie.UpdateMovieDialogFragment">
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guidelineMiddle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.5" />
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/tilMovieTitle"
             style="@style/Widget.Material3.TextInputLayout.OutlinedBox.Dense"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="@string/dialog_movie_title_hint">
+            android:layout_marginBottom="@dimen/spacing_half"
+            android:hint="@string/dialog_movie_title_hint"
+            app:layout_constraintBottom_toTopOf="@id/tilMovieStudio"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/tietMovieTitle"
@@ -31,9 +40,14 @@
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/tilMovieStudio"
             style="@style/Widget.Material3.TextInputLayout.OutlinedBox.Dense"
-            android:layout_width="match_parent"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:hint="@string/dialog_movie_studio_hint">
+            android:layout_marginBottom="@dimen/spacing_half"
+            android:hint="@string/dialog_movie_studio_hint"
+            app:layout_constraintBottom_toTopOf="@id/tilMovieDirector"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tilMovieTitle">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/tietMovieStudio"
@@ -45,9 +59,14 @@
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/tilMovieDirector"
             style="@style/Widget.Material3.TextInputLayout.OutlinedBox.Dense"
-            android:layout_width="match_parent"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:hint="@string/dialog_movie_director_hint">
+            android:layout_marginBottom="@dimen/spacing_half"
+            android:hint="@string/dialog_movie_director_hint"
+            app:layout_constraintBottom_toTopOf="@id/tilMovieWriter"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tilMovieStudio">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/tietMovieDirector"
@@ -59,9 +78,14 @@
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/tilMovieWriter"
             style="@style/Widget.Material3.TextInputLayout.OutlinedBox.Dense"
-            android:layout_width="match_parent"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:hint="@string/dialog_movie_writer_hint">
+            android:layout_marginBottom="@dimen/spacing_half"
+            android:hint="@string/dialog_movie_writer_hint"
+            app:layout_constraintBottom_toTopOf="@id/tilMovieDuration"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tilMovieWriter">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/tietMovieWriter"
@@ -73,9 +97,14 @@
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/tilMovieDuration"
             style="@style/Widget.Material3.TextInputLayout.OutlinedBox.Dense"
-            android:layout_width="match_parent"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:hint="@string/dialog_movie_duration_hint">
+            android:layout_marginBottom="@dimen/spacing_half"
+            android:hint="@string/dialog_movie_duration_hint"
+            app:layout_constraintBottom_toTopOf="@id/tilMovieStatus"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tilMovieWriter">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/tietMovieDuration"
@@ -84,12 +113,24 @@
                 android:inputType="number" />
         </com.google.android.material.textfield.TextInputLayout>
 
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guidelineYearStatus"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_begin="300dp" />
+
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/tilMovieYear"
             style="@style/Widget.Material3.TextInputLayout.OutlinedBox.Dense"
-            android:layout_width="match_parent"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:hint="@string/dialog_year_hint">
+            android:layout_marginBottom="@dimen/spacing_half"
+            android:hint="@string/dialog_year_hint"
+            app:layout_constraintBottom_toTopOf="@id/tvScoreSlider"
+            app:layout_constraintEnd_toStartOf="@id/guidelineMiddle"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/guidelineYearStatus">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/tietMovieYear"
@@ -101,9 +142,14 @@
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/tilMovieStatus"
             style="@style/Widget.Material3.TextInputLayout.OutlinedBox.Dense.ExposedDropdownMenu"
-            android:layout_width="match_parent"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:hint="@string/dialog_status_hint">
+            android:layout_marginBottom="@dimen/spacing_half"
+            android:hint="@string/dialog_status_hint"
+            app:layout_constraintBottom_toTopOf="@id/tvScoreSlider"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/guidelineMiddle"
+            app:layout_constraintTop_toBottomOf="@id/guidelineYearStatus">
 
             <com.google.android.material.textfield.MaterialAutoCompleteTextView
                 android:id="@+id/mactvMovieStatus"
@@ -112,35 +158,50 @@
                 android:inputType="none" />
         </com.google.android.material.textfield.TextInputLayout>
 
-        <LinearLayout
+        <TextView
+            android:id="@+id/tvScoreSlider"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:labelFor="@id/sliderMovieScore"
+            android:text="@string/dialog_score_hint"
+            app:layout_constraintBottom_toTopOf="@id/sliderMovieScore"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tilMovieStatus" />
+
+        <com.google.android.material.slider.Slider
+            android:id="@+id/sliderMovieScore"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/spacing_half"
+            android:contentDescription="@string/dialog_score_slider_desc"
+            android:stepSize="1"
+            android:valueFrom="0"
+            android:valueTo="10"
+            app:layout_constraintBottom_toTopOf="@id/tilMovieStartDate"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tvScoreSlider"
+            app:tickVisible="true" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guidelineDatePicker"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
-
-            <TextView
-                android:id="@+id/tvScoreSlider"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:labelFor="@id/sliderMovieScore"
-                android:text="@string/dialog_score_hint" />
-
-            <com.google.android.material.slider.Slider
-                android:id="@+id/sliderMovieScore"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:contentDescription="@string/dialog_score_slider_desc"
-                android:stepSize="1"
-                android:valueFrom="0"
-                android:valueTo="10" />
-        </LinearLayout>
-
+            android:orientation="horizontal"
+            app:layout_constraintGuide_begin="430dp" />
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/tilMovieStartDate"
             style="@style/Widget.Material3.TextInputLayout.OutlinedBox.Dense.ExposedDropdownMenu"
-            android:layout_width="match_parent"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:hint="@string/dialog_start_date_picker_title">
+            android:layout_marginBottom="@dimen/spacing_half"
+            android:hint="@string/dialog_start_date_picker_title"
+            app:layout_constraintBottom_toTopOf="@id/btnAction"
+            app:layout_constraintEnd_toStartOf="@id/guidelineMiddle"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/guidelineDatePicker">
 
             <com.google.android.material.textfield.MaterialAutoCompleteTextView
                 android:id="@+id/mactvMovieStartDate"
@@ -152,9 +213,14 @@
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/tilMovieEndDate"
             style="@style/Widget.Material3.TextInputLayout.OutlinedBox.Dense.ExposedDropdownMenu"
-            android:layout_width="match_parent"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:hint="@string/dialog_end_date_picker_title">
+            android:layout_marginBottom="@dimen/spacing_half"
+            android:hint="@string/dialog_end_date_picker_title"
+            app:layout_constraintBottom_toTopOf="@id/btnAction"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/guidelineMiddle"
+            app:layout_constraintTop_toBottomOf="@id/guidelineDatePicker">
 
             <com.google.android.material.textfield.MaterialAutoCompleteTextView
                 android:id="@+id/mactvMovieEndDate"
@@ -166,12 +232,18 @@
         <com.google.android.material.button.MaterialButton
             android:id="@+id/btnAction"
             style="@style/Widget.Eino.DialogButton"
-            android:layout_width="match_parent"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="@dimen/spacing_default"
+            android:layout_marginEnd="16dp"
             app:iconGravity="textStart"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
             tools:icon="@drawable/ic_add"
             tools:text="@string/dialog_movie_update_action_text" />
 
-    </LinearLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 </androidx.core.widget.NestedScrollView>
