@@ -61,6 +61,7 @@ class ProfileFragment : BindingFragment<FragmentProfileBinding>() {
         showNavRail(requireActivity())
         showBottomNav(requireActivity())
         setupObservers()
+        setupLogoutButton()
         setupSwipeToRefresh()
     }
 
@@ -131,12 +132,7 @@ class ProfileFragment : BindingFragment<FragmentProfileBinding>() {
         }
     }
 
-    private fun setupUserInfo(profile: ProfileResponse) {
-        with(profile) {
-            infoBinding.tvUsernameValue.text = username
-            infoBinding.tvRegistrationDateValue.text = utcToLocal(registration_date)
-        }
-
+    private fun setupLogoutButton() {
         infoBinding.btnLogout.setOnClickListener {
             MaterialAlertDialogBuilder(requireContext())
                 .setTitle(R.string.dialog_logout_title)
@@ -148,6 +144,13 @@ class ProfileFragment : BindingFragment<FragmentProfileBinding>() {
                     dialog.dismiss()
                 }
                 .show()
+        }
+    }
+
+    private fun setupUserInfo(profile: ProfileResponse) {
+        with(profile) {
+            infoBinding.tvUsernameValue.text = username
+            infoBinding.tvRegistrationDateValue.text = utcToLocal(registration_date)
         }
 
         infoBinding.btnDeleteAccount.setOnClickListener {
