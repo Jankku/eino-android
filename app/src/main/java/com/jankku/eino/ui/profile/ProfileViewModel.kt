@@ -58,7 +58,7 @@ class ProfileViewModel @Inject constructor(
                 if (response.data != null) {
                     sendEvent(Event.DeleteAccountSuccess(response.data.results[0].message))
                 } else {
-                    sendEvent(Event.DeleteAccountError("Couldn't delete account"))
+                    sendEvent(Event.DeleteAccountError(response.message.toString()))
                 }
             }
     }

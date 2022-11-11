@@ -2,61 +2,31 @@ package com.jankku.eino.data
 
 import com.jankku.eino.network.EinoApi
 import com.jankku.eino.network.request.BookRequest
-import com.jankku.eino.util.Result
+import com.jankku.eino.util.handleResponse
+import com.squareup.moshi.Moshi
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.flow.flowOf
 import kotlinx.coroutines.flow.flowOn
 import javax.inject.Inject
 
 class BookRepository @Inject constructor(
     private val api: EinoApi,
-    private val dataStoreManager: DataStoreManager
+    private val moshi: Moshi
 ) {
-    suspend fun searchBooks(query: String) = flowOf(
-        try {
-            Result.Success(api.searchBooks(query, dataStoreManager.getAccessToken()))
-        } catch (e: Exception) {
-            Result.Error(e.message)
-        }
-    ).flowOn(Dispatchers.IO)
+    suspend fun searchBooks(query: String) =
+        handleResponse(api.searchBooks(query), moshi).flowOn(Dispatchers.IO)
 
-    suspend fun getBooksByStatus(status: String) = flowOf(
-        try {
-            Result.Success(api.getBooksByStatus(status, dataStoreManager.getAccessToken()))
-        } catch (e: Exception) {
-            Result.Error(e.message)
-        }
-    ).flowOn(Dispatchers.IO)
+    suspend fun getBooksByStatus(status: String) =
+        handleResponse(api.getBooksByStatus(status), moshi).flowOn(Dispatchers.IO)
 
-    suspend fun getBookById(bookId: String) = flowOf(
-        try {
-            Result.Success(api.getBookById(bookId, dataStoreManager.getAccessToken()))
-        } catch (e: Exception) {
-            Result.Error(e.message)
-        }
-    ).flowOn(Dispatchers.IO)
+    suspend fun getBookById(id: String) =
+        handleResponse(api.getBookById(id), moshi).flowOn(Dispatchers.IO)
 
-    suspend fun addBook(book: BookRequest) = flowOf(
-        try {
-            Result.Success(api.addBook(book, dataStoreManager.getAccessToken()))
-        } catch (e: Exception) {
-            Result.Error(e.message)
-        }
-    ).flowOn(Dispatchers.IO)
+    suspend fun addBook(book: BookRequest) =
+        handleResponse(api.addBook(book), moshi).flowOn(Dispatchers.IO)
 
-    suspend fun editBook(id: String, book: BookRequest) = flowOf(
-        try {
-            Result.Success(api.updateBook(id, book, dataStoreManager.getAccessToken()))
-        } catch (e: Exception) {
-            Result.Error(e.message)
-        }
-    ).flowOn(Dispatchers.IO)
+    suspend fun editBook(id: String, book: BookRequest) =
+        handleResponse(api.updateBook(id, book), moshi).flowOn(Dispatchers.IO)
 
-    suspend fun deleteBook(id: String) = flowOf(
-        try {
-            Result.Success(api.deleteBook(id, dataStoreManager.getAccessToken()))
-        } catch (e: Exception) {
-            Result.Error(e.message)
-        }
-    ).flowOn(Dispatchers.IO)
+    suspend fun deleteBook(id: String) =
+        handleResponse(api.deleteBook(id), moshi).flowOn(Dispatchers.IO)
 }

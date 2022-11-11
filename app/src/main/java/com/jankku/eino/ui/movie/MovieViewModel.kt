@@ -119,11 +119,7 @@ class MovieViewModel @Inject constructor(
             .editMovie(movieId, movie)
             .catch { e -> sendEvent(Event.EditItemError(e.message.toString())) }
             .collect { response ->
-                if (response.data?.results?.get(0) != null) {
-                    sendEvent(Event.EditItemSuccess(response.data.results[0].message))
-                } else {
-                    sendEvent(Event.EditItemError(response.message.toString()))
-                }
+                sendEvent(Event.EditItemSuccess("Movie successfully edited"))
                 getMovieById()
             }
     }

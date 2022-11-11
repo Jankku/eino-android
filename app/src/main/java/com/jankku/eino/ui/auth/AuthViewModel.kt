@@ -4,7 +4,6 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.auth0.android.jwt.JWT
 import com.jankku.eino.data.AuthRepository
 import com.jankku.eino.data.DataStoreManager
 import com.jankku.eino.network.request.LoginRequest
@@ -12,9 +11,9 @@ import com.jankku.eino.network.request.RegisterRequest
 import com.jankku.eino.network.response.auth.LoginResponse
 import com.jankku.eino.network.response.auth.RegisterResponse
 import com.jankku.eino.util.Result
+import com.jankku.eino.util.isJWTNotExpired
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.catch
-import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.onStart
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -41,9 +40,10 @@ class AuthViewModel @Inject constructor(
 
     private fun isAlreadyLoggedIn() = viewModelScope.launch {
         try {
-            val accessToken = dataStoreManager.getAccessToken()
+            val tokensExist = dataStoreManager.tokensExist()
             val refreshToken = dataStoreManager.getRefreshToken()
-            _isLoggedIn.value = accessToken.isNotBlank() && refreshToken.isNotBlank()
+            val isValidTokens = tokensExist && isJWTNotExpired(refreshToken)
+            _isLoggedIn.value = isValidTokens
         } catch (e: Exception) {
             _isLoggedIn.value = false
         }
@@ -64,38 +64,21 @@ class AuthViewModel @Inject constructor(
         repository
             .login(body)
             .onStart { _loginResponse.value = Result.Loading() }
-            .catch { e -> _loginResponse.value = Result.Error(e.message) }
             .collect { response ->
                 try {
                     if (response.data == null) {
-                        _loginResponse.value = Result.Error(response.message)
+                        _loginResponse.value = Result.Error(response.message.toString())
                         return@collect
                     }
 
-                    val accessToken = JWT(response.data.accessToken)
-                    val refreshToken = JWT(response.data.refreshToken)
-                    val jwtUsername = accessToken.claims["username"]?.asString()
-                    val accessTokenExpirationTime = accessToken.expiresAt?.time
-                    val refreshTokenExpirationTime = refreshToken.expiresAt?.time
-
-                    if (jwtUsername != null &&
-                        accessTokenExpirationTime != null &&
-                        refreshTokenExpirationTime != null
-                    ) {
-                        dataStoreManager.run {
-                            setUsername(jwtUsername)
-                            setAccessToken(response.data.accessToken)
-                            setAccessTokenExpirationTime(accessTokenExpirationTime)
-                            setRefreshToken(response.data.refreshToken)
-                            setRefreshTokenExpirationTime(refreshTokenExpirationTime)
-                        }
-                        _loginResponse.value = Result.Success(response.data)
-                    } else {
-                        _loginResponse.value =
-                            Result.Error("Username or token expiration time is null")
+                    dataStoreManager.run {
+                        setAccessToken(response.data.accessToken)
+                        setRefreshToken(response.data.refreshToken)
                     }
+
+                    _loginResponse.value = Result.Success(response.data)
                 } catch (e: Exception) {
-                    _loginResponse.value = Result.Error(e.message)
+                    _loginResponse.value = Result.Error(e.toString())
                 }
             }
     }

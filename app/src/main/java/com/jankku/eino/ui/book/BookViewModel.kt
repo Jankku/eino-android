@@ -14,7 +14,6 @@ import com.jankku.eino.util.utcToLocal
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.catch
-import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.onStart
 import kotlinx.coroutines.flow.receiveAsFlow
 import kotlinx.coroutines.launch
@@ -117,11 +116,7 @@ class BookViewModel @Inject constructor(
             .editBook(bookId, book)
             .catch { e -> sendEvent(Event.EditItemError(e.message.toString())) }
             .collect { response ->
-                if (response.data?.results?.get(0) != null) {
-                    sendEvent(Event.EditItemSuccess(response.data.results[0].message))
-                } else {
-                    sendEvent(Event.EditItemError(response.message.toString()))
-                }
+                sendEvent(Event.EditItemSuccess("Book successfully edited"))
                 getBookById()
             }
     }
