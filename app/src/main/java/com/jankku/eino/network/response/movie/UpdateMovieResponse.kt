@@ -1,7 +1,7 @@
 package com.jankku.eino.network.response.movie
 
-import com.jankku.eino.network.response.Response
+import com.jankku.eino.data.model.Movie
 
 data class UpdateMovieResponse(
-    val results: List<Response>
+    val results: List<Movie>
 )
