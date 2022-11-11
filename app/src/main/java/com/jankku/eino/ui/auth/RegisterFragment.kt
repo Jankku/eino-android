@@ -15,7 +15,7 @@ import com.jankku.eino.ui.common.BindingFragment
 import com.jankku.eino.util.Result
 import com.jankku.eino.util.hideBottomNav
 import com.jankku.eino.util.navigateSafe
-import com.jankku.eino.util.showSnackBar
+import com.jankku.eino.util.showToast
 import dagger.hilt.android.AndroidEntryPoint
 
 private const val TAG = "RegisterFragment"
@@ -64,7 +64,7 @@ class RegisterFragment : BindingFragment<FragmentRegisterBinding>() {
                 }
                 is Result.Error -> {
                     binding.progressBar.hide()
-                    showSnackBar(binding.root, response.message.toString())
+                    requireContext().showToast(response.message.toString())
                 }
                 else -> {}
             }

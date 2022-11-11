@@ -16,7 +16,6 @@ import com.jankku.eino.ui.common.BindingFragment
 import com.jankku.eino.ui.common.MarginItemDecoration
 import com.jankku.eino.util.*
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 
 private const val TAG = "MovieListFragment"
@@ -169,21 +168,9 @@ class MovieListFragment : BindingFragment<FragmentItemListBinding>() {
                 .flowWithLifecycle(lifecycle, Lifecycle.State.STARTED)
                 .collect { event ->
                     when (event) {
-                        is Event.GetItemListError -> showSnackBar(
-                            binding.root,
-                            binding.fabAddItem,
-                            event.message
-                        )
-                        is Event.AddItemSuccess -> showSnackBar(
-                            binding.root,
-                            binding.fabAddItem,
-                            event.message
-                        )
-                        is Event.AddItemError -> showSnackBar(
-                            binding.root,
-                            binding.fabAddItem,
-                            event.message
-                        )
+                        is Event.GetItemListError -> requireContext().showToast(event.message)
+                        is Event.AddItemSuccess -> requireContext().showToast(event.message)
+                        is Event.AddItemError -> requireContext().showToast(event.message)
                         else -> {}
                     }
                 }

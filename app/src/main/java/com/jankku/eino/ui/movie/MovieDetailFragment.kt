@@ -18,7 +18,6 @@ import com.jankku.eino.ui.common.DetailAdapter
 import com.jankku.eino.ui.common.MarginItemDecoration
 import com.jankku.eino.util.*
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 
 private const val TAG = "MovieDetailFragment"
@@ -109,25 +108,13 @@ class MovieDetailFragment : BindingFragment<FragmentItemDetailBinding>() {
                 .flowWithLifecycle(lifecycle, Lifecycle.State.STARTED)
                 .collect { event ->
                     when (event) {
-                        is Event.EditItemSuccess -> showSnackBar(
-                            binding.root,
-                            binding.fabEditItem,
-                            event.message
-                        )
-                        is Event.EditItemError -> showSnackBar(
-                            binding.root,
-                            binding.fabEditItem,
-                            event.message
-                        )
+                        is Event.EditItemSuccess -> requireContext().showToast(event.message)
+                        is Event.EditItemError -> requireContext().showToast(event.message)
                         is Event.DeleteItemSuccess -> {
-                            showSnackBar(binding.root, binding.fabEditItem, event.message)
+                            requireContext().showToast(event.message)
                             findNavController().navigateUp()
                         }
-                        is Event.DeleteItemError -> showSnackBar(
-                            binding.root,
-                            binding.fabEditItem,
-                            event.message
-                        )
+                        is Event.DeleteItemError -> requireContext().showToast(event.message)
                         else -> {}
                     }
                 }

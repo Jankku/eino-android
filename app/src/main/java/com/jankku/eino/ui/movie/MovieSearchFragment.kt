@@ -18,7 +18,6 @@ import com.jankku.eino.ui.common.BindingFragment
 import com.jankku.eino.ui.common.MarginItemDecoration
 import com.jankku.eino.util.*
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 
 private const val TAG = "MovieSearchFragment"
@@ -126,7 +125,7 @@ class MovieSearchFragment : BindingFragment<FragmentMovieSearchBinding>() {
                 .flowWithLifecycle(lifecycle, Lifecycle.State.STARTED)
                 .collect { event ->
                     when (event) {
-                        is Event.SearchError -> showSnackBar(binding.root, event.message)
+                        is Event.SearchError -> requireContext().showToast(event.message)
                         else -> {}
                     }
                 }

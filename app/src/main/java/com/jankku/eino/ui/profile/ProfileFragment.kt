@@ -4,6 +4,7 @@ import android.content.DialogInterface
 import android.graphics.Color
 import android.os.Bundle
 import android.view.*
+import android.widget.Toast
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.flowWithLifecycle
@@ -15,9 +16,9 @@ import com.github.mikephil.charting.components.XAxis
 import com.github.mikephil.charting.data.BarData
 import com.github.mikephil.charting.data.BarDataSet
 import com.github.mikephil.charting.data.BarEntry
+import com.github.mikephil.charting.formatter.ValueFormatter
 import com.google.android.material.color.MaterialColors
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
-import com.google.android.material.snackbar.BaseTransientBottomBar
 import com.jankku.eino.NavGraphDirections
 import com.jankku.eino.R
 import com.jankku.eino.databinding.FragmentProfileBinding
@@ -105,25 +106,16 @@ class ProfileFragment : BindingFragment<FragmentProfileBinding>() {
                 .flowWithLifecycle(lifecycle, Lifecycle.State.STARTED)
                 .collect { event ->
                     when (event) {
-                        is Event.ProfileError -> showSnackBar(binding.root, event.message)
+                        is Event.ProfileError -> requireContext().showToast(event.message)
                         is Event.LogoutSuccess -> {
                             findNavController().navigateSafe(NavGraphDirections.actionGlobalAuthGraph())
                         }
                         is Event.LogoutError -> {
-                            showSnackBar(
-                                requireView(),
-                                requireView(),
-                                event.message,
-                                BaseTransientBottomBar.LENGTH_LONG
-                            )
+                            requireContext().showToast(event.message, Toast.LENGTH_LONG)
                         }
-                        is Event.DeleteAccountError -> showSnackBar(binding.root, event.message)
+                        is Event.DeleteAccountError -> requireContext().showToast(event.message)
                         is Event.DeleteAccountSuccess -> {
-                            showSnackBar(
-                                binding.root,
-                                event.message,
-                                BaseTransientBottomBar.LENGTH_LONG
-                            )
+                            requireContext().showToast(event.message, Toast.LENGTH_LONG)
                             findNavController().navigateSafe(NavGraphDirections.actionGlobalAuthGraph())
                         }
                         else -> {}
@@ -209,7 +201,9 @@ class ProfileFragment : BindingFragment<FragmentProfileBinding>() {
             color = currentAccentColor
             valueTextColor = currentTextColor
             valueTextSize = 13f
-            valueFormatter = TableValueFormatter()
+            valueFormatter = object : ValueFormatter() {
+                override fun getFormattedValue(value: Float): String = "%.0f".format(value)
+            }
         }
 
         chart.apply {
