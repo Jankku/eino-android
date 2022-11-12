@@ -21,8 +21,8 @@ android {
         applicationId "com.jankku.eino"
         minSdk 23
         targetSdk 33
-        versionCode 6
-        versionName "0.8"
+        versionCode 7
+        versionName "0.9"
         buildConfigField "String", "baseUrl", baseUrlProperties['baseUrl']
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
@@ -31,10 +31,10 @@ android {
             try {
                 storeFile file(signingProperties['storeFile'])
                 storePassword signingProperties['storePassword']
-                keyAlias "key0"
+                keyAlias signingProperties['keyAlias']
                 keyPassword signingProperties['keyPassword']
             } catch (ignored) {
-                throw new InvalidPropertiesFormatException("You should define 'storeFile', 'storePassword' and 'keyPassword' in signing.properties.")
+                throw new InvalidPropertiesFormatException("Define 'storeFile', 'storePassword', 'keyAlias' and 'keyPassword' in signing.properties.")
             }
         }
     }
