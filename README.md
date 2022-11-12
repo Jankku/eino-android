@@ -47,10 +47,17 @@ Now you can build a release build.
 ![Movies](screenshots/Movies.png "Movies")
 
 ### Search
+
 ![Search](screenshots/Search.png "Search")
 
 ### Profile
+
 ![Profile](screenshots/Profile.png "Profile")
 
 ### Settings
+
 ![Settings](screenshots/Settings.png "Settings")
+
+## License
+
+Licensed under the [MIT License](https://github.com/Jankku/eino-android/blob/master/LICENSE.md).
