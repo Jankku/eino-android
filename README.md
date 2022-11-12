@@ -16,13 +16,24 @@ Get the app from [releases page](https://github.com/Jankku/eino-android/releases
 
 ## Building
 
-Create `baseurl.properties` file to root folder with the following content:
+Create `baseurl.properties` file to the root folder with the following content:
 
 ```properties
 baseUrl="<backend url>"
 ```
 
-And then build the project.
+Now you can a debug build. If you want a release build, do the following:
+
+Create `signing.properties` file to the root folder with the following content:
+
+```properties
+storeFile=<path to keystore>
+keyAlias=
+storePassword=
+keyPassword=
+```
+
+Now you can build a release build.
 
 ## Screenshots
 
