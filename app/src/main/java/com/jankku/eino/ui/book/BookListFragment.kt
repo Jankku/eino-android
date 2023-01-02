@@ -1,6 +1,7 @@
 package com.jankku.eino.ui.book
 
 import android.os.Bundle
+import android.util.Log
 import android.view.*
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Lifecycle
@@ -61,6 +62,7 @@ class BookListFragment : BindingFragment<FragmentItemListBinding>() {
 
     private fun setupAdapter() {
         _adapter = BookListAdapter { bookId ->
+            Log.d(TAG, bookId)
             findNavController().navigateSafe(
                 BookListFragmentDirections.actionBookListFragmentToBookDetailFragment(
                     bookId
@@ -141,11 +143,7 @@ class BookListFragment : BindingFragment<FragmentItemListBinding>() {
         }
 
         viewModel.bookList.observe(viewLifecycleOwner) { list ->
-            if (list.isNotEmpty()) {
-                setupAdapter()
-                binding.rvList.swapAdapter(adapter, false)
-                adapter.submitList(list)
-            }
+            adapter.submitList(list)
             (requireActivity() as? MainActivity)?.setCustomTitle(
                 getString(
                     R.string.appbar_books_title,

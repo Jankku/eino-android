@@ -150,11 +150,7 @@ class MovieListFragment : BindingFragment<FragmentItemListBinding>() {
         }
 
         viewModel.movieList.observe(viewLifecycleOwner) { list ->
-            if (list.isNotEmpty()) {
-                setupAdapter()
-                binding.rvList.swapAdapter(adapter, false)
-                adapter.submitList(list)
-            }
+            adapter.submitList(list)
             (requireActivity() as? MainActivity)?.setCustomTitle(
                 getString(
                     R.string.appbar_movies_title,
