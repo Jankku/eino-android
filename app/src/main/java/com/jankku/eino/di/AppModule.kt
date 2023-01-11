@@ -46,6 +46,7 @@ object AppModule {
     @Singleton
     fun provideOkHttpClient(dataStoreManager: DataStoreManager, moshi: Moshi): OkHttpClient =
         OkHttpClient.Builder()
+            .retryOnConnectionFailure(true)
             .addInterceptor(HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.BASIC))
             .addNetworkInterceptor(TokenInterceptor(dataStoreManager))
             .addInterceptor(TokenRenewInterceptor(dataStoreManager, moshi))

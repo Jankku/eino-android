@@ -17,7 +17,9 @@ class TokenInterceptor @Inject constructor(
         val oldRequest = chain.request()
         var newRequest: Request? = null
 
-        return try {
+        try {
+            if (isAuthRoute(oldRequest)) return chain.proceed(oldRequest)
+
             runBlocking {
                 if (dataStoreManager.tokensExist()) {
                     val accessToken = dataStoreManager.getAccessToken()
@@ -26,14 +28,14 @@ class TokenInterceptor @Inject constructor(
                         .build()
                 }
             }
-            val response =
-                if (newRequest != null) chain.proceed(newRequest!!) else buildErrorResponse(
-                    oldRequest,
-                    Exception("Error")
-                )
-            response
+            return if (newRequest != null) chain.proceed(newRequest!!) else buildErrorResponse(
+                oldRequest,
+                Exception("Error")
+            )
         } catch (e: Exception) {
-            buildErrorResponse(oldRequest, e)
+            return buildErrorResponse(oldRequest, e)
         }
     }
 }
+
+private fun isAuthRoute(request: Request) = request.url.pathSegments.contains("auth")

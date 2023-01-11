@@ -22,7 +22,7 @@ fun <T> handleResponse(response: Response<T>, moshi: Moshi): Flow<Result<T>> {
 fun <T> Response<T>.getError(moshi: Moshi): ApiError {
     return try {
         val error = this.errorBody()!!.string()
-        val errorList = moshi.adapter(ApiErrorResponse::class.java).fromJson(error)
+        val errorList = moshi.adapter(ApiErrorResponse::class.java).lenient().fromJson(error)
         errorList!!.errors[0]
     } catch (e: Exception) {
         ApiError("Error", e.message ?: e.localizedMessage)
