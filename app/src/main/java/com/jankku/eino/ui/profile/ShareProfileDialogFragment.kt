@@ -113,7 +113,7 @@ class ShareProfileDialogFragment : BottomSheetDialogFragment() {
 
             bmpUri = FileProvider.getUriForFile(
                 requireContext(),
-                "com.jankku.eino.fileprovider",
+                "${requireContext().packageName}.fileprovider",
                 file
             )
         } catch (e: IOException) {
