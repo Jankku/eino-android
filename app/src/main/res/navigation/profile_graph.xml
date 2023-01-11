@@ -19,10 +19,18 @@
         <action
             android:id="@+id/action_profileFragment_to_deleteAccountDialogFragment"
             app:destination="@id/deleteAccountDialogFragment" />
+        <action
+            android:id="@+id/action_profileFragment_to_shareProfileDialogFragment"
+            app:destination="@id/shareProfileDialogFragment" />
     </fragment>
     <dialog
         android:id="@+id/deleteAccountDialogFragment"
         android:name="com.jankku.eino.ui.profile.DeleteAccountDialogFragment"
         android:label="@string/dialog_delete_account_title"
         tools:layout="@layout/fragment_delete_account_dialog" />
+    <dialog
+        android:id="@+id/shareProfileDialogFragment"
+        android:name="com.jankku.eino.ui.profile.ShareProfileDialogFragment"
+        android:label="@string/dialog_share_profile_title"
+        tools:layout="@layout/fragment_share_profile_dialog" />
 </navigation>

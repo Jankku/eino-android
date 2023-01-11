@@ -14,6 +14,8 @@ class ProfileRepository @Inject constructor(
 ) {
     suspend fun getProfile() = handleResponse(api.getProfile(), moshi).flowOn(Dispatchers.IO)
 
+    suspend fun generateShare() = handleResponse(api.generateShare(), moshi).flowOn(Dispatchers.IO)
+
     suspend fun deleteAccount(body: DeleteAccountRequest) =
         handleResponse(api.deleteAccount(body), moshi).flowOn(Dispatchers.IO)
 }

@@ -66,6 +66,11 @@
     <string name="dialog_logout_btn_positive_text">Log out</string>
     <string name="dialog_logout_btn_negative_text">Cancel</string>
 
+    <!-- Share profile dialog -->
+    <string name="dialog_share_profile_title">Share profile</string>
+    <string name="dialog_share_profile_btn_copy_link">Copy link</string>
+    <string name="dialog_share_profile_btn_share_image">Share image</string>
+
     <!-- Delete account dialog -->
     <string name="dialog_delete_account_title">Are you sure you want to delete account?</string>
     <string name="dialog_delete_account_warning">NOTE: THIS ACTION IS IRREVERSIBLE!</string>
@@ -118,6 +123,7 @@
     <string name="profile_user_info_username">Username</string>
     <string name="profile_user_info_registration_date">Registration date</string>
     <string name="profile_user_info_btn_logout_text">Log out</string>
+    <string name="profile_user_info_btn_share_text">Share</string>
     <string name="profile_user_info_btn_delete_account_text">Delete account</string>
     <string name="profile_stats_book_title">Book stats</string>
     <string name="profile_stats_movie_title">Movie stats</string>

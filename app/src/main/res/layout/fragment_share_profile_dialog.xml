@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:divider="@drawable/divider"
+    android:orientation="vertical"
+    android:padding="@dimen/spacing_default"
+    android:showDividers="middle">
+
+    <TextView
+        android:id="@+id/tvTitle"
+        style="@style/TextAppearance.Eino.TitleLarge"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingBottom="@dimen/spacing_half"
+        android:text="@string/dialog_share_profile_title" />
+
+    <RelativeLayout
+        android:id="@+id/rlImage"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:id="@+id/ivShare"
+            android:layout_width="match_parent"
+            android:layout_height="250dp" />
+
+        <ProgressBar
+            android:id="@+id/pbImage"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:indeterminate="true"
+            android:visibility="gone" />
+    </RelativeLayout>
+
+    <Button
+        android:id="@+id/btnCopyLink"
+        style="@style/Widget.Material3.Button.TextButton.Icon"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:enabled="false"
+        android:text="@string/dialog_share_profile_btn_copy_link"
+        app:icon="@drawable/ic_content_copy" />
+
+    <Button
+        android:id="@+id/btnShareImage"
+        style="@style/Widget.Material3.Button.TextButton.Icon"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:enabled="false"
+        android:text="@string/dialog_share_profile_btn_share_image"
+        app:icon="@drawable/ic_share" />
+
+</LinearLayout>

@@ -148,6 +148,10 @@ class ProfileFragment : BindingFragment<FragmentProfileBinding>() {
         infoBinding.btnDeleteAccount.setOnClickListener {
             findNavController().navigateSafe(R.id.action_profileFragment_to_deleteAccountDialogFragment)
         }
+
+        infoBinding.btnShare.setOnClickListener {
+            findNavController().navigateSafe(R.id.action_profileFragment_to_shareProfileDialogFragment)
+        }
     }
 
     private fun setupBookStats(stats: BookStats) {

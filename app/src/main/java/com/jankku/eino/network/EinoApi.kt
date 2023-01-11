@@ -8,6 +8,7 @@ import com.jankku.eino.network.response.book.*
 import com.jankku.eino.network.response.movie.*
 import com.jankku.eino.network.response.profile.DeleteAccountResponse
 import com.jankku.eino.network.response.profile.ProfileResponse
+import com.jankku.eino.network.response.profile.ShareProfileResponse
 import com.jankku.eino.util.Constant.REQUEST_HEADERS
 import retrofit2.Response
 import retrofit2.http.*
@@ -99,4 +100,8 @@ interface EinoApi {
     @Headers(REQUEST_HEADERS)
     @POST("profile/deleteaccount")
     suspend fun deleteAccount(@Body password: DeleteAccountRequest): Response<DeleteAccountResponse>
+
+    @Headers(REQUEST_HEADERS)
+    @GET("profile/share")
+    suspend fun generateShare(): Response<ShareProfileResponse>
 }

@@ -13,6 +13,7 @@ sealed class Event {
     data class LogoutError(val message: String) : Event()
     data class SearchError(val message: String) : Event()
     data class ProfileError(val message: String) : Event()
+    data class ShareError(val message: String) : Event()
     data class DeleteAccountSuccess(val message: String) : Event()
     data class DeleteAccountError(val message: String) : Event()
 }

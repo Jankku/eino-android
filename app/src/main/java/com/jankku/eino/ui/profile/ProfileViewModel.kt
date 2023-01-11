@@ -7,6 +7,7 @@ import com.jankku.eino.data.AuthRepository
 import com.jankku.eino.data.ProfileRepository
 import com.jankku.eino.network.request.DeleteAccountRequest
 import com.jankku.eino.network.response.profile.ProfileResponse
+import com.jankku.eino.network.response.profile.ShareProfileResponse
 import com.jankku.eino.util.Event
 import com.jankku.eino.util.Result
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -30,6 +31,9 @@ class ProfileViewModel @Inject constructor(
     private val _profile = MutableLiveData<Result<ProfileResponse>>()
     val profile get() = _profile
 
+    private val _share = MutableLiveData<Result<ShareProfileResponse>>()
+    val share get() = _share
+
     init {
         getProfile()
     }
@@ -40,6 +44,14 @@ class ProfileViewModel @Inject constructor(
             .onStart { _profile.value = Result.Loading() }
             .catch { e -> sendEvent(Event.ProfileError(e.message.toString())) }
             .collect { response -> _profile.value = response }
+    }
+
+    fun generateShare() = viewModelScope.launch {
+        profileRepository
+            .generateShare()
+            .onStart { _share.value = Result.Loading() }
+            .catch { e -> sendEvent(Event.ShareError(e.message.toString())) }
+            .collect { response -> _share.value = response }
     }
 
     fun logOut() = viewModelScope.launch {
