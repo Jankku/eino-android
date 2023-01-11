@@ -5,6 +5,9 @@ import com.jankku.eino.network.response.ApiErrorResponse
 import com.squareup.moshi.Moshi
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flowOf
+import okhttp3.Protocol
+import okhttp3.Request
+import okhttp3.ResponseBody.Companion.toResponseBody
 import retrofit2.Response
 
 fun <T> handleResponse(response: Response<T>, moshi: Moshi): Flow<Result<T>> {
@@ -22,7 +25,16 @@ fun <T> Response<T>.getError(moshi: Moshi): ApiError {
         val errorList = moshi.adapter(ApiErrorResponse::class.java).fromJson(error)
         errorList!!.errors[0]
     } catch (e: Exception) {
-        ApiError("unknown", "Unknown error")
+        ApiError("Error", e.message ?: e.localizedMessage)
     }
 }
+
+fun buildErrorResponse(request: Request, exception: Exception) =
+    okhttp3.Response.Builder()
+        .request(request)
+        .protocol(Protocol.HTTP_1_1)
+        .code(400)
+        .body((exception.message ?: exception.localizedMessage).toResponseBody())
+        .message(exception.message ?: exception.localizedMessage)
+        .build()
 

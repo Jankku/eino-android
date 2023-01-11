@@ -6,6 +6,7 @@ import com.jankku.eino.data.DataStoreManager
 import com.jankku.eino.network.request.RefreshTokenRequest
 import com.jankku.eino.network.response.ApiError
 import com.jankku.eino.network.response.ApiErrorResponse
+import com.jankku.eino.util.buildErrorResponse
 import com.jankku.eino.util.isJWTExpired
 import com.jankku.eino.util.isJWTNotExpired
 import com.squareup.moshi.Moshi
@@ -32,24 +33,28 @@ class TokenRenewInterceptor @Inject constructor(
         .create(EinoApi::class.java)
 
     override fun intercept(chain: Interceptor.Chain): Response {
-        val originalResponse = chain.proceed(chain.request())
-        if (originalResponse.isSuccessful) return originalResponse
+        return try {
+            val originalResponse = chain.proceed(chain.request())
+            if (originalResponse.isSuccessful) return originalResponse
 
-        if (getError(originalResponse).name != "authorization_error") return originalResponse
+            if (getError(originalResponse).name != "authorization_error") return originalResponse
 
-        var newResponse: Response? = null
-        runBlocking {
-            if (!shouldGetNewAccessToken()) return@runBlocking originalResponse
+            var newResponse: Response? = null
+            runBlocking {
+                if (!shouldGetNewAccessToken()) return@runBlocking originalResponse
 
-            val refreshToken = dataStoreManager.getRefreshToken()
-            val newAccessToken = getNewAccessToken(refreshToken)
-            if (newAccessToken?.isBlank() == true) return@runBlocking originalResponse
+                val refreshToken = dataStoreManager.getRefreshToken()
+                val newAccessToken = getNewAccessToken(refreshToken)
+                if (newAccessToken?.isBlank() == true) return@runBlocking originalResponse
 
-            val newRequest = originalResponse.request.newBuilder().build()
-            newResponse = chain.proceed(newRequest)
+                val newRequest = originalResponse.request.newBuilder().build()
+                newResponse = chain.proceed(newRequest)
+            }
+
+            newResponse ?: originalResponse
+        } catch (e: Exception) {
+            buildErrorResponse(chain.request(), e)
         }
-
-        return newResponse ?: originalResponse
     }
 
     private fun getError(response: Response): ApiError {
@@ -59,7 +64,7 @@ class TokenRenewInterceptor @Inject constructor(
             apiError
         } catch (e: Exception) {
             Log.e(TAG, e.toString())
-            ApiError("unknown", "Unknown error")
+            ApiError("Error", e.message ?: e.localizedMessage)
         }
 
     }
