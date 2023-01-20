@@ -61,10 +61,10 @@ class TokenRenewInterceptor @Inject constructor(
         return try {
             val body = response.peekBody(2048).string()
             val apiError =
-                moshi.adapter(ApiErrorResponse::class.java).lenient().fromJson(body)!!.errors[0]
+                moshi.adapter(ApiErrorResponse::class.java).fromJson(body)!!.errors[0]
             apiError
         } catch (e: Exception) {
-            Log.e(TAG, e.toString())
+            Log.e(TAG, e.stackTraceToString())
             ApiError("Error", e.message ?: e.localizedMessage)
         }
 

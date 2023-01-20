@@ -19,6 +19,7 @@ import retrofit2.Retrofit
 import retrofit2.converter.moshi.MoshiConverterFactory
 import javax.inject.Singleton
 
+
 @Module
 @InstallIn(SingletonComponent::class)
 object AppModule {
@@ -46,10 +47,10 @@ object AppModule {
     @Singleton
     fun provideOkHttpClient(dataStoreManager: DataStoreManager, moshi: Moshi): OkHttpClient =
         OkHttpClient.Builder()
-            .retryOnConnectionFailure(true)
             .addInterceptor(HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.BASIC))
-            .addNetworkInterceptor(TokenInterceptor(dataStoreManager))
+            .addInterceptor(TokenInterceptor(dataStoreManager))
             .addInterceptor(TokenRenewInterceptor(dataStoreManager, moshi))
+            .retryOnConnectionFailure(true)
             .build()
 
     @Provides
