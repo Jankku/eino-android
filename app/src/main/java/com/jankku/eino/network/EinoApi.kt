@@ -7,6 +7,7 @@ import com.jankku.eino.network.response.auth.RegisterResponse
 import com.jankku.eino.network.response.book.*
 import com.jankku.eino.network.response.movie.*
 import com.jankku.eino.network.response.profile.DeleteAccountResponse
+import com.jankku.eino.network.response.profile.ExportAccountResponse
 import com.jankku.eino.network.response.profile.ProfileResponse
 import com.jankku.eino.network.response.profile.ShareProfileResponse
 import com.jankku.eino.util.Constant.REQUEST_HEADERS
@@ -100,6 +101,10 @@ interface EinoApi {
     @Headers(REQUEST_HEADERS)
     @POST("profile/deleteaccount")
     suspend fun deleteAccount(@Body password: DeleteAccountRequest): Response<DeleteAccountResponse>
+
+    @Headers(REQUEST_HEADERS)
+    @POST("profile/export")
+    suspend fun exportAccount(@Body password: ExportAccountRequest): Response<ExportAccountResponse>
 
     @Headers(REQUEST_HEADERS)
     @GET("profile/share")

@@ -5,5 +5,6 @@ data class ShareProfileResponse(
 )
 
 data class Share(
-    val share_id: String
+    val share_id: String,
+    val created_on: String?
 )

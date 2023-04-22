@@ -16,4 +16,5 @@ sealed class Event {
     data class ShareError(val message: String) : Event()
     data class DeleteAccountSuccess(val message: String) : Event()
     data class DeleteAccountError(val message: String) : Event()
+    data class ExportAccountError(val message: String) : Event()
 }

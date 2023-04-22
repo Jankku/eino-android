@@ -69,6 +69,7 @@
                 app:layout_constraintTop_toBottomOf="@+id/tvRegistrationDateTitle"
                 tools:text="2022-01-27T18:48:34.000Z" />
 
+
             <Button
                 android:id="@+id/btnLogout"
                 style="@style/Widget.Material3.Button.IconButton.Outlined"
@@ -101,6 +102,20 @@
                 app:icon="@drawable/ic_delete"
                 app:layout_constraintStart_toEndOf="@id/btnShare"
                 app:layout_constraintTop_toBottomOf="@+id/tvRegistrationDateValue" />
+
+            <Button
+                android:id="@+id/btnExport"
+                style="@style/Widget.Material3.Button.IconButton.Outlined"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/spacing_half"
+                android:text="@string/profile_user_info_btn_export_text"
+                app:icon="@drawable/ic_download"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/btnLogout" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </com.google.android.material.card.MaterialCardView>

@@ -22,6 +22,9 @@
         <action
             android:id="@+id/action_profileFragment_to_shareProfileDialogFragment"
             app:destination="@id/shareProfileDialogFragment" />
+        <action
+            android:id="@+id/action_profileFragment_to_exportDialogFragment"
+            app:destination="@id/exportDialogFragment" />
     </fragment>
     <dialog
         android:id="@+id/deleteAccountDialogFragment"
@@ -33,4 +36,8 @@
         android:name="com.jankku.eino.ui.profile.ShareProfileDialogFragment"
         android:label="@string/dialog_share_profile_title"
         tools:layout="@layout/fragment_share_profile_dialog" />
+    <dialog
+        android:id="@+id/exportDialogFragment"
+        android:name="com.jankku.eino.ui.profile.ExportDialogFragment"
+        android:label="@string/dialog_export_account_title" />
 </navigation>

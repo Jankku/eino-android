@@ -77,6 +77,11 @@
     <string name="dialog_delete_account_message">This action will permanently delete your account and all associated data. Please confirm your password before proceeding.</string>
     <string name="dialog_delete_account_btn_text">Delete account</string>
 
+    <!-- Export account dialog -->
+    <string name="dialog_export_account_title">Export account data</string>
+    <string name="dialog_export_account_message">All account data is downloaded as a JSON file. Please confirm your password to continue.</string>
+    <string name="dialog_export_account_btn_text">Export</string>
+
     <!-- Sort dialog -->
     <string name="dialog_sort_title">Sort by</string>
     <string name="dialog_sort_status_title">Status</string>
@@ -125,6 +130,7 @@
     <string name="profile_user_info_btn_logout_text">Log out</string>
     <string name="profile_user_info_btn_share_text">Share</string>
     <string name="profile_user_info_btn_delete_account_text">Delete account</string>
+    <string name="profile_user_info_btn_export_text">Export</string>
     <string name="profile_stats_book_title">Book stats</string>
     <string name="profile_stats_movie_title">Movie stats</string>
     <string name="profile_stats_score_distribution">Score distribution</string>
@@ -163,4 +169,6 @@
     <string name="settings_github_key" translatable="false">github</string>
     <string name="settings_github_title" translatable="false">GitHub</string>
     <string name="settings_github_summary" translatable="false">https://github.com/jankku/eino-android</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

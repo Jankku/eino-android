@@ -6,6 +6,8 @@ import androidx.lifecycle.viewModelScope
 import com.jankku.eino.data.AuthRepository
 import com.jankku.eino.data.ProfileRepository
 import com.jankku.eino.network.request.DeleteAccountRequest
+import com.jankku.eino.network.request.ExportAccountRequest
+import com.jankku.eino.network.response.profile.ExportAccountResponse
 import com.jankku.eino.network.response.profile.ProfileResponse
 import com.jankku.eino.network.response.profile.ShareProfileResponse
 import com.jankku.eino.util.Event
@@ -33,6 +35,9 @@ class ProfileViewModel @Inject constructor(
 
     private val _share = MutableLiveData<Result<ShareProfileResponse>>()
     val share get() = _share
+
+    private val _accountData = MutableLiveData<Result<ExportAccountResponse>>()
+    val accountData get() = _accountData
 
     init {
         getProfile()
@@ -73,6 +78,14 @@ class ProfileViewModel @Inject constructor(
                     sendEvent(Event.DeleteAccountError(response.message.toString()))
                 }
             }
+    }
+
+    fun exportAccount(password: String) = viewModelScope.launch {
+        val body = ExportAccountRequest(password)
+        profileRepository
+            .exportAccount(body)
+            .catch { e -> sendEvent(Event.ExportAccountError(e.message.toString())) }
+            .collect { response -> _accountData.value = response }
     }
 
     fun sendEvent(event: Event) = viewModelScope.launch {

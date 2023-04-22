@@ -2,6 +2,7 @@ package com.jankku.eino.data
 
 import com.jankku.eino.network.EinoApi
 import com.jankku.eino.network.request.DeleteAccountRequest
+import com.jankku.eino.network.request.ExportAccountRequest
 import com.jankku.eino.util.handleResponse
 import com.squareup.moshi.Moshi
 import kotlinx.coroutines.Dispatchers
@@ -18,4 +19,7 @@ class ProfileRepository @Inject constructor(
 
     suspend fun deleteAccount(body: DeleteAccountRequest) =
         handleResponse(api.deleteAccount(body), moshi).flowOn(Dispatchers.IO)
+
+    suspend fun exportAccount(body: ExportAccountRequest) =
+        handleResponse(api.exportAccount(body), moshi).flowOn(Dispatchers.IO)
 }

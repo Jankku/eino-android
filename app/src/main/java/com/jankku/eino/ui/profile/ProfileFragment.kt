@@ -118,6 +118,7 @@ class ProfileFragment : BindingFragment<FragmentProfileBinding>() {
                             requireContext().showToast(event.message, Toast.LENGTH_LONG)
                             findNavController().navigateSafe(NavGraphDirections.actionGlobalAuthGraph())
                         }
+                        is Event.ExportAccountError -> requireContext().showToast(event.message)
                         else -> {}
                     }
                 }
@@ -151,6 +152,10 @@ class ProfileFragment : BindingFragment<FragmentProfileBinding>() {
 
         infoBinding.btnShare.setOnClickListener {
             findNavController().navigateSafe(R.id.action_profileFragment_to_shareProfileDialogFragment)
+        }
+
+        infoBinding.btnExport.setOnClickListener {
+            findNavController().navigateSafe(R.id.action_profileFragment_to_exportDialogFragment)
         }
     }
 
