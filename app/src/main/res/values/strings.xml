@@ -35,6 +35,9 @@
     <string name="validation_username_length_invalid">Username length should be between 3–255 characters</string>
     <string name="validation_password_length_invalid">Password length should be between 8–255 characters</string>
 
+    <!-- List item -->
+    <string name="list_item_image_description">Item image</string>
+
     <!-- Common dialogs -->
     <string name="dialog_status_hint">Status</string>
     <string name="dialog_score_hint">Score</string>
@@ -42,6 +45,7 @@
     <string name="dialog_start_date_picker_title">Started</string>
     <string name="dialog_end_date_picker_title">Finished</string>
     <string name="dialog_year_hint">Publication year</string>
+    <string name="dialog_image_url_hint">Image URL</string>
 
     <!-- Book dialogs -->
     <string name="dialog_book_add_action_text">Add book</string>
@@ -99,7 +103,6 @@
 
     <string name="dialog_sort_score_ascending">Ascending</string>
     <string name="dialog_sort_score_descending">Descending</string>
-
 
     <!-- Item list -->
     <string name="action_sort_label">Sort</string>
@@ -169,6 +172,4 @@
     <string name="settings_github_key" translatable="false">github</string>
     <string name="settings_github_title" translatable="false">GitHub</string>
     <string name="settings_github_summary" translatable="false">https://github.com/jankku/eino-android</string>
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

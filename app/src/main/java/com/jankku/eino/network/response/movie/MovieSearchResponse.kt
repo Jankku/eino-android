@@ -1,7 +1,7 @@
 package com.jankku.eino.network.response.movie
 
-import com.jankku.eino.data.model.MovieSearchItem
+import com.jankku.eino.data.model.Movie
 
 data class MovieSearchResponse(
-    val results: List<MovieSearchItem>
+    val results: List<Movie>
 )

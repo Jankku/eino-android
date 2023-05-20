@@ -71,7 +71,7 @@ class MovieSearchFragment : BindingFragment<FragmentMovieSearchBinding>() {
     }
 
     private fun setupRecyclerView() {
-        _adapter = MovieSearchAdapter { movieId ->
+        _adapter = MovieSearchAdapter(requireContext()) { movieId ->
             findNavController().navigateSafe(
                 MovieSearchFragmentDirections.actionMovieSearchFragmentToMovieDetailFragment(
                     movieId

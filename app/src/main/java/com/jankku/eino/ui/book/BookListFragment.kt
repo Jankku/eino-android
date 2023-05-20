@@ -39,7 +39,6 @@ class BookListFragment : BindingFragment<FragmentItemListBinding>() {
         showNavRail(requireActivity())
         showBottomNav(requireActivity())
         setupObservers()
-        setupAdapter()
         setupRecyclerView()
         setupSwipeToRefresh()
     }
@@ -60,8 +59,8 @@ class BookListFragment : BindingFragment<FragmentItemListBinding>() {
         _adapter = null
     }
 
-    private fun setupAdapter() {
-        _adapter = BookListAdapter { bookId ->
+    private fun setupRecyclerView() {
+        _adapter = BookListAdapter(requireContext()) { bookId ->
             Log.d(TAG, bookId)
             findNavController().navigateSafe(
                 BookListFragmentDirections.actionBookListFragmentToBookDetailFragment(
@@ -72,9 +71,7 @@ class BookListFragment : BindingFragment<FragmentItemListBinding>() {
 
         adapter.stateRestorationPolicy =
             RecyclerView.Adapter.StateRestorationPolicy.PREVENT_WHEN_EMPTY
-    }
 
-    private fun setupRecyclerView() {
         binding.rvList.let {
             it.setHasFixedSize(true)
             it.addOnScrollListener(HideFabOnScroll(binding.fabAddItem))

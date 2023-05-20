@@ -57,21 +57,8 @@ class MovieListFragment : BindingFragment<FragmentItemListBinding>() {
         _adapter = null
     }
 
-    private fun setupAdapter() {
-        _adapter = MovieListAdapter { movieId ->
-            findNavController().navigateSafe(
-                MovieListFragmentDirections.actionMovieListFragmentToMovieDetailFragment(
-                    movieId
-                )
-            )
-        }
-
-        adapter.stateRestorationPolicy =
-            RecyclerView.Adapter.StateRestorationPolicy.PREVENT_WHEN_EMPTY
-    }
-
     private fun setupRecyclerView() {
-        _adapter = MovieListAdapter { movieId ->
+        _adapter = MovieListAdapter(requireContext()) { movieId ->
             findNavController().navigateSafe(
                 MovieListFragmentDirections.actionMovieListFragmentToMovieDetailFragment(
                     movieId
@@ -177,6 +164,7 @@ class MovieListFragment : BindingFragment<FragmentItemListBinding>() {
         inflater.inflate(R.menu.menu_item_list, menu)
     }
 
+    @Deprecated("Deprecated in Java")
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         return when (item.itemId) {
             R.id.action_search -> {

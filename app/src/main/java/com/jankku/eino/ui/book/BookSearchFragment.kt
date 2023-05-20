@@ -71,7 +71,7 @@ class BookSearchFragment : BindingFragment<FragmentBookSearchBinding>() {
     }
 
     private fun setupRecyclerView() {
-        _adapter = BookSearchAdapter { bookId ->
+        _adapter = BookSearchAdapter(requireContext()) { bookId ->
             findNavController().navigateSafe(
                 BookSearchFragmentDirections.actionBookSearchFragmentToBookDetailFragment(
                     bookId

@@ -5,79 +5,106 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     app:cardCornerRadius="@dimen/card_corner_radius"
-    app:cardElevation="@dimen/card_elevation"
-    app:layout_constraintBottom_toBottomOf="parent"
-    app:layout_constraintEnd_toEndOf="parent"
-    app:layout_constraintStart_toStartOf="parent"
-    app:layout_constraintTop_toTopOf="parent">
+    app:cardElevation="@dimen/card_elevation">
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/clInfo"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:paddingStart="@dimen/spacing_default"
-        android:paddingTop="@dimen/spacing_three_fours"
-        android:paddingEnd="@dimen/spacing_half"
-        android:paddingBottom="@dimen/spacing_default"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        android:layout_height="match_parent">
 
-        <androidx.constraintlayout.widget.Guideline
-            android:id="@+id/guidelineScore"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            app:layout_constraintGuide_begin="320dp" />
-
-        <androidx.constraintlayout.widget.Guideline
-            android:id="@+id/guidelineSecondText"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            app:layout_constraintGuide_begin="35dp" />
-
-        <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/tvFirst"
-            style="@style/TextAppearance.Eino.BodyMedium"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:ellipsize="end"
-            android:maxLines="1"
-            android:paddingBottom="@dimen/spacing_half"
-            app:layout_constraintBottom_toTopOf="@id/tvSecond"
-            app:layout_constraintEnd_toStartOf="@id/guidelineScore"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            tools:text="First text" />
-
-        <com.google.android.material.chip.Chip
-            android:id="@+id/tvScore"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:layout_constraintBottom_toTopOf="@id/guidelineSecondText"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="@id/guidelineScore"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.95"
-            tools:ignore="TouchTargetSizeCheck"
-            tools:text="10" />
-
-        <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/tvSecond"
-            style="@style/TextAppearance.Eino.BodyMedium"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:ellipsize="end"
-            android:maxLines="1"
+        <ImageView
+            android:id="@+id/ivImage"
+            android:layout_width="match_parent"
+            android:layout_height="300dp"
+            android:adjustViewBounds="true"
+            android:contentDescription="@string/list_item_image_description"
+            android:scaleType="centerCrop"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@id/guidelineScore"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/tvFirst"
-            tools:text="Second text" />
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <com.google.android.material.chip.ChipGroup
+            android:id="@+id/vChips"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingVertical="@dimen/spacing_half"
+            android:paddingStart="@dimen/spacing_half"
+            app:chipSpacing="@dimen/spacing_half"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/chipScore"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:chipIcon="@drawable/ic_star"
+                app:chipIconEnabled="true"
+                app:chipIconSize="16dp"
+                app:chipIconTint="@color/material_on_primary_emphasis_high_type"
+                app:ensureMinTouchTargetSize="false"
+                app:textEndPadding="@dimen/spacing_eighth"
+                app:textStartPadding="@dimen/spacing_eighth"
+                tools:ignore="TouchTargetSizeCheck"
+                tools:text="10" />
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/chipStatus"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:ensureMinTouchTargetSize="false"
+                app:textEndPadding="@dimen/spacing_quarter"
+                app:textStartPadding="@dimen/spacing_quarter"
+                tools:ignore="TouchTargetSizeCheck"
+                tools:text="Reading" />
+        </com.google.android.material.chip.ChipGroup>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="120dp"
+            android:background="@drawable/shadow_overlay"
+            app:layout_constraintBottom_toBottomOf="@id/llInfo"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <LinearLayout
+            android:id="@+id/llInfo"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_alignParentBottom="true"
+            android:orientation="vertical"
+            android:paddingBottom="@dimen/spacing_default"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent">
+
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tvFirst"
+                style="@style/TextAppearance.Eino.TitleLarge"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ellipsize="end"
+                android:maxLines="1"
+                android:paddingHorizontal="@dimen/spacing_three_fours"
+                android:paddingBottom="@dimen/spacing_quarter"
+                android:textColor="@color/white"
+                tools:text="First text" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tvSecond"
+                style="@style/TextAppearance.Eino.BodyMedium"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ellipsize="end"
+                android:maxLines="1"
+                android:paddingHorizontal="@dimen/spacing_three_fours"
+                android:textColor="@color/white"
+                tools:text="Second text" />
+
+        </LinearLayout>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
+
 
 </com.google.android.material.card.MaterialCardView>

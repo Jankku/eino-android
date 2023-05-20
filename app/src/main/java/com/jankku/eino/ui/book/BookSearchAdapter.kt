@@ -1,15 +1,17 @@
 package com.jankku.eino.ui.book
 
+import android.content.Context
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.jankku.eino.data.model.BookSearchItem
+import com.bumptech.glide.Glide
+import com.jankku.eino.data.model.Book
 import com.jankku.eino.databinding.ItemListBinding
 
-class BookSearchAdapter(private val clickListener: (String) -> Unit) :
-    ListAdapter<BookSearchItem, BookSearchAdapter.ViewHolder>(DiffCallback) {
+class BookSearchAdapter(private val context: Context, private val clickListener: (String) -> Unit) :
+    ListAdapter<Book, BookSearchAdapter.ViewHolder>(DiffCallback) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val binding =
@@ -23,9 +25,13 @@ class BookSearchAdapter(private val clickListener: (String) -> Unit) :
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val item = getItem(position)
         with(holder.binding) {
-            tvFirst.text = if (item.title.isNotEmpty()) item.title else "-"
-            tvSecond.text = if (item.author.isNotEmpty()) item.author else "-"
-            tvScore.text = item.score.toString()
+            tvFirst.text = item.title.ifEmpty { "-" }
+            tvSecond.text = item.author.ifEmpty { "-" }
+            chipScore.text = item.score.toString()
+            chipStatus.text = item.status
+            Glide.with(context)
+                .load(item.image_url)
+                .into(ivImage)
         }
     }
 
@@ -37,11 +43,11 @@ class BookSearchAdapter(private val clickListener: (String) -> Unit) :
     }
 
     companion object {
-        object DiffCallback : DiffUtil.ItemCallback<BookSearchItem>() {
-            override fun areItemsTheSame(oldItem: BookSearchItem, newItem: BookSearchItem) =
+        object DiffCallback : DiffUtil.ItemCallback<Book>() {
+            override fun areItemsTheSame(oldItem: Book, newItem: Book) =
                 oldItem.book_id == newItem.book_id
 
-            override fun areContentsTheSame(oldItem: BookSearchItem, newItem: BookSearchItem) =
+            override fun areContentsTheSame(oldItem: Book, newItem: Book) =
                 oldItem == newItem
         }
     }
