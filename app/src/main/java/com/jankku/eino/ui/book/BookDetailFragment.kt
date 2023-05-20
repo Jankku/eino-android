@@ -10,6 +10,8 @@ import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.RecyclerView
 import androidx.viewbinding.ViewBinding
+import com.bumptech.glide.Glide
+import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions.withCrossFade
 import com.jankku.eino.R
 import com.jankku.eino.databinding.FragmentItemDetailBinding
 import com.jankku.eino.ui.MainActivity
@@ -103,6 +105,10 @@ class BookDetailFragment : BindingFragment<FragmentItemDetailBinding>() {
             }
         }
 
+        viewModel.book.observe(viewLifecycleOwner) {
+            setupBackgroundImage(it.image_url)
+        }
+
         lifecycleScope.launch {
             viewModel.eventChannel
                 .flowWithLifecycle(lifecycle, Lifecycle.State.STARTED)
@@ -138,6 +144,19 @@ class BookDetailFragment : BindingFragment<FragmentItemDetailBinding>() {
                     }
                 }
             }
+        }
+    }
+
+    private fun setupBackgroundImage(imageUrl: String?) {
+        if (imageUrl.isNullOrEmpty()) {
+            binding.ivImage.visibility = View.GONE
+        } else {
+            binding.ivImage.visibility = View.VISIBLE
+            Glide.with(requireContext())
+                .load(imageUrl)
+                .transition(withCrossFade())
+                .centerCrop()
+                .into(binding.ivImage)
         }
     }
 
