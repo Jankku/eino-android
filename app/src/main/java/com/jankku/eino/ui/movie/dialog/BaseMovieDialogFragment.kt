@@ -136,6 +136,7 @@ open class BaseMovieDialogFragment : BottomSheetDialogFragment() {
         val studio = binding.tietMovieStudio.text.toString()
         val director = binding.tietMovieDirector.text.toString()
         val writer = binding.tietMovieWriter.text.toString()
+        val imageUrl = binding.tietMovieImageUrl.text.toString()
         val duration = binding.tietMovieDuration.text.toString().toIntOrNull() ?: 0
         val year = binding.tietMovieYear.text.toString().toIntOrNull() ?: getCurrentYear()
         val status = binding.mactvMovieStatus.text.toString().lowercase()
@@ -150,6 +151,7 @@ open class BaseMovieDialogFragment : BottomSheetDialogFragment() {
             studio,
             director,
             writer,
+            imageUrl,
             duration,
             year,
             status,

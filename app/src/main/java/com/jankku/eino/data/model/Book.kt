@@ -10,6 +10,7 @@ data class Book(
     val title: String,
     val author: String,
     val publisher: String,
+    val image_url: String?,
     val pages: Int,
     val year: Int,
     val status: String,

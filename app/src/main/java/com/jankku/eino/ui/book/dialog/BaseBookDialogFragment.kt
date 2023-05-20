@@ -136,6 +136,7 @@ open class BaseBookDialogFragment : BottomSheetDialogFragment() {
         val title = binding.tietBookTitle.text.toString()
         val author = binding.tietBookAuthor.text.toString()
         val publisher = binding.tietBookPublisher.text.toString()
+        val imageUrl = binding.tietBookImageUrl.text.toString()
         val pages = binding.tietBookPages.text.toString().toIntOrNull() ?: 0
         val year = binding.tietBookYear.text.toString().toIntOrNull() ?: getCurrentYear()
         val status = binding.mactvBookStatus.text.toString().lowercase()
@@ -149,6 +150,7 @@ open class BaseBookDialogFragment : BottomSheetDialogFragment() {
             title,
             author,
             publisher,
+            imageUrl,
             pages,
             year,
             status,

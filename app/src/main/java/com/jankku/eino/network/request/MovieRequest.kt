@@ -5,6 +5,7 @@ data class MovieRequest(
     val studio: String,
     val director: String,
     val writer: String,
+    val image_url: String,
     val duration: Int,
     val year: Int,
     val status: String,

@@ -36,6 +36,7 @@ class UpdateMovieDialogFragment : BaseMovieDialogFragment() {
                     tietMovieStudio.setText(studio)
                     tietMovieDirector.setText(director)
                     tietMovieWriter.setText(writer)
+                    tietMovieImageUrl.setText(image_url)
                     tietMovieDuration.setText(duration.toString())
                     tietMovieYear.setText(year.toString())
                     mactvMovieStatus.setText(status.replaceFirstChar { it.uppercase() }, false)

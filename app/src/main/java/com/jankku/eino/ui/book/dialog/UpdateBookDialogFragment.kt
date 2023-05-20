@@ -36,6 +36,7 @@ class UpdateBookDialogFragment : BaseBookDialogFragment() {
                     tietBookTitle.setText(title)
                     tietBookAuthor.setText(author)
                     tietBookPublisher.setText(publisher)
+                    tietBookImageUrl.setText(image_url)
                     tietBookPages.setText(pages.toString())
                     tietBookYear.setText(year.toString())
                     mactvBookStatus.setText(status.replaceFirstChar { it.uppercase() }, false)

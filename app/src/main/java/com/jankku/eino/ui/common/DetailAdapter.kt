@@ -18,8 +18,8 @@ class DetailAdapter : ListAdapter<DetailItem, DetailAdapter.ViewHolder>(DiffCall
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val item = getItem(position)
         with(holder.binding) {
-            tvTitle.text = if (item.title.isNotEmpty()) item.title else "-"
-            tvText.text = if (item.text.isNotEmpty()) item.text else "-"
+            tvTitle.text = item.title.ifEmpty { "-" }
+            tvText.text = item.text.ifEmpty { "-" }
         }
     }
 

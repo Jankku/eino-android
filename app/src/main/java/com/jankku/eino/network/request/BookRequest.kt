@@ -5,6 +5,7 @@ data class BookRequest(
     val title: String,
     val author: String,
     val publisher: String,
+    val image_url: String,
     val pages: Int = 0,
     val year: Int = 2021,
     val status: String,
