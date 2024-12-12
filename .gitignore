@@ -9,3 +9,4 @@ captures
 app/**/output-metadata.json
 baseurl.properties
 signing.properties
+.idea/copilot
