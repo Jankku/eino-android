@@ -1,6 +1,12 @@
 package com.jankku.eino.ui.movie
 
-import androidx.lifecycle.*
+import android.annotation.SuppressLint
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MediatorLiveData
+import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.map
+import androidx.lifecycle.viewModelScope
 import com.jankku.eino.data.MovieRepository
 import com.jankku.eino.data.enums.MovieStatus
 import com.jankku.eino.data.enums.Sort
@@ -118,7 +124,7 @@ class MovieViewModel @Inject constructor(
         repository
             .editMovie(movieId, movie)
             .catch { e -> sendEvent(Event.EditItemError(e.message.toString())) }
-            .collect { response ->
+            .collect {
                 sendEvent(Event.EditItemSuccess("Movie successfully edited"))
                 getMovieById()
             }
@@ -158,6 +164,7 @@ class MovieViewModel @Inject constructor(
         _eventChannel.trySend(event)
     }
 
+    @SuppressLint("NullSafeMutableLiveData")
     private fun setupMovieListSources() {
         movieList.addSource(_ascTitleAscScoreMovieList) { result ->
             result?.let {

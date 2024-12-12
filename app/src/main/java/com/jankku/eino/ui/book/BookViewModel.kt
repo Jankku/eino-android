@@ -1,6 +1,12 @@
 package com.jankku.eino.ui.book
 
-import androidx.lifecycle.*
+import android.annotation.SuppressLint
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MediatorLiveData
+import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.map
+import androidx.lifecycle.viewModelScope
 import com.jankku.eino.data.BookRepository
 import com.jankku.eino.data.enums.BookStatus
 import com.jankku.eino.data.enums.Sort
@@ -115,7 +121,7 @@ class BookViewModel @Inject constructor(
         repository
             .editBook(bookId, book)
             .catch { e -> sendEvent(Event.EditItemError(e.message.toString())) }
-            .collect { response ->
+            .collect {
                 sendEvent(Event.EditItemSuccess("Book successfully edited"))
                 getBookById()
             }
@@ -155,6 +161,7 @@ class BookViewModel @Inject constructor(
         _eventChannel.trySend(event)
     }
 
+    @SuppressLint("NullSafeMutableLiveData")
     private fun setupBookListSources() {
         bookList.addSource(_ascTitleAscScoreBookList) { result ->
             result?.let {
